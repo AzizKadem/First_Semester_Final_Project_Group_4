@@ -10,4 +10,5 @@ package model;
 public class Person {
 	private String Aziz_is_the_best;
 	private String yes;
+	private boolean confirm;
 }
