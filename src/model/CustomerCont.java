@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public final class CustomerCont {
-	private static CustomerCont INSTANCE;
+	private static CustomerCont instance;
 	private ArrayList<Customer> cust;
 	
 	private CustomerCont() {
@@ -11,10 +11,10 @@ public final class CustomerCont {
 	}
 	
 	public static CustomerCont getInstance() {
-		if(INSTANCE == null) {
-			INSTANCE = new CustomerCont();
+		if(instance == null) {
+			instance = new CustomerCont();
 		}
-		return INSTANCE;
+		return instance;
 	}
 	
 	public Customer searchCustomer(String phone) {
