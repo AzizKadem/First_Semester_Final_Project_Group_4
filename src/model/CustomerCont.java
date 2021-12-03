@@ -9,7 +9,10 @@ public final class CustomerCont {
 	private CustomerCont() {
 		cust = new ArrayList<>();
 	}
-	
+	/**
+	 * Get instance of the singleton container
+	 * @return The instance
+	 */
 	public static CustomerCont getInstance() {
 		if(instance == null) {
 			instance = new CustomerCont();
@@ -17,6 +20,10 @@ public final class CustomerCont {
 		return instance;
 	}
 	
+	/**
+	 * @param phone
+	 * @return Customer
+	 */
 	public Customer searchCustomer(String phone) {
 		boolean found = false;
 		Customer retVal = null;

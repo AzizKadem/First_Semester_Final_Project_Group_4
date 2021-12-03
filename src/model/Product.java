@@ -1,9 +1,11 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Product {
 
 	private String name;
-	private Price price;
+	private ArrayList<Price> prices;
 	private int stock;
 	//private Department department;
 	private String category;
@@ -19,7 +21,7 @@ public class Product {
 	public Product(String name, Price price, int stock, String category, int barcode) {
 		super();
 		this.name = name;
-		this.price = price;
+		prices.add(price);
 		this.stock = stock;
 		this.category = category;
 		this.barcode = barcode;
@@ -36,7 +38,7 @@ public class Product {
 	 * @return the price
 	 */
 	public double getPrice() {
-		return price.getPrice();
+		return prices.get(prices.size()-1).getPrice();
 	}
 
 	/**
@@ -44,6 +46,10 @@ public class Product {
 	 */
 	public int getBarcode() {
 		return barcode;
+	}
+	
+	public boolean changePrice(Price price) {
+		return prices.add(price);
 	}
 
 	

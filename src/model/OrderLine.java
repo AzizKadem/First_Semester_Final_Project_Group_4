@@ -5,6 +5,10 @@ public class OrderLine {
 	private double subTotal;
 	private Product aProduct;
 
+	/**
+	 * @param quantity
+	 * @param aProduct
+	 */
 	public OrderLine(int quantity, Product aProduct) {
 		this.quantity = quantity;
 		this.aProduct = aProduct;
