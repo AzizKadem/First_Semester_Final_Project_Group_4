@@ -1,5 +1,11 @@
 package controller;
 
-public class StaffCtrl {
+import model.*;
+;
 
+public class StaffCtrl {
+		
+	public StaffCtrl() {
+		
+	}
 }
