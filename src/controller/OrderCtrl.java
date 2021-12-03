@@ -24,7 +24,7 @@ public class OrderCtrl {
 	 * @param barcode The barcode of the product
 	 * @return The found product
 	 */
-	public Product searchProduct(int barcode) {
+	public Product searchProduct(String barcode) {
 		Product aProduct = productCtrl.searchProduct(barcode);
 
 		return aProduct;
@@ -51,7 +51,7 @@ public class OrderCtrl {
 	 * @param barcode The barcode of the product
 	 * @return True if the order line was created successfully
 	 */
-	public boolean createOrderline(int quantity, int barcode) {
+	public boolean createOrderline(int quantity, String barcode) {
 		boolean	retVal = false;
 		if (currentOrder.addOrderLine(new OrderLine(quantity, productCtrl.searchProduct(barcode)))) {
 			retVal = true;

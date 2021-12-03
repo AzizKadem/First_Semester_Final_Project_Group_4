@@ -9,16 +9,16 @@ public class Product {
 	private int stock;
 	//private Department department;
 	private String category;
-	private int barcode;
+	private String barcode;
 	
 	/**
-	 * @param name
-	 * @param price
-	 * @param stock
-	 * @param category
-	 * @param barcode
+	 * @param name the name of the product
+	 * @param price the price of the product
+	 * @param stock the stock which the product has
+	 * @param category the category of the product
+	 * @param barcode the barcode of the product
 	 */
-	public Product(String name, Price price, int stock, String category, int barcode) {
+	public Product(String name, Price price, int stock, String category, String barcode) {
 		super();
 		this.name = name;
 		prices.add(price);
@@ -28,6 +28,8 @@ public class Product {
 	}
 	
 	/**
+	 * Get name.
+	 * 
 	 * @return the name
 	 */
 	public String getName() {
@@ -35,6 +37,7 @@ public class Product {
 	}
 
 	/**
+	 * Get price.
 	 * @return the price
 	 */
 	public double getPrice() {
@@ -42,14 +45,22 @@ public class Product {
 	}
 
 	/**
+	 * Get barcode.
+	 * 
 	 * @return the barcode
 	 */
-	public int getBarcode() {
+	public String getBarcode() {
 		return barcode;
 	}
 	
-	public boolean changePrice(Price price) {
-		return prices.add(price);
+	/**
+	 * Change the current price.
+	 *  
+	 * @param newPrice the new of the product
+	 * @return true if the change was successful
+	 */
+	public boolean changePrice(Price newPrice) {
+		return prices.add(newPrice);
 	}
 
 	

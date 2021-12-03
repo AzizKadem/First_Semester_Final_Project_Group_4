@@ -6,8 +6,9 @@ public class Price {
 	private double price;
 	
 	/**
-	 * @param period
-	 * @param price
+	 * Price constructor
+	 * @param period the period in which the price was active
+	 * @param price the price of the product in DKK
 	 */
 	public Price(String period, double price) {
 		super();
@@ -16,6 +17,8 @@ public class Price {
 	}
 
 	/**
+	 * Get the period
+	 * 
 	 * @return the period
 	 */
 	public String getPeriod() {
@@ -23,6 +26,8 @@ public class Price {
 	}
 
 	/**
+	 * Get the price
+	 * 
 	 * @return the price
 	 */
 	public double getPrice() {
