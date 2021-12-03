@@ -18,13 +18,13 @@ public final class CustomerCont {
 	}
 	
 	public Customer searchCustomer(String phone) {
-		for(Customer element: cust) {
-			if(element.getPhoneNumber() == phone) {
-				return element;
+		boolean found = false;
+		Customer retVal = null;
+		for(int i=0; !found && i<cust.size(); i++) {
+			if(cust.get(i).getPhoneNumber() == phone) {
+				retVal = cust.get(i);
 			}
-			else {
-				return null;
-			}
+		return retVal;
 		}
 	}
 }
