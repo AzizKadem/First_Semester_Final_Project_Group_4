@@ -85,4 +85,13 @@ public class Order {
 		return returnString.toString();
 	}
 
+
+	/**
+	 * Get totalPrice.
+	 *
+	 * @return totalPrice as double.
+	 */
+	public double getTotalPrice() {
+	    return totalPrice;
+	}
 }
