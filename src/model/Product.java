@@ -35,8 +35,8 @@ public class Product {
 	/**
 	 * @return the price
 	 */
-	public Price getPrice() {
-		return price;
+	public double getPrice() {
+		return price.getPrice();
 	}
 
 	/**
