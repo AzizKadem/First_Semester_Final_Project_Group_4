@@ -24,7 +24,7 @@ public final class CustomerCont {
 			if(cust.get(i).getPhoneNumber() == phone) {
 				retVal = cust.get(i);
 			}
-		return retVal;
 		}
+		return retVal;
 	}
 }
