@@ -27,7 +27,7 @@ public class OrderCont {
 	/**
 	 * Add order to the container
 	 * @param newOrder The order to be added
-	 * @return True if the order was added succesfully
+	 * @return True if the order was added successfully
 	 */
 	public boolean addOrder(Order newOrder) {
 		boolean retVal = false;

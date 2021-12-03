@@ -52,7 +52,7 @@ public class Order {
 	 * Get receipt
 	 * @return String of the receipt
 	 */
-	public String printReceipt() {
+	public String getReceipt() {
 		StringBuilder returnString = new StringBuilder();
 		//TODO print date
 		returnString.append("Customer\n");
