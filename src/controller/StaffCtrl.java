@@ -10,6 +10,9 @@ public class StaffCtrl {
 		
 	}
 	
+	/**
+	 * @param amount
+	 */
 	public void addTotal(double amount) {
 		loged.updateTotal(amount);
 	}

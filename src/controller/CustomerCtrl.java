@@ -8,6 +8,10 @@ public class CustomerCtrl {
 		
 	}
 	
+	/**
+	 * @param phone
+	 * @return Customer
+	 */
 	public Customer searchCustomer(String phone) {
 		return CustomerCont.getInstance().searchCustomer(phone);
 	}

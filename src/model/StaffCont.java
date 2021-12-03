@@ -9,7 +9,10 @@ public final class StaffCont {
 	public StaffCont() {
 		staff = new ArrayList<>();
 	}
-	
+	/**
+	 * Get instance of the singleton container
+	 * @return The instance
+	 */
 	public static StaffCont getInstance() {
 		if(instance == null) {
 			instance = new StaffCont();
