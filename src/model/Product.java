@@ -3,7 +3,7 @@ package model;
 public class Product {
 
 	private String name;
-	private double price;
+	private Price price;
 	private int stock;
 	//private Department department;
 	private String category;
@@ -16,7 +16,7 @@ public class Product {
 	 * @param category
 	 * @param barcode
 	 */
-	public Product(String name, double price, int stock, String category, int barcode) {
+	public Product(String name, Price price, int stock, String category, int barcode) {
 		super();
 		this.name = name;
 		this.price = price;
@@ -35,7 +35,7 @@ public class Product {
 	/**
 	 * @return the price
 	 */
-	public double getPrice() {
+	public Price getPrice() {
 		return price;
 	}
 
