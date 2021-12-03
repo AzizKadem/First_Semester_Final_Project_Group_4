@@ -12,6 +12,7 @@ public class Product {
 	private String barcode;
 	
 	/**
+	 * Product constructor
 	 * @param name the name of the product
 	 * @param price the price of the product
 	 * @param stock the stock which the product has
