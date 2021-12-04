@@ -73,4 +73,13 @@ public class OrderLine {
 	public void setSubTotal(double subTotal) {
 	    this.subTotal = subTotal;
 	}
+
+	/**
+	 * Get aProduct.
+	 *
+	 * @return aProduct as Product.
+	 */
+	public Product getAProduct() {
+	    return aProduct;
+	}
 }

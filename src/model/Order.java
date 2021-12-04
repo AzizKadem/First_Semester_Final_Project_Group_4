@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Order {
 	private int discount;
@@ -33,6 +34,62 @@ public class Order {
 		}
 
 		return retVal;
+	}
+
+	/**
+	 * Check if product is present in the order
+	 * @param aProduct Product that is being looked for
+	 * @return True if the product is present
+	 */
+	public boolean checkOrderForProduct(Product aProduct) {
+		boolean found = false;
+		int index = 0;
+
+		while (index < orderLines.size() && !found) {
+			if (aProduct.equals(orderLines.get(index).getAProduct())) {
+				found = true;
+			}
+			else {
+				index++;
+			}
+		}
+		return found;
+	}
+
+	/**
+	 * Get quantity of products in order line
+	 * @param aProduct A product to get the quantity of
+	 * @return The quantity of products
+	 */
+	public int getQuantityOfOrderLine(Product aProduct) {
+		int retVal = 0;
+		for (OrderLine anOrderLine : orderLines) {
+			if (anOrderLine.getAProduct().equals(aProduct)) {
+				retVal = anOrderLine.getQuantity();
+			}
+		}
+		return retVal;
+	}
+
+	/**
+	 * Delete order line containing a product
+	 * @param aProduct A product that deleted order line contains
+	 * @return True if order line was deleted
+	 */
+	public boolean deleteOrderLine(Product aProduct) {
+		boolean deleted = false;
+
+		Iterator<OrderLine> it = orderLines.iterator();
+
+		while (it.hasNext()) {
+			OrderLine thisOrderLine = it.next();
+
+			if (thisOrderLine.getAProduct().equals(aProduct)) {
+				it.remove();
+				deleted = true;
+			}
+		}
+		return deleted;
 	}
 
 	/**

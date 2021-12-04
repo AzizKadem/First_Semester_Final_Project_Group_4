@@ -50,6 +50,11 @@ public class OrderMenu extends Menu {
 			while (!barcode.equals("finish")) {
 				quantity = 1;
 				barcode = input.intupString("Enter product barcode(finish)");
+				
+				if (barcode.equals("")) {
+					barcode = "finish";
+				}
+				
 				if (!barcode.equals("finish")) {
 					quantity = input.inputInt("Enter quantity");
 
@@ -63,6 +68,7 @@ public class OrderMenu extends Menu {
 				}
 			}
 			//TODO ask for payment first
+			//Empty order can be created!
 			System.out.println(orderCtrl.finishOrder());
 			retVal = true;
 		}

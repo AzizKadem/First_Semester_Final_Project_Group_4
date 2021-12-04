@@ -59,7 +59,11 @@ public class OrderCtrl {
 		boolean	retVal = false;
 		Product product = productCtrl.searchProduct(barcode);
 		if (product != null) {
-			//TODO fix possible bug if one item added twice but separately
+			if (currentOrder.checkOrderForProduct(product)) {
+				quantity += currentOrder.getQuantityOfOrderLine(product);
+				currentOrder.deleteOrderLine(product);
+
+			}
 			if (product.isEnoughInStock(quantity)) {
 				if (currentOrder.addOrderLine(new OrderLine(quantity, product))) {
 					retVal = true;
