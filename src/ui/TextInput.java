@@ -17,7 +17,7 @@ public class TextInput {
 		Scanner scanner = new Scanner(System.in);
 
 		String line = scanner.nextLine();
-		scanner.close();
+
 
 		return line;
 

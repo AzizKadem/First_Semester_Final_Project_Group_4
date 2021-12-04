@@ -43,6 +43,7 @@ public class Order {
 	public double finishOrder() {
 		for (OrderLine aLine : orderLines) {
 			totalPrice += aLine.getSubTotal();
+			aLine.subtractFromStock();
 		}
 		totalPrice = totalPrice * (1 - (discount / 100));
 		return totalPrice;
@@ -55,8 +56,9 @@ public class Order {
 	public String getReceipt() {
 		StringBuilder returnString = new StringBuilder();
 		//TODO print date
-		returnString.append("Customer\n");
+		returnString.append("Customer\nName:\t\t");
 		returnString.append(aCustomer.getName());
+		returnString.append("\nPhone number:\t");
 		returnString.append(aCustomer.getPhoneNumber());
 		returnString.append("\n\n");
 

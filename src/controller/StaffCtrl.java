@@ -7,7 +7,8 @@ public class StaffCtrl {
 	private Staff loged;	
 	
 	public StaffCtrl() {
-		
+		//for now
+		loged = new Staff(0, "worker", "1234");
 	}
 	
 	/**

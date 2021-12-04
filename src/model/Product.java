@@ -22,10 +22,24 @@ public class Product {
 	public Product(String name, Price price, int stock, String category, String barcode) {
 		super();
 		this.name = name;
+		prices = new ArrayList<>();
 		prices.add(price);
 		this.stock = stock;
 		this.category = category;
 		this.barcode = barcode;
+	}
+	
+	/**
+	 * Check if the stock has amount
+	 * @param amount The amount of items to be compared
+	 * @return True if stock has enough items
+	 */
+	public boolean isEnoughInStock(int amount) {
+		boolean retVal = false;
+		if ((stock - amount) >= 0) {
+			retVal = true;
+		}
+		return retVal;
 	}
 	
 	/**
@@ -65,4 +79,22 @@ public class Product {
 	}
 
 	
+
+	/**
+	 * Get stock.
+	 *
+	 * @return stock as int.
+	 */
+	public int getStock() {
+	    return stock;
+	}
+
+	/**
+	 * Set stock.
+	 *
+	 * @param stock the value to set.
+	 */
+	public void setStock(int stock) {
+	    this.stock = stock;
+	}
 }

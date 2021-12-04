@@ -29,6 +29,14 @@ public class OrderLine {
 
 		return returnString.toString();
 	}
+	
+	/**
+	 * Subtract quantity from the stock
+	 */
+	public void subtractFromStock() {
+		aProduct.setStock(aProduct.getStock() - quantity);
+		System.out.println("Stock: " + aProduct.getStock());
+	}
 
 	/**
 	 * Get quantity.

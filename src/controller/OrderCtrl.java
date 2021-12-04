@@ -1,9 +1,9 @@
 package controller;
 
+import model.Customer;
 import model.Order;
-import model.OrderLine;
 import model.OrderCont;
-
+import model.OrderLine;
 import model.Product;
 
 public class OrderCtrl {
@@ -36,10 +36,14 @@ public class OrderCtrl {
 	 * @return True if the order was successfully created
 	 */
 	public boolean createOrder(String phone) {
-		currentOrder = new Order(customerCtrl.searchCustomer(phone));
+		Customer currentCustomer = customerCtrl.searchCustomer(phone);
+		
 		boolean retVal = false;
-		if (OrderCont.getInstance().addOrder(currentOrder)) {
-			retVal = true;
+		if (currentCustomer != null) {
+			currentOrder = new Order(currentCustomer);
+			if (OrderCont.getInstance().addOrder(currentOrder)) {
+				retVal = true;
+			}
 		}
 
 		return retVal;
@@ -47,14 +51,20 @@ public class OrderCtrl {
 	
 	/**
 	 * Create order line and add it to the current order
-	 * @param quantity Amount of the product ordered
 	 * @param barcode The barcode of the product
+	 * @param quantity Amount of the product ordered
 	 * @return True if the order line was created successfully
 	 */
-	public boolean createOrderline(int quantity, String barcode) {
+	public boolean createOrderline(String barcode, int quantity) {
 		boolean	retVal = false;
-		if (currentOrder.addOrderLine(new OrderLine(quantity, productCtrl.searchProduct(barcode)))) {
-			retVal = true;
+		Product product = productCtrl.searchProduct(barcode);
+		if (product != null) {
+			//TODO fix possible bug if one item added twice but separately
+			if (product.isEnoughInStock(quantity)) {
+				if (currentOrder.addOrderLine(new OrderLine(quantity, product))) {
+					retVal = true;
+				}
+			}
 		}
 
 		return retVal;

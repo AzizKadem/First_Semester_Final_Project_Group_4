@@ -15,6 +15,19 @@ public class ProductCont {
 	}
 	
 	/**
+	 * Add a new product to the product container
+	 * @return True if the product was added successfully
+	 */
+	public boolean addProduct(Product newProduct) {
+		boolean retVal = false;
+
+		if (products.add(newProduct)) {
+			retVal = true;
+		}
+		return retVal;
+	}
+	
+	/**
 	 * Get instance of the singleton container
 	 * @return The instance
 	 */
@@ -37,6 +50,7 @@ public class ProductCont {
 			Product element = products.get(i);
 			if(element.getBarcode().equals(barcode)) {
 				retProduct = element;
+				found = true;
 			}
 		}
 		return retProduct;

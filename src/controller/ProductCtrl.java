@@ -4,14 +4,13 @@ import model.Product;
 import model.ProductCont;
 
 public class ProductCtrl {
-
 	/**
 	 * ProductCtrl constructor
 	 */
 	public ProductCtrl() {
 		
 	}
-	
+
 	/**
 	 * Search for a product
 	 * @param barcode the barcode of the product to search for
