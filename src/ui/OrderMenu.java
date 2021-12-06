@@ -88,7 +88,7 @@ public class OrderMenu extends Menu {
 				System.out.println("Please make a payment(sending signal to the card treminal)");
 				boolean finalized = false;
 
-				while(finalized = true) {
+				while(!finalized) {
 				String s = input.intupString("Is the payment succesfull? y/n");
 
 					if(s.equals("y")) {
@@ -98,15 +98,15 @@ public class OrderMenu extends Menu {
 					}
 					else if(s.equals("n")) {
 						System.out.println("The order is cancelled");
-						finalized = false;
+						finalized = true;
 					}
 					else {
 						System.out.println("Payment failed, try again");
 					}
+				}
 				retVal = true;
 			}
 			
-		}
 		}
 		return retVal;
 	}
