@@ -82,26 +82,30 @@ public class OrderMenu extends Menu {
 			}
 			//TODO ask for payment first
 			//Empty order can be created!
-			System.out.println(orderCtrl.finishOrder());
-			System.out.println("Please make a payment(sending signal to the card treminal)");
-			boolean finalized = false;
+			if(!orderCtrl.isEmpty())
+			{
+				System.out.println(orderCtrl.finishOrder());
+				System.out.println("Please make a payment(sending signal to the card treminal)");
+				boolean finalized = false;
 
-			while(finalized = true) {
-			String s = input.intupString("Is the payment succesfull? y/n");
+				while(finalized = true) {
+				String s = input.intupString("Is the payment succesfull? y/n");
 
-				if(s.equals("y")) {
-					System.out.println("Order succesfully finalized");
-					System.out.println(orderCtrl.finishOrder());
-					finalized = true;
-				}
-				else if(s.equals("n")) {
-					System.out.println("The order is cancelled");
-					finalized = false;
-				}
-				else {
-					System.out.println("Payment failed, try again");
-				}
-			retVal = true;
+					if(s.equals("y")) {
+						System.out.println("Order succesfully finalized");
+						System.out.println(orderCtrl.finishOrder());
+						finalized = true;
+					}
+					else if(s.equals("n")) {
+						System.out.println("The order is cancelled");
+						finalized = false;
+					}
+					else {
+						System.out.println("Payment failed, try again");
+					}
+				retVal = true;
+			}
+			
 		}
 		}
 		return retVal;
