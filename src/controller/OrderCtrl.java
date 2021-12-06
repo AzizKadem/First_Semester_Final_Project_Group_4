@@ -111,5 +111,12 @@ public class OrderCtrl {
 	{
 		return OrderCont.getInstance().printInfo();
 	}
+	public double getTotal() {
+		return currentOrder.getTotalPrice();
+	}
+	
+	public String getProductsAndPrice() {
+		return currentOrder.getProductsAndPrice();
+	}
 }
 
