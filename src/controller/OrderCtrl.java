@@ -78,7 +78,7 @@ public class OrderCtrl {
 	 * Finish the current order
 	 * @return Receipt
 	 */
-	public String finishOrder() {
+	public String calculatePrice() {
 		currentOrder.finishOrder();
 		staffCtrl.addTotal(currentOrder.getTotalPrice());
 		return currentOrder.getReceipt();
