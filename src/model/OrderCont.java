@@ -38,4 +38,16 @@ public class OrderCont {
 
 		return retVal;
 	}
+	
+	public String printInfo()
+	{
+		StringBuilder returnString = new StringBuilder();
+		
+		for(Order order: orders)
+		{
+			returnString.append(order.getReceipt());
+			returnString.append("\n\n");
+		}
+		return returnString.toString();
+	}
 }

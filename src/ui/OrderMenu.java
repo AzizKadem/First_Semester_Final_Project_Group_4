@@ -103,7 +103,7 @@ public class OrderMenu extends Menu {
 				}
 			retVal = true;
 		}
+		}
 		return retVal;
 	}
-
 }

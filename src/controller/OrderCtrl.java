@@ -43,9 +43,7 @@ public class OrderCtrl {
 		boolean retVal = false;
 		if (currentCustomer != null) {
 			currentOrder = new Order(currentCustomer);
-			if (OrderCont.getInstance().addOrder(currentOrder)) {
-				retVal = true;
-			}
+			retVal = true;
 		}
 
 		return retVal;
@@ -85,15 +83,33 @@ public class OrderCtrl {
 
 		return retVal;
 	}
+	
+	public boolean isEmpty()
+	{
+		return currentOrder.isEmpty();
+	}
 
 	/**
 	 * Finish the current order
 	 * @return Receipt
 	 */
 	public String finishOrder() {
-		currentOrder.finishOrder();
-		staffCtrl.addTotal(currentOrder.getTotalPrice());
-		return currentOrder.getReceipt();
+		if(isEmpty())
+		{
+			return "The order is empty, try again.";
+		}
+		else
+		{
+			currentOrder.finishOrder();
+			staffCtrl.addTotal(currentOrder.getTotalPrice());
+			OrderCont.getInstance().addOrder(currentOrder);
+			return currentOrder.getReceipt();
+		}
 	}
-
+	
+	public String printInfo()
+	{
+		return OrderCont.getInstance().printInfo();
+	}
 }
+

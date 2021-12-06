@@ -35,6 +35,18 @@ public class Order {
 
 		return retVal;
 	}
+	
+	public boolean isEmpty()
+	{
+		if(orderLines.size() == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 	/**
 	 * Check if product is present in the order
