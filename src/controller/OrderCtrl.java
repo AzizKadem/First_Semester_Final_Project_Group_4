@@ -91,7 +91,6 @@ public class OrderCtrl {
 	 * @return Receipt
 	 */
 	public String finishOrder() {
-<<<<<<< Updated upstream
 		if(currentOrder.isEmpty())
 		{
 			return "The order is empty, try again.";
@@ -99,7 +98,7 @@ public class OrderCtrl {
 		else
 		{
 			currentOrder.getReceipt();
-			staffCtrl.addTotal(currentOrder.getTotalPrice());
+			staffCtrl.addTotal(currentOrder.getPrice());
 			return currentOrder.getReceipt();
 		}
 	}
@@ -107,11 +106,6 @@ public class OrderCtrl {
 	public boolean isEmpty()
 	{
 		return currentOrder.isEmpty();
-=======
-		currentOrder.getReceipt();
-		staffCtrl.addTotal(currentOrder.getPrice());
-		return currentOrder.getReceipt();
->>>>>>> Stashed changes
 	}
 
 	public String printInfo()	{
