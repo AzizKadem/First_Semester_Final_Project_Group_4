@@ -13,6 +13,9 @@ public class OrderLine {
 		this.quantity = quantity;
 		this.aProduct = aProduct;
 		subTotal = aProduct.getPrice() * quantity;
+		if(quantity > 10) {
+			subTotal = subTotal * 0.95;
+		}
 	}
 
 	/**
