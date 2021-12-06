@@ -53,6 +53,13 @@ public class OrderLine {
 	}
 
 	/**
+	 * Add a quantity to stock
+	 */
+	public void addToStock() {
+		aProduct.setStock(aProduct.getStock() + quantity);
+	}
+
+	/**
 	 * Get quantity.
 	 *
 	 * @return quantity as int.

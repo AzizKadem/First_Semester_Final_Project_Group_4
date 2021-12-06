@@ -39,14 +39,21 @@ public class OrderCont {
 		return retVal;
 	}
 	
-	public String printInfo()
-	{
+	/**
+	 * Return a string containing all orders in the container
+	 * @return String of all orders
+	 */
+	public String printAllOrders() {
 		StringBuilder returnString = new StringBuilder();
 		
-		for(Order order: orders)
-		{
-			returnString.append(order.getReceipt());
-			returnString.append("\n\n");
+		if (orders.size() == 0) {
+			returnString.append("There are no orders.");
+		}
+		else {
+			for (Order order: orders) {
+				returnString.append(order.getReceipt());
+				returnString.append("\n\n");
+			}
 		}
 		return returnString.toString();
 	}

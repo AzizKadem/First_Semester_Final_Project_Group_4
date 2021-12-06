@@ -1,5 +1,6 @@
 package controller;
 
+import Exceptions.EmptyOrder;
 import Exceptions.ProductNotFound;
 import Exceptions.QuantityUnderrunException;
 import model.Customer;
@@ -43,9 +44,7 @@ public class OrderCtrl {
 		boolean retVal = false;
 		if (currentCustomer != null) {
 			currentOrder = new Order(currentCustomer);
-			if (OrderCont.getInstance().addOrder(currentOrder)) {
-				retVal = true;
-			}
+			retVal = true;
 		}
 
 		return retVal;
@@ -69,6 +68,7 @@ public class OrderCtrl {
 			if (product != null) {
 				if (currentOrder.checkOrderForProduct(product)) {
 					quantity += currentOrder.getQuantityOfOrderLine(product);
+					currentOrder.addToStock(product);
 					currentOrder.deleteOrderLine(product);
 					
 				}
@@ -89,33 +89,58 @@ public class OrderCtrl {
 	/**
 	 * Finish the current order
 	 * @return Receipt
+	 * @throws EmptyOrder
 	 */
-	public String finishOrder() {
-		if(currentOrder.isEmpty())
-		{
-			return "The order is empty, try again.";
+	public String finishOrder() throws EmptyOrder {
+		if(currentOrder.isEmpty()) {
+			throw new EmptyOrder();
 		}
-		else
-		{
+		else {
 			currentOrder.getReceipt();
 			staffCtrl.addTotal(currentOrder.getPrice());
-			return currentOrder.getReceipt();
 		}
+		String receipt = currentOrder.getReceipt();
+		OrderCont.getInstance().addOrder(currentOrder);
+		currentOrder = null;
+		return receipt;
 	}
 	
-	public boolean isEmpty()
-	{
+	/**
+	 * Cancel the current order
+	 * @return Information about cancellation
+	 */
+	public String cancelOrder() {
+		return currentOrder.cancelOrder();
+	}
+	
+	/**
+	 * Check if the current order is empty
+	 * @return True if the current order is empty
+	 */
+	public boolean isEmpty() {
 		return currentOrder.isEmpty();
 	}
 
-	public String printInfo()	{
-		return OrderCont.getInstance().printInfo();
+	/**
+	 * Print all orders in the container
+	 * @return String of all orders
+	 */
+	public String printAllOrders() {
+		return OrderCont.getInstance().printAllOrders();
 	}
 	
+	/**
+	 * Get total price of the current order
+	 * @return Price of the current order
+	 */
 	public double getTotal() {
 		return currentOrder.getPrice();
 	}
 	
+	/**
+	 * Get products and final price of the current order
+	 * @return String of all products and price
+	 */
 	public String getProductsAndPrice() {
 		return currentOrder.getProductsAndPrice();
 	}

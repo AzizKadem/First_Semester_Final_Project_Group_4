@@ -1,5 +1,4 @@
 package model;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -37,15 +36,28 @@ public class Order {
 		return retVal;
 	}
 	
-	public boolean isEmpty()
-	{
-		if(orderLines.size() == 0)
-		{
-			return true;
+	/**
+	 * Check if the order is empty
+	 * @return True if the order is empty
+	 */
+	public boolean isEmpty() {
+		boolean retVal = false;
+
+		if(orderLines.size() == 0) {
+			retVal = true;
 		}
-		else
-		{
-			return false;
+		return retVal;
+	}
+	
+	/**
+	 * Add to stock quantity of products that are in the order line
+	 * @param aProduct Product that is in the order line
+	 */
+	public void addToStock(Product aProduct) {
+		OrderLine aLine = findOrderLineByProduct(aProduct);
+		
+		if (aLine != null) {
+			aLine.addToStock();
 		}
 	}
 
@@ -56,15 +68,9 @@ public class Order {
 	 */
 	public boolean checkOrderForProduct(Product aProduct) {
 		boolean found = false;
-		int index = 0;
 
-		while (index < orderLines.size() && !found) {
-			if (aProduct.equals(orderLines.get(index).getAProduct())) {
-				found = true;
-			}
-			else {
-				index++;
-			}
+		if (findOrderLineByProduct(aProduct) != null) {
+			found = true;
 		}
 		return found;
 	}
@@ -123,6 +129,10 @@ public class Order {
 		return returnString.toString();
 	}
 	
+	/**
+	 * Get all products and a price of this order line
+	 * @return String of all products and a price
+	 */
 	public String getProductsAndPrice() {
 		StringBuilder returnString = new StringBuilder();
 		
@@ -151,6 +161,25 @@ public class Order {
 
 		return returnString.toString();
 	}
+	
+	/**
+	 * Cancel Order and return items
+	 * @return Items that were cancelled
+	 */
+	public String cancelOrder() {
+		StringBuilder returnString = new StringBuilder();
+		returnString.append("Order Canceled with ");
+		returnString.append(orderLines.size());
+		returnString.append(" products:\n");
+		
+		for (OrderLine aLine : orderLines) {
+			returnString.append(aLine.getInfo());
+			aLine.addToStock();
+		}
+		
+		return returnString.toString();
+		
+	}
 
 
 	/**
@@ -168,5 +197,28 @@ public class Order {
 	
 	public double getPrice() {
 		return totalPrice;
+	}
+	
+	/**
+	 * Find an order line by a product
+	 * @param aProduct A product that the order line contains
+	 * @return Found order line (null if not found)
+	 */
+	private OrderLine findOrderLineByProduct(Product aProduct) {
+		int index = 0;
+		boolean found = false;
+		OrderLine returnLine = null;
+		
+		while (index < orderLines.size() && !found) {
+			if (orderLines.get(index).getAProduct().equals(aProduct)) {
+				returnLine = orderLines.get(index);
+				found = true;
+			}
+			else {
+				index++;
+			}
+		}
+		
+		return returnLine;
 	}
 }
