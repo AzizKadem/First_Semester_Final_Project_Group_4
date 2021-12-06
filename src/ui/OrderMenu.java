@@ -11,6 +11,7 @@ public class OrderMenu extends Menu {
 	public OrderMenu() {
 		super("Back");
 		super.addOption("Create Order");
+		super.addOption("Print");
 
 		orderCtrl = new OrderCtrl();
 		input = new TextInput();
@@ -28,11 +29,13 @@ public class OrderMenu extends Menu {
 				super.setExit(!isExit());
 				break;
 			case 1:
-				if (createOrder()) {
+				if (createOrder() && orderCtrl.isEmpty() == false) {
 					System.out.println("Order was successfully created.");
 				}
 				break;
-				
+			case 2:
+				System.out.println(" " + orderCtrl.printInfo());
+				break;
 		}
 	}
 	
@@ -44,7 +47,7 @@ public class OrderMenu extends Menu {
 		boolean retVal = false;
 
 		String phone = input.intupString("Enter customer phone number");
-
+		
 		if (orderCtrl.createOrder(phone)) {
 			String barcode = "";
 			int quantity;
@@ -52,7 +55,6 @@ public class OrderMenu extends Menu {
 			while (!barcode.equals("finish")) {
 				quantity = 1;
 				barcode = input.intupString("Enter product barcode(finish)");
-				
 				if (barcode.equals("")) {
 					barcode = "finish";
 				}
