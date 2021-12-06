@@ -1,5 +1,7 @@
 package controller;
 
+import Exceptions.ProductNotFound;
+import Exceptions.QuantityUnderrunException;
 import model.Customer;
 import model.Order;
 import model.OrderCont;
@@ -54,20 +56,30 @@ public class OrderCtrl {
 	 * @param barcode The barcode of the product
 	 * @param quantity Amount of the product ordered
 	 * @return True if the order line was created successfully
+	 * @throws QuantityUnderrunException
 	 */
-	public boolean createOrderline(String barcode, int quantity) {
+	public boolean createOrderline(String barcode, int quantity) throws QuantityUnderrunException,
+			ProductNotFound {
 		boolean	retVal = false;
 		Product product = productCtrl.searchProduct(barcode);
-		if (product != null) {
-			if (currentOrder.checkOrderForProduct(product)) {
-				quantity += currentOrder.getQuantityOfOrderLine(product);
-				currentOrder.deleteOrderLine(product);
-
-			}
-			if (product.isEnoughInStock(quantity)) {
-				if (currentOrder.addOrderLine(new OrderLine(quantity, product))) {
-					retVal = true;
+		if (quantity < 1) {
+			throw new QuantityUnderrunException();
+		}
+		else {
+			if (product != null) {
+				if (currentOrder.checkOrderForProduct(product)) {
+					quantity += currentOrder.getQuantityOfOrderLine(product);
+					currentOrder.deleteOrderLine(product);
+					
 				}
+				if (product.isEnoughInStock(quantity)) {
+					if (currentOrder.addOrderLine(new OrderLine(quantity, product))) {
+						retVal = true;
+					}
+				}
+			}
+			else {
+				throw new ProductNotFound(barcode);
 			}
 		}
 

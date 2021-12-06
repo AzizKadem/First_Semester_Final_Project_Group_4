@@ -1,5 +1,7 @@
 package ui;
 
+import Exceptions.ProductNotFound;
+import Exceptions.QuantityUnderrunException;
 import controller.OrderCtrl;
 
 public class OrderMenu extends Menu {
@@ -57,17 +59,23 @@ public class OrderMenu extends Menu {
 				
 				if (!barcode.equals("finish")) {
 					quantity = input.inputInt("Enter quantity");
-					while(quantity < 1) {
-						quantity = input.inputInt("Quantity cannot be negative, try again");
-					}
+					
+					try {
+						if (orderCtrl.createOrderline(barcode, quantity)) {
+							System.out.println("Product added successfully!");
 
-					if (orderCtrl.createOrderline(barcode, quantity)) {
-						System.out.println("Product added successfully!");
-
+						}
+						else {
+							System.out.println("Error, try again.");
+						}
 					}
-					else {
-						System.out.println("Error, try again.");
+					catch (QuantityUnderrunException que) {
+						System.out.println(que.getLocalizedMessage());
 					}
+					catch (ProductNotFound pnf) {
+						System.out.println(pnf.getLocalizedMessage());
+					}
+					
 				}
 			}
 			//TODO ask for payment first
