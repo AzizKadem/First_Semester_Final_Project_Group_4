@@ -72,7 +72,7 @@ public class OrderMenu extends Menu {
 			}
 			//TODO ask for payment first
 			//Empty order can be created!
-			System.out.println(orderCtrl.calculatePrice());
+			System.out.println(orderCtrl.finishOrder());
 			retVal = true;
 		}
 		return retVal;
