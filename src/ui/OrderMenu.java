@@ -57,6 +57,9 @@ public class OrderMenu extends Menu {
 				
 				if (!barcode.equals("finish")) {
 					quantity = input.inputInt("Enter quantity");
+					while(quantity < 1) {
+						quantity = input.inputInt("Quantity cannot be negative, try again");
+					}
 
 					if (orderCtrl.createOrderline(barcode, quantity)) {
 						System.out.println("Product added successfully!");
