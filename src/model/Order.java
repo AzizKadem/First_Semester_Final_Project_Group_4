@@ -129,7 +129,7 @@ public class Order {
 		returnString.append(getOrderLineItems());
 		returnString.append("\n");
 
-		returnString.append("Total:\t" + getTotalPrice());
+		returnString.append("Total:\t" + getPrice());
 		returnString.append("\n");
 		
 		return returnString.toString();
@@ -141,6 +141,7 @@ public class Order {
 	 * @return String of the items
 	 */
 	public String getOrderLineItems() {
+		calculateTotalPrice();
 		StringBuilder returnString = new StringBuilder();
 
 		for (OrderLine aLine : orderLines) {
@@ -157,10 +158,15 @@ public class Order {
 	 *
 	 * @return totalPrice as double.
 	 */
-	public double getTotalPrice() {
+	public void calculateTotalPrice() {
+		totalPrice = 0;
 		for (OrderLine aLine : orderLines) {
 			totalPrice += aLine.getSubTotal();
 		}
-	    return totalPrice = totalPrice * (1 - (discount / 100));
+	    totalPrice = totalPrice * (1 - (discount / 100));
+	}
+	
+	public double getPrice() {
+		return totalPrice;
 	}
 }
