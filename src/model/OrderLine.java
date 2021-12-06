@@ -4,17 +4,21 @@ public class OrderLine {
 	private int quantity;
 	private double subTotal;
 	private Product aProduct;
+	private double discount;
 
 	/**
 	 * @param quantity
 	 * @param aProduct
 	 */
 	public OrderLine(int quantity, Product aProduct) {
+		double x;
 		this.quantity = quantity;
 		this.aProduct = aProduct;
 		subTotal = aProduct.getPrice() * quantity;
 		if(quantity > 10) {
+			x = subTotal;
 			subTotal = subTotal * 0.95;
+			discount =  x - subTotal;
 		}
 	}
 
@@ -28,6 +32,7 @@ public class OrderLine {
 		returnString.append(aProduct.getName());
 		returnString.append("\t" + aProduct.getPrice());
 		returnString.append(" x" + quantity);
+		returnString.append(" -" + discount);
 		returnString.append(" " + subTotal);
 
 		return returnString.toString();
