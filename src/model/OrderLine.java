@@ -35,7 +35,6 @@ public class OrderLine {
 	 */
 	public void subtractFromStock() {
 		aProduct.setStock(aProduct.getStock() - quantity);
-		//TODO delete this after 
 		System.out.println("Stock: " + aProduct.getStock());
 	}
 
