@@ -91,9 +91,21 @@ public class OrderCtrl {
 	 * @return Receipt
 	 */
 	public String finishOrder() {
-		currentOrder.getReceipt();
-		staffCtrl.addTotal(currentOrder.getTotalPrice());
-		return currentOrder.getReceipt();
+		if(currentOrder.isEmpty())
+		{
+			return "The order is empty, try again.";
+		}
+		else
+		{
+			currentOrder.getReceipt();
+			staffCtrl.addTotal(currentOrder.getTotalPrice());
+			return currentOrder.getReceipt();
+		}
+	}
+	
+	public boolean isEmpty()
+	{
+		return currentOrder.isEmpty();
 	}
 
 	public String printInfo()	{
