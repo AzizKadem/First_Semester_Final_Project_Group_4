@@ -30,6 +30,7 @@ public class Order {
 		boolean retVal = false;
 
 		if (orderLines.add(newOrderLine)) {
+			newOrderLine.subtractFromStock();
 			retVal = true;
 		}
 
@@ -105,20 +106,6 @@ public class Order {
 	}
 
 	/**
-	 * Finish the order by calculating the final price 
-	 * and applying the discount
-	 * @return Final price
-	 */
-	public double finishOrder() {
-		for (OrderLine aLine : orderLines) {
-			totalPrice += aLine.getSubTotal();
-			aLine.subtractFromStock();
-		}
-		totalPrice = totalPrice * (1 - (discount / 100));
-		return totalPrice;
-	}
-
-	/**
 	 * Get receipt
 	 * @return String of the receipt
 	 */
@@ -131,15 +118,23 @@ public class Order {
 		returnString.append(aCustomer.getPhoneNumber());
 		returnString.append("\n\n");
 
+		returnString.append(getProductsAndPrice());
+	
+		return returnString.toString();
+	}
+	
+	public String getProductsAndPrice() {
+		StringBuilder returnString = new StringBuilder();
+		
 		returnString.append(getOrderLineItems());
 		returnString.append("\n");
 
-		returnString.append("Total:\t" + totalPrice);
+		returnString.append("Total:\t" + getTotalPrice());
 		returnString.append("\n");
 		
-
 		return returnString.toString();
 	}
+	
 
 	/**
 	 * Get info about all items in the order
@@ -163,6 +158,9 @@ public class Order {
 	 * @return totalPrice as double.
 	 */
 	public double getTotalPrice() {
-	    return totalPrice;
+		for (OrderLine aLine : orderLines) {
+			totalPrice += aLine.getSubTotal();
+		}
+	    return totalPrice = totalPrice * (1 - (discount / 100));
 	}
 }
