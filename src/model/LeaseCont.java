@@ -23,5 +23,6 @@ public class LeaseCont {
 			retVal = true;
 			leases.add(newLease);
 		}
+		return retVal;
 	}
 }
