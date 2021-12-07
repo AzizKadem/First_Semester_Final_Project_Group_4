@@ -84,34 +84,36 @@ public class OrderMenu extends Menu {
 					
 				}
 			}
-
-			System.out.println(orderCtrl.getProductsAndPrice());
-			System.out.println("Please make a payment(sending signal to the card treminal)");
-
-			boolean finalized = false;
-			
-			while(!finalized) {
-				String s = input.intupString("Is the payment succesfull? y/n");
+			if(!orderCtrl.isEmpty())
+			{
+				System.out.println(orderCtrl.getProductsAndPrice());
+				System.out.println("Please make a payment(sending signal to the card treminal)");
+	
+				boolean finalized = false;
 				
-				if(s.equals("y")) {
-					System.out.println("Order succesfully paid");
-					try {
-						System.out.println(orderCtrl.finishOrder());
-					}
-					catch (EmptyOrder eo) {
-						System.out.println(eo.getLocalizedMessage());
-						System.out.println(orderCtrl.cancelOrder());
-					}
+				while(!finalized) {
+					String s = input.intupString("Is the payment succesfull? y/n");
 					
-					finalized = true;
-					retVal = true;
-				}
-				else if(s.equals("n")) {
-					System.out.println(orderCtrl.cancelOrder());
-					finalized = true;
-				}
-				else {
-					System.out.println("Payment failed, try again");
+					if(s.equals("y")) {
+						System.out.println("Order succesfully paid");
+						try {
+							System.out.println(orderCtrl.finishOrder());
+						}
+						catch (EmptyOrder eo) {
+							System.out.println(eo.getLocalizedMessage());
+							System.out.println(orderCtrl.cancelOrder());
+						}
+						
+						finalized = true;
+						retVal = true;
+					}
+					else if(s.equals("n")) {
+						System.out.println(orderCtrl.cancelOrder());
+						finalized = true;
+					}
+					else {
+						System.out.println("Payment failed, try again");
+					}
 				}
 			}
 		}
