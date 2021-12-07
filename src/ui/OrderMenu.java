@@ -50,7 +50,7 @@ public class OrderMenu extends Menu {
 	public boolean createOrder() {
 		boolean retVal = false;
 
-		String phone = input.intupString("Enter customer phone number");
+		String phone = input.inputString("Enter customer phone number");
 		
 		if (orderCtrl.createOrder(phone)) {
 			String barcode = "";
@@ -58,7 +58,7 @@ public class OrderMenu extends Menu {
 			
 			while (!barcode.equals("finish")) {
 				quantity = 1;
-				barcode = input.intupString("Enter product barcode(finish)");
+				barcode = input.inputString("Enter product barcode(finish)");
 				if (barcode.equals("")) {
 					barcode = "finish";
 				}
@@ -92,7 +92,7 @@ public class OrderMenu extends Menu {
 				boolean finalized = false;
 				
 				while(!finalized) {
-					String s = input.intupString("Is the payment succesfull? y/n");
+					String s = input.inputString("Is the payment succesfull? y/n");
 					
 					if(s.equals("y")) {
 						System.out.println("Order succesfully paid");

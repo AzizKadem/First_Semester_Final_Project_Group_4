@@ -36,7 +36,7 @@ public class LeaseMenu extends Menu{
 	public boolean createLease() {
 		boolean retVal = false;
 		
-		String phone = input.intupString("Enter customer phone");
+		String phone = input.inputString("Enter customer phone");
 		
 		if(leaseCtrl.searchCustomer(phone) != null) {
 			int id;
@@ -44,7 +44,7 @@ public class LeaseMenu extends Menu{
 			id = input.inputInt("Enter product id");
 			if(leaseCtrl.searchMachine(id) != null){
 			//TODO print info about the product!!
-				String conf = input.intupString("Would you like to confirm the lease? y/n");
+				String conf = input.inputString("Would you like to confirm the lease? y/n");
 				if(conf.equals("y")) {
 					retVal = leaseCtrl.confirmLease(leaseCtrl.searchCustomer(phone), leaseCtrl.searchMachine(id));
 				}

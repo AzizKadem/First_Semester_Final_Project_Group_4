@@ -12,7 +12,7 @@ public class TextInput {
 	 * @param question Question for the user
 	 * @return Inputed string
 	 */
-	public String intupString(String question) {
+	public String inputString(String question) {
 		printQuestion(question);
 		Scanner scanner = new Scanner(System.in);
 
