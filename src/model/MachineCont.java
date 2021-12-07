@@ -2,15 +2,15 @@ package model;
 
 import java.util.ArrayList;
 
-public class MachineCont {
-	private MachineCont instance;
+public final class MachineCont {
+	private static MachineCont instance;
 	private ArrayList<Machine> machines;
 	
 	private MachineCont() {
 		machines = new ArrayList<>();
 	}
 	
-	public MachineCont getInstance() {
+	public static MachineCont getInstance() {
 		if (instance == null) {
 			instance = new MachineCont();
 		}
@@ -29,5 +29,9 @@ public class MachineCont {
 			index++;
 		}
 		return retVal;
+	}
+	
+	public void addMachine(Machine m) {
+		machines.add(m);
 	}
 }

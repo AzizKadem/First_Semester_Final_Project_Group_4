@@ -15,6 +15,8 @@ public class Main {
 
 		ProductCont.getInstance().addProduct(new Product("Hammer",
 					new Price("Today", 50), 40, "Tools", "2"));
+		
+		MachineCont.getInstance().addMachine(new Machine(1,"Vacum"));
 
 
 		menu.start();

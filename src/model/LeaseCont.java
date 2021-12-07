@@ -2,15 +2,15 @@ package model;
 
 import java.util.ArrayList;
 
-public class LeaseCont {
+public final class LeaseCont {
 	private ArrayList<Lease> leases;
-	private LeaseCont instance;
+	private static LeaseCont instance;
 
 	private LeaseCont() {
-		
+		leases = new ArrayList<>();
 	}
 	
-	public LeaseCont getInsatnce() {
+	public static LeaseCont getInsatnce() {
 		if (instance == null) {
 			instance = new LeaseCont();
 		}
