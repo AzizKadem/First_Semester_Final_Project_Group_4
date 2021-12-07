@@ -6,6 +6,7 @@ public class LeaseCtrl {
 	private CustomerCtrl customerController;
 	private MachineCtrl machineController;
 	private LeaseCont leaseContainer;
+	private Lease lease;
 	
 	public LeaseCtrl() {
 		
@@ -19,7 +20,8 @@ public class LeaseCtrl {
 		return machineController.searchMachine(id);
 	}
 	
-	public boolean confirmLease(Lease newLease) {
-		return leaseContainer.getInsatnce().addLease(newLease);
+	public boolean confirmLease(Customer c, Machine m) {
+		Lease l = new Lease(c, m);
+		return leaseContainer.getInsatnce().addLease(l);
 	}
 }

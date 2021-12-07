@@ -8,6 +8,7 @@ public class MainMenu extends Menu {
 		super.addOption("Product Menu");
 		super.addOption("Staff Menu");
 		super.addOption("Department Menu");
+		super.addOption("Lease Menu");
 	}
 
 	/**
@@ -45,6 +46,11 @@ public class MainMenu extends Menu {
 				DepartmentMenu departmentMenu = new DepartmentMenu();
 				System.out.println("Department Menu");
 				//departmentMenu.start();
+				break;
+			case 6:
+				LeaseMenu leaseMenu = new LeaseMenu();
+				System.out.println("Lease Menu");
+				leaseMenu.start();
 				break;
 		}
 	}

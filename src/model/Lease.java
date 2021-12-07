@@ -7,8 +7,7 @@ public class Lease {
 	private Customer c;
 	private Machine m;
 	
-	public Lease(int period, Customer c, Machine m) {
-		this.period  = period;
+	public Lease(Customer c, Machine m) {
 		this.c = c;
 		this.m = m;
 	}
