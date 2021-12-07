@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Order {
+	//TODO add ID/index
 	private int discount;
 	private double totalPrice;
 	private String date;
