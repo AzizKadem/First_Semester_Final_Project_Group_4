@@ -21,7 +21,7 @@ public final class MachineCont {
 		boolean found = false;
 		Machine retVal = null;
 		int index = 0;
-		while(!found) {
+		while(index < machines.size() && !found) {
 			if(machines.get(index).getID() == ID) {
 				retVal = machines.get(index);
 				found = true;

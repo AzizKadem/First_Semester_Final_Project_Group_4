@@ -5,8 +5,6 @@ import model.*;
 public class LeaseCtrl {
 	private CustomerCtrl customerController;
 	private MachineCtrl machineController;
-	private LeaseCont leaseContainer;
-	private Lease lease;
 	
 	public LeaseCtrl() {
 		
@@ -24,6 +22,6 @@ public class LeaseCtrl {
 	
 	public boolean confirmLease(Customer c, Machine m) {
 		Lease l = new Lease(c, m);
-		return leaseContainer.getInsatnce().addLease(l);
+		return LeaseCont.getInsatnce().addLease(l);
 	}
 }
