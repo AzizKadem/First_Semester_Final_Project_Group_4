@@ -1,5 +1,33 @@
 package model;
 
-public class MachineCont {
+import java.util.ArrayList;
 
+public class MachineCont {
+	private MachineCont instance;
+	private ArrayList<Machine> machines;
+	
+	private MachineCont() {
+		machines = new ArrayList<>();
+	}
+	
+	public MachineCont getInstance() {
+		if (instance == null) {
+			instance = new MachineCont();
+		}
+		return instance;
+	}
+	
+	public Machine searchMachine(int ID) {
+		boolean found = false;
+		Machine retVal = null;
+		int index = 0;
+		while(!found) {
+			if(machines.get(index).getID() == ID) {
+				retVal = machines.get(index);
+				found = true;
+			}
+			index++;
+		}
+		return retVal;
+	}
 }

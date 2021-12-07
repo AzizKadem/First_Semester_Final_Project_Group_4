@@ -2,10 +2,18 @@ package model;
 
 public class Machine {
 	private String name;
-	private int id;
+	private int ID;
 	
-	public Machine(int id, String name) {
+	public Machine(int ID, String name) {
 		this.name = name;
-		this.id = id;
+		this.ID = ID;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	
+	public String getName() {
+		return name;
 	}
 }
