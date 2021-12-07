@@ -20,7 +20,7 @@ public abstract class Menu {
 	}
 
 	/**
-	 * Pring all options in the menu
+	 * Print all options in the menu
 	 */
 	public void printOptions() {
 		for (int i = 0; i < options.size(); i++) {
