@@ -29,7 +29,6 @@ public class MainMenu extends Menu {
 				break;
 			case 2:
 				OrderMenu orderMenu = new OrderMenu();
-				System.out.println("Order Menu");
 				orderMenu.start();
 				break;
 			case 3:
@@ -49,7 +48,6 @@ public class MainMenu extends Menu {
 				break;
 			case 6:
 				LeaseMenu leaseMenu = new LeaseMenu();
-				System.out.println("Lease Menu");
 				leaseMenu.start();
 				break;
 		}
