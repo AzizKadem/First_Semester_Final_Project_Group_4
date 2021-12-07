@@ -2,7 +2,7 @@ package ui;
 
 public class StaffMenu extends Menu {
 	public StaffMenu() {
-		super("Back");
+		super("Staff Menu", "Back");
 		//super.addOption();
 	}
 

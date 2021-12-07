@@ -7,7 +7,7 @@ public class LeaseMenu extends Menu{
 	private TextInput input;
 	
 	public LeaseMenu() {
-		super("Back");
+		super("Lease Menu", "Back");
 		super.addOption("Create Lease");
 		
 		leaseCtrl = new LeaseCtrl();

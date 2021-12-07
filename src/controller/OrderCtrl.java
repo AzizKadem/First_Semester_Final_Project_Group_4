@@ -23,17 +23,6 @@ public class OrderCtrl {
 	}
 
 	/**
-	 * Find a product by barcode
-	 * @param barcode The barcode of the product
-	 * @return The found product
-	 */
-	public Product searchProduct(String barcode) {
-		Product aProduct = productCtrl.searchProduct(barcode);
-
-		return aProduct;
-	}
-
-	/**
 	 * Create order and add it to the container
 	 * @param phone The phone number of the customer
 	 * @return True if the order was successfully created
@@ -72,7 +61,7 @@ public class OrderCtrl {
 					currentOrder.deleteOrderLine(product);
 					
 				}
-				if (product.isEnoughInStock(quantity)) {
+				if (productCtrl.isEnoughInStock(product, quantity)) {
 					if (currentOrder.addOrderLine(new OrderLine(quantity, product))) {
 						retVal = true;
 					}
@@ -96,13 +85,15 @@ public class OrderCtrl {
 			throw new EmptyOrder();
 		}
 		else {
-			currentOrder.getReceipt();
+			String receipt = currentOrder.getReceipt();
+
+			OrderCont.getInstance().addOrder(currentOrder);
+
 			staffCtrl.addTotal(currentOrder.getPrice());
+			currentOrder = null;
+
+			return receipt;
 		}
-		String receipt = currentOrder.getReceipt();
-		OrderCont.getInstance().addOrder(currentOrder);
-		currentOrder = null;
-		return receipt;
 	}
 	
 	/**

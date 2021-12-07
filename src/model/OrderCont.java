@@ -38,7 +38,7 @@ public class OrderCont {
 
 		return retVal;
 	}
-	
+
 	/**
 	 * Return a string containing all orders in the container
 	 * @return String of all orders

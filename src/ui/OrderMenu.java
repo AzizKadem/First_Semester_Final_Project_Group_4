@@ -10,7 +10,7 @@ public class OrderMenu extends Menu {
 	private TextInput input;
 
 	public OrderMenu() {
-		super("Back");
+		super("Order Menu", "Back");
 		super.addOption("Create Order");
 		super.addOption("Print");
 

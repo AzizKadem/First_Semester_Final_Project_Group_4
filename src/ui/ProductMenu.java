@@ -2,7 +2,7 @@ package ui;
 
 public class ProductMenu extends Menu {
 	public ProductMenu() {
-		super("Back");
+		super("Product Menu", "Back");
 		//super.addOption();
 	}
 

@@ -2,7 +2,7 @@ package ui;
 
 public class MainMenu extends Menu {
 	public MainMenu() {
-		super("Exit");
+		super("Main Menu", "Exit");
 		super.addOption("Customer Menu");
 		super.addOption("Order Menu");
 		super.addOption("Product Menu");

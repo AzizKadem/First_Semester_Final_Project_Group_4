@@ -6,26 +6,30 @@ public abstract class Menu {
 	private ArrayList<String> options;
 	private TextInput input;
 	private boolean exit;
+	private String name;
 
 	/**
 	 * Create menu
 	 * @param exitOption The name of the option to exit the menu
 	 */
-	public Menu(String exitOption) {
+	public Menu(String name, String exitOption) {
 		options = new ArrayList<>();
 		options.add(exitOption);
 		
 		input = new TextInput();
 		exit = false;
+		this.name = name;
 	}
 
 	/**
 	 * Print all options in the menu
 	 */
 	public void printOptions() {
+		System.out.println("[    -" + name + "-    ]");
 		for (int i = 0; i < options.size(); i++) {
 			System.out.println("(" + i + ") " + options.get(i));
 		}
+		System.out.println();
 	}
 
 	/**

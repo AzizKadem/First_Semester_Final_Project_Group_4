@@ -2,7 +2,7 @@ package ui;
 
 public class DepartmentMenu extends Menu {
 	public DepartmentMenu() {
-		super("Back");
+		super("Department Menu", "Back");
 		//super.addOption();
 	}
 

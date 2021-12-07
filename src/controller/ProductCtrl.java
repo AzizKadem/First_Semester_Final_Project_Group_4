@@ -19,4 +19,20 @@ public class ProductCtrl {
 	public Product searchProduct(String barcode) {
 		return ProductCont.getInstance().searchProduct(barcode);
 	}
+
+	/**
+	 * Check if the product has enough quantity in stock
+	 * @param aProduct A product to be checked
+	 * @param quantity Quantity to be checked
+	 * @return True if the quantity is enough
+	 */
+	public boolean isEnoughInStock(Product aProduct, int quantity) {
+		boolean retVal = false;
+		
+		if (aProduct.isEnoughInStock(quantity)) {
+			retVal = true;
+		}
+
+		return retVal;
+	}
 }
