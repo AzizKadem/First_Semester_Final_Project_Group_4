@@ -1,7 +1,5 @@
 package ui;
 
-import javax.print.DocFlavor.INPUT_STREAM;
-
 import Exceptions.EmptyOrder;
 import Exceptions.ProductNotFound;
 import Exceptions.QuantityUnderrunException;
@@ -92,13 +90,17 @@ public class OrderMenu extends Menu {
 		return retVal;
 	}
 	
+	/**
+	 * Ask customer to make a payment
+	 * @return True if the payment was successful
+	 */
 	public boolean makePayment() {
 		boolean retVal = false;
 		if(!orderCtrl.isEmpty()) {
 			System.out.println(orderCtrl.getProductsAndPrice());
-			int answ = input.inputInt("Please make a payment. Chose 1 to pay here or 2 for sending an invoice");
+			int answer = input.inputInt("Please make a payment. Chose 1 to pay here or 2 for sending an invoice");
 			
-			if(answ == 1) {
+			if(answer == 1) {
 			
 				boolean finalized = false;
 				
@@ -127,7 +129,7 @@ public class OrderMenu extends Menu {
 					}
 				}
 			}
-			else if(answ == 2){
+			else if(answer == 2){
 				String p = input.inputString("Please input CVR");
 				// maybe changes later
 				System.out.println("Invoice sent");
