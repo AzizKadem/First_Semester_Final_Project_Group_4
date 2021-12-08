@@ -129,7 +129,7 @@ public class Order {
 
 		returnString.append(getProductsAndPrice());
 		
-		returnString.append("\nDate of purchase:\t");
+		returnString.append("\nDate of purchase:\n");
 		returnString.append(getDate());
 		returnString.append("\n\n");
 		
