@@ -22,6 +22,7 @@ public class LeaseCtrl {
 	
 	public boolean confirmLease(Customer c, Machine m) {
 		Lease l = new Lease(c, m);
+		m.setLease(false);
 		return LeaseCont.getInsatnce().addLease(l);
 	}
 }
