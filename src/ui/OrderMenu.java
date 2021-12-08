@@ -1,5 +1,7 @@
 package ui;
 
+import javax.print.DocFlavor.INPUT_STREAM;
+
 import Exceptions.EmptyOrder;
 import Exceptions.ProductNotFound;
 import Exceptions.QuantityUnderrunException;
@@ -84,11 +86,20 @@ public class OrderMenu extends Menu {
 					
 				}
 			}
-			if(!orderCtrl.isEmpty())
-			{
-				System.out.println(orderCtrl.getProductsAndPrice());
-				System.out.println("Please make a payment(sending signal to the card treminal)");
+			retVal = makePayment();
+		}
+		
+		return retVal;
+	}
 	
+	public boolean makePayment() {
+		boolean retVal = false;
+		if(!orderCtrl.isEmpty()) {
+			System.out.println(orderCtrl.getProductsAndPrice());
+			int answ = input.inputInt("Please make a payment. Chose 1 to pay here or 2 for sending an invoice");
+			
+			if(answ == 1) {
+			
 				boolean finalized = false;
 				
 				while(!finalized) {
@@ -103,7 +114,7 @@ public class OrderMenu extends Menu {
 							System.out.println(eo.getLocalizedMessage());
 							System.out.println(orderCtrl.cancelOrder());
 						}
-						
+					
 						finalized = true;
 						retVal = true;
 					}
@@ -116,9 +127,15 @@ public class OrderMenu extends Menu {
 					}
 				}
 			}
-		}
-		else {
-			System.out.println("Invalid phone number.");
+			else if(answ == 2){
+				String p = input.inputString("Please input CVR");
+				// maybe changes later
+				System.out.println("Invoice sent");
+				retVal = true;
+			}
+			else {
+				System.out.println("Try again");
+			}
 		}
 		return retVal;
 	}
