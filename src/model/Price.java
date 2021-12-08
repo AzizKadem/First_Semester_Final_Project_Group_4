@@ -2,7 +2,7 @@ package model;
 
 public class Price {
 
-	private String period;
+	private Date date;
 	private double price;
 	
 	/**
@@ -10,9 +10,9 @@ public class Price {
 	 * @param period the period in which the price was active
 	 * @param price the price of the product in DKK
 	 */
-	public Price(String period, double price) {
+	public Price(Date date, double price) {
 		super();
-		this.period = period;
+		this.date = date;
 		this.price = price;
 	}
 
@@ -21,8 +21,8 @@ public class Price {
 	 * 
 	 * @return the period
 	 */
-	public String getPeriod() {
-		return period;
+	public Date getDate() {
+		return date;
 	}
 
 	/**

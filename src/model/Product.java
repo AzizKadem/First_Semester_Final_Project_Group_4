@@ -2,14 +2,12 @@ package model;
 
 import java.util.ArrayList;
 
-public class Product {
+public abstract class Product {
 
 	private String name;
 	private ArrayList<Price> prices;
 	private int stock;
 	//private Department department;
-	private String category;
-	private String barcode;
 	
 	/**
 	 * Product constructor
@@ -19,14 +17,12 @@ public class Product {
 	 * @param category the category of the product
 	 * @param barcode the barcode of the product
 	 */
-	public Product(String name, Price price, int stock, String category, String barcode) {
+	public Product(String name, Price price, int stock) {
 		super();
 		this.name = name;
 		prices = new ArrayList<>();
 		prices.add(price);
 		this.stock = stock;
-		this.category = category;
-		this.barcode = barcode;
 	}
 	
 	/**
@@ -64,9 +60,7 @@ public class Product {
 	 * 
 	 * @return the barcode
 	 */
-	public String getBarcode() {
-		return barcode;
-	}
+	public abstract String getBarcode();
 	
 	/**
 	 * Change the current price.
