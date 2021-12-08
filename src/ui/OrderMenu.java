@@ -88,6 +88,10 @@ public class OrderMenu extends Menu {
 			}
 			retVal = makePayment();
 		}
+		else
+		{
+			String m = input.inputString("The phone number doesn't exist in the system, try again or create a new customer profile");
+		}
 		
 		return retVal;
 	}
