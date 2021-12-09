@@ -1,7 +1,7 @@
 package ui;
 
-import Exceptions.EmptyOrder;
-import Exceptions.ProductNotFound;
+import Exceptions.EmptyOrderException;
+import Exceptions.ProductNotFoundException;
 import Exceptions.QuantityUnderrunException;
 import controller.OrderCtrl;
 
@@ -172,7 +172,7 @@ public class OrderMenu extends Menu {
 					catch (QuantityUnderrunException que) {
 						System.out.println(que.getLocalizedMessage());
 					}
-					catch (ProductNotFound pnf) {
+					catch (ProductNotFoundException pnf) {
 						System.out.println(pnf.getLocalizedMessage());
 					}
 					
@@ -211,7 +211,7 @@ public class OrderMenu extends Menu {
 							orderCtrl.finishOrder();
 							System.out.println(receipt);
 						}
-						catch (EmptyOrder eo) {
+						catch (EmptyOrderException eo) {
 							System.out.println(eo.getLocalizedMessage());
 							System.out.println(cancelOrder(orderCtrl.getCurrentOrder()));
 							orderCtrl.cancelOrder();

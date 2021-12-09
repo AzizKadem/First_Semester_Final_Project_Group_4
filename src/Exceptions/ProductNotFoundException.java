@@ -1,9 +1,9 @@
 package Exceptions;
 
-public class ProductNotFound extends IllegalArgumentException {
+public class ProductNotFoundException extends IllegalArgumentException {
 	private String key;
 	
-	public ProductNotFound(String key) {
+	public ProductNotFoundException(String key) {
 		this.key = key;
 	}
 

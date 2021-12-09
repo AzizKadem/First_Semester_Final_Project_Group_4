@@ -1,6 +1,6 @@
 package Exceptions;
 
-public class EmptyOrder extends Exception {
+public class EmptyOrderException extends Exception {
 	/**
 	 * Get message about exception
 	 * @return Message
