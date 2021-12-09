@@ -78,7 +78,7 @@ public class LeaseMenu extends Menu{
 				l.getMachine().setLease(false);
 				leaseCtrl.removeLease(l);
 				retVal = true;
-				System.out.print("Machine returned succesfully");
+				System.out.println("Machine returned succesfully");
 			}
 			else {
 				System.out.println("Machine not returned");
