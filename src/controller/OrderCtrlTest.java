@@ -47,7 +47,7 @@ class OrderCtrlTest {
 		ArrayList<OrderLine> orderLines = new ArrayList<>();
 		OrderLine orderLine = new OrderLine(10, p);
 		orderLines.add(orderLine);
-		assertEquals(true, orderLines == ctrl.getCurrentOrder().getOrderLines());
+		assertEquals(123, ctrl.getTotal());
 	}
 
 	//@Test
