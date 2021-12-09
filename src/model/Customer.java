@@ -7,7 +7,6 @@ public class Customer {
 	private String address;
 	private String city;
 	private String zipCode;
-	private int discount;
 	
 	/**
 	 * @param name
@@ -17,14 +16,13 @@ public class Customer {
 	 * @param zipCode
 	 * @param discount
 	 */
-	public Customer(String name, String phoneNumber, String address, String city, String zipCode, int discount) {
+	public Customer(String name, String phoneNumber, String address, String city, String zipCode) {
 		super();
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.city = city;
 		this.zipCode = zipCode;
-		this.discount = discount;
 	}
 	
 	/**
@@ -87,17 +85,4 @@ public class Customer {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-	/**
-	 * @return
-	 */
-	public int getDiscount() {
-		return discount;
-	}
-	/**
-	 * @param discount
-	 */
-	public void setDiscount(int discount) {
-		this.discount = discount;
-	}
-	
 }
