@@ -72,6 +72,7 @@ public class LeaseMenu extends Menu{
 		Lease l = leaseCtrl.searchLease(machineID);
 		if(leaseCtrl.searchLease(machineID) != null) {
 			System.out.println("Lease found");
+			l.printLeaseInfo();
 			//display info about lease
 			String answ = input.inputString("Confirm return of the machine y/n");
 			if(answ.equals("y")) {
