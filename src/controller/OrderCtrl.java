@@ -1,7 +1,7 @@
 package controller;
 
-import Exceptions.EmptyOrder;
-import Exceptions.ProductNotFound;
+import Exceptions.EmptyOrderException;
+import Exceptions.ProductNotFoundException;
 import Exceptions.QuantityUnderrunException;
 import model.Customer;
 import model.Order;
@@ -47,7 +47,7 @@ public class OrderCtrl {
 	 * @throws QuantityUnderrunException
 	 */
 	public boolean createOrderline(String barcode, int quantity) throws QuantityUnderrunException,
-			ProductNotFound {
+			ProductNotFoundException {
 		boolean	retVal = false;
 		Product product = productCtrl.searchProduct(barcode);
 		if (quantity < 1) {
@@ -68,7 +68,7 @@ public class OrderCtrl {
 				}
 			}
 			else {
-				throw new ProductNotFound(barcode);
+				throw new ProductNotFoundException(barcode);
 			}
 		}
 
@@ -78,13 +78,13 @@ public class OrderCtrl {
 	/**
 	 * Finish the current order
 	 * @return Receipt
-	 * @throws EmptyOrder
+	 * @throws EmptyOrderException
 	 */
-	public boolean finishOrder() throws EmptyOrder {
+	public boolean finishOrder() throws EmptyOrderException {
 		boolean retVal = false;
 
 		if(currentOrder.isEmpty()) {
-			throw new EmptyOrder();
+			throw new EmptyOrderException();
 		}
 		else {
 			if (OrderCont.getInstance().addOrder(currentOrder)) {
