@@ -1,6 +1,7 @@
 package ui;
 
 import controller.LeaseCtrl;
+import model.Lease;
 
 public class LeaseMenu extends Menu{
 	private LeaseCtrl leaseCtrl;
@@ -9,6 +10,7 @@ public class LeaseMenu extends Menu{
 	public LeaseMenu() {
 		super("Lease Menu", "Back");
 		super.addOption("Create Lease");
+		super.addOption("Return lease");
 		
 		leaseCtrl = new LeaseCtrl();
 		input = new TextInput();
@@ -29,6 +31,9 @@ public class LeaseMenu extends Menu{
 				else {
 					System.out.println("Lease canceled");
 				}
+				break;
+			case 2:
+				returnLease(input.inputInt("Input Machine ID"));
 				break;
 		}
 	}
@@ -58,6 +63,29 @@ public class LeaseMenu extends Menu{
 		}
 		else {
 			System.out.println("Customer not found, try again");
+		}
+		return retVal;
+	}
+	
+	public boolean returnLease(int machineID) {
+		boolean retVal = false;
+		Lease l = leaseCtrl.searchLease(machineID);
+		if(leaseCtrl.searchLease(machineID) != null) {
+			System.out.println("Lease found");
+			//display info about lease
+			String answ = input.inputString("Confirm return of the machine y/n");
+			if(answ.equals("y")) {
+				l.getMachine().setLease(false);
+				leaseCtrl.removeLease(l);
+				retVal = true;
+				System.out.print("Machine returned succesfully");
+			}
+			else {
+				System.out.println("Machine not returned");
+			}
+		}
+		else {
+			System.out.println("System was not able to find the lease, try again!");
 		}
 		return retVal;
 	}

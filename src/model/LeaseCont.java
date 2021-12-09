@@ -25,4 +25,20 @@ public final class LeaseCont {
 		}
 		return retVal;
 	}
+	
+	public Lease searchLease(int id) {
+		boolean found = false;
+		Lease retVal = null;
+		for(int i = 0; i < leases.size() || !found; i++ ) {
+			if(leases.get(i).getMachineId(id) == id) {
+				found = true;
+				retVal = leases.get(i);
+			}
+		}
+		return retVal;
+	}
+	
+	public boolean removeLease(Lease l) {
+		return leases.remove(l);
+	}
 }

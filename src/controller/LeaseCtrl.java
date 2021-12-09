@@ -20,9 +20,17 @@ public class LeaseCtrl {
 		return machineController.searchMachine(id);
 	}
 	
+	public Lease searchLease(int id) {
+		return LeaseCont.getInsatnce().searchLease(id);
+	}
+	
 	public boolean confirmLease(Customer c, Machine m) {
 		Lease l = new Lease(c, m);
 		m.setLease(false);
 		return LeaseCont.getInsatnce().addLease(l);
+	}
+	
+	public boolean removeLease(Lease l) {
+		return LeaseCont.getInsatnce().removeLease(l);
 	}
 }

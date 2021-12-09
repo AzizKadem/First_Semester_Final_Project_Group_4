@@ -15,4 +15,12 @@ public class Lease {
 	public void printLeaseInfo() {
 		System.out.println("Lease of " + m.getName() + " for a period of " + period);
 	}
+	
+	public int getMachineId(int id) {
+		return m.getID();
+	}
+	
+	public Machine getMachine() {
+		return m;
+	}
 }
