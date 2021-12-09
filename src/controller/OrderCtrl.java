@@ -62,7 +62,8 @@ public class OrderCtrl {
 					
 				}
 				if (productCtrl.isEnoughInStock(product, quantity)) {
-					if (currentOrder.addOrderLine(new OrderLine(quantity, product))) {
+					OrderLine orderLine = new OrderLine(quantity, product);
+					if (currentOrder.addOrderLine(orderLine)) {
 						retVal = true;
 					}
 				}
