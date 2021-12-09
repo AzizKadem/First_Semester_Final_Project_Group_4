@@ -11,10 +11,6 @@ import model.CustomerCont;
 
 class CustomerCtrlTest {
 
-	@Test
-	void test() {
-		fail("Not yet implemented");
-	}
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -33,6 +29,7 @@ class CustomerCtrlTest {
 	public void testSearchCustomer() {
 		Customer c = new Customer("1", "1", "1", "1", "1");
 		CustomerCont.getInstance().addCustommer(c);
-		assertEquals(c, CustomerCtrl.searchCustomer("1"));
+		CustomerCtrl ctrl = new CustomerCtrl();
+		assertEquals(c, ctrl.searchCustomer("1"));
 	}
 }
