@@ -112,62 +112,6 @@ public class Order {
 		}
 		return deleted;
 	}
-
-	/**
-	 * Get receipt
-	 * @return String of the receipt
-	 */
-	public String getReceipt() {
-		StringBuilder returnString = new StringBuilder();
-		
-		returnString.append("Customer\nName:\t\t");
-		returnString.append(aCustomer.getName());
-		returnString.append("\nPhone number:\t");
-		returnString.append(aCustomer.getPhoneNumber());
-		returnString.append("\n\n");
-
-		returnString.append(getProductsAndPrice());
-		
-
-		returnString.append("\nDate of purchase:\t");
-		returnString.append(date.getDateTime());
-		returnString.append("\n\n");
-		
-		return returnString.toString();
-	}
-	
-	/**
-	 * Get all products and a price of this order line
-	 * @return String of all products and a price
-	 */
-	public String getProductsAndPrice() {
-		StringBuilder returnString = new StringBuilder();
-		
-		returnString.append(getOrderLineItems());
-		returnString.append("\n");
-
-		returnString.append("Total:\t" + getPrice());
-		returnString.append("\n");
-		
-		return returnString.toString();
-	}
-	
-
-	/**
-	 * Get info about all items in the order
-	 * @return String of the items
-	 */
-	public String getOrderLineItems() {
-		calculateTotalPrice();
-		StringBuilder returnString = new StringBuilder();
-
-		for (OrderLine aLine : orderLines) {
-			returnString.append(aLine.getInfo());
-			returnString.append("\n");
-		}
-
-		return returnString.toString();
-	}
 	
 	/**
 	 * Cancel Order and return items

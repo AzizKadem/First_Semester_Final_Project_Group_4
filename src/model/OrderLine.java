@@ -21,30 +21,6 @@ public class OrderLine {
 	}
 
 	/**
-	 * Get info of the orderLine
-	 * @return String about the info
-	 */
-	public String getInfo() {
-		StringBuilder returnString = new StringBuilder();
-
-		returnString.append(aProduct.getName());
-		returnString.append("\t" + aProduct.getPrice());
-		returnString.append(" x" + quantity);
-		if(quantity < 10)
-		{
-			returnString.append(" " + subTotal);
-		}
-		else
-		{
-			returnString.append(" " + (subTotal + discount));
-			returnString.append(" -" + discount);
-			returnString.append(" " + subTotal);
-		}
-	
-		return returnString.toString();
-	}
-	
-	/**
 	 * Subtract quantity from the stock
 	 */
 	public void subtractFromStock() {

@@ -112,7 +112,7 @@ public class OrderMenu extends Menu {
 		StringBuilder returnString = new StringBuilder();
 
 		for (OrderLine aLine : anOrder.getOrderLines()) {
-			returnString.append(aLine.getInfo());
+			returnString.append(getOrderLineInfo(aLine));
 			returnString.append("\n");
 		}
 
@@ -130,7 +130,7 @@ public class OrderMenu extends Menu {
 		returnString.append(" products:\n");
 		
 		for (OrderLine aLine : anOrder.getOrderLines()) {
-			returnString.append(aLine.getInfo());
+			returnString.append(getOrderLineInfo(aLine));
 		}
 		
 		return returnString.toString();
