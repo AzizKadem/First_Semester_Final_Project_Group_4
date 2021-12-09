@@ -5,7 +5,7 @@ import model.*;
 public class Main {
 	public static void main(String[] args) {
 		MainMenu menu = new MainMenu();
-
+		
 		CustomerCont.getInstance().addCustommer(new Customer("Bob", 
 					"123", "Home", "ThisCity", "0", 2));
 		

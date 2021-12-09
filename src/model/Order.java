@@ -1,14 +1,13 @@
 package model;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.time.LocalDateTime;
-import java.time.format.*;
+
 
 public class Order {
 	//TODO add ID/index
 	private int discount;
 	private double totalPrice;
-	private String date;
+	private Date date;
 
 	private Customer aCustomer;
 	private ArrayList<OrderLine> orderLines;
@@ -19,7 +18,7 @@ public class Order {
 	public Order (Customer customer) {
 		totalPrice = 0;
 		aCustomer = customer;
-		date = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+		date = new Date();
 		orderLines = new ArrayList<>();
 	}
 
@@ -120,7 +119,7 @@ public class Order {
 	 */
 	public String getReceipt() {
 		StringBuilder returnString = new StringBuilder();
-		//TODO print date
+		
 		returnString.append("Customer\nName:\t\t");
 		returnString.append(aCustomer.getName());
 		returnString.append("\nPhone number:\t");
@@ -129,8 +128,9 @@ public class Order {
 
 		returnString.append(getProductsAndPrice());
 		
-		returnString.append("\nDate of purchase:\n");
-		returnString.append(getDate());
+
+		returnString.append("\nDate of purchase:\t");
+		returnString.append(date.getDateTime());
 		returnString.append("\n\n");
 		
 		return returnString.toString();
@@ -206,14 +206,6 @@ public class Order {
 		return totalPrice;
 	}
 	
-	/**
-	 * Get date
-	 * 
-	 * @return the date as String
-	 */
-	public String getDate() {
-		return date;
-	}
 
 	/**
 	 * Find an order line by a product
