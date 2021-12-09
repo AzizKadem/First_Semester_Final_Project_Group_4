@@ -22,8 +22,9 @@ public class Main {
 		menu.start();
 		
 		for (Order order : OrderCont.getInstance().getOrders()) {
-			System.out.println("Customer" + order.getACustomer().getName());
-			System.out.println("Paid" + order.getPrice());
+			System.out.println("Customer: " + order.getACustomer().getName());
+			System.out.println("Paid: " + order.getPrice());
+			System.out.println("ID: " + order.getID());
 		}
 	}
 }

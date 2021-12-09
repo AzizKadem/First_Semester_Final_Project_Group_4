@@ -4,10 +4,11 @@ import java.util.Iterator;
 
 
 public class Order {
-	//TODO add ID/index
 	private int discount;
 	private double totalPrice;
 	private Date date;
+	private int id;
+	private static int staticID;
 
 	private Customer aCustomer;
 	private ArrayList<OrderLine> orderLines;
@@ -20,6 +21,7 @@ public class Order {
 		aCustomer = customer;
 		date = new Date();
 		orderLines = new ArrayList<>();
+		id = staticID++;
 	}
 
 	/**
@@ -212,5 +214,14 @@ public class Order {
 	 */
 	public ArrayList<OrderLine> getOrderLines() {
 	    return orderLines;
+	}
+	
+	/**
+	 * Get ID
+	 * 
+	 * @return id as int
+	 */
+	public int getID() {
+		return id;
 	}
 }
