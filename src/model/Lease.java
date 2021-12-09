@@ -15,7 +15,7 @@ public class Lease {
 	
 	public void printLeaseInfo() {
 		
-		System.out.println("Lease of " + m.getName() + " for a period of " + period + " months");
+		System.out.println("Lease of " + m.getName() + " for a period of " + period + " month(s)");
 		System.out.println("Price: " + period*m.getPrice());
 		System.out.println("Date: " + date.getDateTime());
 	}
