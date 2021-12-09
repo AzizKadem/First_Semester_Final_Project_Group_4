@@ -173,21 +173,11 @@ public class Order {
 	 * Cancel Order and return items
 	 * @return Items that were cancelled
 	 */
-	public String cancelOrder() {
-		StringBuilder returnString = new StringBuilder();
-		returnString.append("Order Canceled with ");
-		returnString.append(orderLines.size());
-		returnString.append(" products:\n");
-		
+	public void cancelOrder() {
 		for (OrderLine aLine : orderLines) {
-			returnString.append(aLine.getInfo());
 			aLine.addToStock();
 		}
-		
-		return returnString.toString();
-		
 	}
-
 
 	/**
 	 * Get totalPrice.
@@ -202,7 +192,12 @@ public class Order {
 	    totalPrice = totalPrice * (1 - (discount / 100));
 	}
 	
+	/**
+	 * Get a price
+	 * @return price
+	 */
 	public double getPrice() {
+		calculateTotalPrice();
 		return totalPrice;
 	}
 	
@@ -228,5 +223,50 @@ public class Order {
 		}
 		
 		return returnLine;
+	}
+
+	/**
+	 * Get discount.
+	 *
+	 * @return discount as int.
+	 */
+	public int getDiscount() {
+	    return discount;
+	}
+
+	/**
+	 * Get totalPrice.
+	 *
+	 * @return totalPrice as double.
+	 */
+	public double getTotalPrice() {
+	    return totalPrice;
+	}
+
+	/**
+	 * Get date.
+	 *
+	 * @return date as Date.
+	 */
+	public Date getDate() {
+	    return date;
+	}
+
+	/**
+	 * Get aCustomer.
+	 *
+	 * @return aCustomer as Customer.
+	 */
+	public Customer getACustomer() {
+	    return aCustomer;
+	}
+
+	/**
+	 * Get orderLines.
+	 *
+	 * @return orderLines as ArrayList<OrderLine>.
+	 */
+	public ArrayList<OrderLine> getOrderLines() {
+	    return orderLines;
 	}
 }

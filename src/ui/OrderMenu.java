@@ -5,6 +5,9 @@ import Exceptions.ProductNotFound;
 import Exceptions.QuantityUnderrunException;
 import controller.OrderCtrl;
 
+import model.OrderLine;
+import model.Order;
+
 public class OrderMenu extends Menu {
 	private OrderCtrl orderCtrl;
 	private TextInput input;
@@ -12,7 +15,6 @@ public class OrderMenu extends Menu {
 	public OrderMenu() {
 		super("Order Menu", "Back");
 		super.addOption("Create Order");
-		super.addOption("Print");
 
 		orderCtrl = new OrderCtrl();
 		input = new TextInput();
@@ -37,12 +39,104 @@ public class OrderMenu extends Menu {
 					System.out.println("Order was canceled.");
 				}
 				break;
-			case 2:
-				System.out.println(" " + orderCtrl.printAllOrders());
-				break;
 		}
 	}
+
+	/**
+	 * Get info of the orderLine
+	 * @return String about the info
+	 */
+	public String getOrderLineInfo(OrderLine anOrderLine) {
+		StringBuilder returnString = new StringBuilder();
+
+		returnString.append(anOrderLine.getAProduct().getName());
+		returnString.append("\t" + anOrderLine.getAProduct().getPrice());
+		returnString.append(" x" + anOrderLine.getQuantity());
+		if(anOrderLine.getQuantity() < 10) {
+			returnString.append(" " + anOrderLine.getSubTotal());
+		}
+		else
+		{
+			returnString.append(" " + (anOrderLine.getSubTotal() + anOrderLine.getDiscount()));
+			returnString.append(" -" + anOrderLine.getQuantity());
+			returnString.append(" " + anOrderLine.getSubTotal());
+		}
 	
+		return returnString.toString();
+	}
+	
+	/**
+	 * Get receipt of an order
+	 * @param anOrder Get receipt of current order
+	 * @return String of the receipt
+	 */
+	public String getOrderReceipt(Order anOrder) {
+		StringBuilder returnString = new StringBuilder();
+		
+		returnString.append("Customer\nName:\t\t");
+		returnString.append(anOrder.getACustomer().getName());
+		returnString.append("\nPhone number:\t");
+		returnString.append(anOrder.getACustomer().getPhoneNumber());
+		returnString.append("\n\n");
+
+		returnString.append(getProductsAndPrice(anOrder));
+		
+		returnString.append("\nDate of purchase:\t");
+		returnString.append(anOrder.getDate().getDateTime());
+		returnString.append("\n\n");
+		
+		return returnString.toString();
+	}
+	
+	/**
+	 * Get all products and a price of this order line
+	 * @return String of all products and a price
+	 */
+	public String getProductsAndPrice(Order anOrder) {
+		StringBuilder returnString = new StringBuilder();
+		
+		returnString.append(getOrderLineItems(anOrder));
+		returnString.append("\n");
+
+		returnString.append("Total:\t" + anOrder.getPrice());
+		returnString.append("\n");
+		
+		return returnString.toString();
+	}
+
+	/**
+	 * Get info about all items in the order
+	 * @return String of the items
+	 */
+	public String getOrderLineItems(Order anOrder) {
+		StringBuilder returnString = new StringBuilder();
+
+		for (OrderLine aLine : anOrder.getOrderLines()) {
+			returnString.append(aLine.getInfo());
+			returnString.append("\n");
+		}
+
+		return returnString.toString();
+	}
+
+	/**
+	 * Cancel Order and return items
+	 * @return Items that were cancelled
+	 */
+	public String cancelOrder(Order anOrder) {
+		StringBuilder returnString = new StringBuilder();
+		returnString.append("Order Canceled with ");
+		returnString.append(anOrder.getOrderLines().size());
+		returnString.append(" products:\n");
+		
+		for (OrderLine aLine : anOrder.getOrderLines()) {
+			returnString.append(aLine.getInfo());
+		}
+		
+		return returnString.toString();
+		
+	}
+
 	/**
 	 * Create order
 	 * @return True if the order was successfully created
@@ -86,8 +180,7 @@ public class OrderMenu extends Menu {
 			}
 			retVal = makePayment();
 		}
-		else
-		{
+		else {
 			String m = input.inputString("The phone number doesn't exist in the system, try again or create a new customer profile");
 		}
 		
@@ -101,7 +194,7 @@ public class OrderMenu extends Menu {
 	public boolean makePayment() {
 		boolean retVal = false;
 		if(!orderCtrl.isEmpty()) {
-			System.out.println(orderCtrl.getProductsAndPrice());
+			System.out.println(getProductsAndPrice(orderCtrl.getCurrentOrder()));
 			int answer = input.inputInt("Please make a payment. Chose 1 to pay here or 2 for sending an invoice");
 			
 			if(answer == 1) {
@@ -114,18 +207,22 @@ public class OrderMenu extends Menu {
 					if(s.equals("y")) {
 						System.out.println("Order succesfully paid");
 						try {
-							System.out.println(orderCtrl.finishOrder());
+							String receipt = getOrderReceipt(orderCtrl.getCurrentOrder());
+							orderCtrl.finishOrder();
+							System.out.println(receipt);
 						}
 						catch (EmptyOrder eo) {
 							System.out.println(eo.getLocalizedMessage());
-							System.out.println(orderCtrl.cancelOrder());
+							System.out.println(cancelOrder(orderCtrl.getCurrentOrder()));
+							orderCtrl.cancelOrder();
 						}
 					
 						finalized = true;
 						retVal = true;
 					}
 					else if(s.equals("n")) {
-						System.out.println(orderCtrl.cancelOrder());
+						System.out.println(cancelOrder(orderCtrl.getCurrentOrder()));
+						orderCtrl.getCurrentOrder();
 						finalized = true;
 					}
 					else {

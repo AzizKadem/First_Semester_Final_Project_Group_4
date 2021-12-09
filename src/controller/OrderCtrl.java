@@ -80,28 +80,31 @@ public class OrderCtrl {
 	 * @return Receipt
 	 * @throws EmptyOrder
 	 */
-	public String finishOrder() throws EmptyOrder {
+	public boolean finishOrder() throws EmptyOrder {
+		boolean retVal = false;
+
 		if(currentOrder.isEmpty()) {
 			throw new EmptyOrder();
 		}
 		else {
-			String receipt = currentOrder.getReceipt();
+			if (OrderCont.getInstance().addOrder(currentOrder)) {
+				staffCtrl.addTotal(currentOrder.getPrice());
+				currentOrder = null;
 
-			OrderCont.getInstance().addOrder(currentOrder);
-
-			staffCtrl.addTotal(currentOrder.getPrice());
-			currentOrder = null;
-
-			return receipt;
+				retVal = true;
+			}
+			
 		}
+		return retVal;
 	}
 	
 	/**
 	 * Cancel the current order
 	 * @return Information about cancellation
 	 */
-	public String cancelOrder() {
-		return currentOrder.cancelOrder();
+	public void cancelOrder() {
+		currentOrder.cancelOrder();
+		currentOrder = null;
 	}
 	
 	/**
@@ -111,14 +114,6 @@ public class OrderCtrl {
 	public boolean isEmpty() {
 		return currentOrder.isEmpty();
 	}
-
-	/**
-	 * Print all orders in the container
-	 * @return String of all orders
-	 */
-	public String printAllOrders() {
-		return OrderCont.getInstance().printAllOrders();
-	}
 	
 	/**
 	 * Get total price of the current order
@@ -127,12 +122,13 @@ public class OrderCtrl {
 	public double getTotal() {
 		return currentOrder.getPrice();
 	}
-	
+
 	/**
-	 * Get products and final price of the current order
-	 * @return String of all products and price
+	 * Get currentOrder.
+	 *
+	 * @return currentOrder as Order.
 	 */
-	public String getProductsAndPrice() {
-		return currentOrder.getProductsAndPrice();
+	public Order getCurrentOrder() {
+	    return currentOrder;
 	}
 }

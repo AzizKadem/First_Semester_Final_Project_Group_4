@@ -38,23 +38,12 @@ public class OrderCont {
 
 		return retVal;
 	}
-
+	
 	/**
-	 * Return a string containing all orders in the container
-	 * @return String of all orders
+	 * Get orders
+	 * @return orders
 	 */
-	public String printAllOrders() {
-		StringBuilder returnString = new StringBuilder();
-		
-		if (orders.size() == 0) {
-			returnString.append("There are no orders.");
-		}
-		else {
-			for (Order order: orders) {
-				returnString.append(order.getReceipt());
-				returnString.append("\n\n");
-			}
-		}
-		return returnString.toString();
+	public ArrayList<Order> getOrders() {
+		return orders;
 	}
 }

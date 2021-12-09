@@ -103,4 +103,13 @@ public class OrderLine {
 	public Product getAProduct() {
 	    return aProduct;
 	}
+
+	/**
+	 * Get discount.
+	 *
+	 * @return discount as double.
+	 */
+	public double getDiscount() {
+	    return discount;
+	}
 }
