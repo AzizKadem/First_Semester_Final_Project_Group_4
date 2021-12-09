@@ -7,7 +7,7 @@ public class Main {
 		MainMenu menu = new MainMenu();
 		
 		CustomerCont.getInstance().addCustommer(new Customer("Bob", 
-					"123", "Home", "ThisCity", "0", 2));
+					"123", "Home", "ThisCity", "0"));
 		
 		ProductCont.getInstance().addProduct(new Item("Wrench",
 				new Price(new Date(), 50), 40, "Tools", "1"));
