@@ -46,9 +46,11 @@ public class ProductCont {
 	public Product searchProduct(String barcode) {
 		boolean found = false;
 		Product retProduct = null;
-		for(int i=0; !found && i<products.size();i++) {
+		
+		for(int i = 0; !found && i < products.size(); i++) {
 			Product element = products.get(i);
-			if(element.getBarcode().equals(barcode)) {
+			
+			if (element.getBarcode().equals(barcode)) {
 				retProduct = element;
 				found = true;
 			}
