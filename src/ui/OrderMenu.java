@@ -2,10 +2,13 @@ package ui;
 
 import controller.OrderCtrl;
 import exceptions.EmptyOrderException;
+import exceptions.NotEnoughInStockException;
 import exceptions.ProductNotFoundException;
 import exceptions.QuantityUnderrunException;
-import model.OrderLine;
+import model.Appliance;
+import model.AppliancesOrderLine;
 import model.Order;
+import model.OrderLine;
 
 public class OrderMenu extends Menu {
 	private OrderCtrl orderCtrl;
@@ -51,15 +54,20 @@ public class OrderMenu extends Menu {
 		returnString.append(anOrderLine.getAProduct().getName());
 		returnString.append("\t" + anOrderLine.getAProduct().getPrice());
 		returnString.append(" x" + anOrderLine.getQuantity());
-		if(anOrderLine.getQuantity() < 10) {
+		if (anOrderLine.getQuantity() < 10) {
 			returnString.append(" " + anOrderLine.getSubTotal());
 		}
-		else
-		{
+		else {
 			returnString.append(" " + (anOrderLine.getSubTotal() + anOrderLine.getDiscount()));
 			returnString.append(" -" + anOrderLine.getQuantity());
 			returnString.append(" " + anOrderLine.getSubTotal());
 		}
+		
+		if (anOrderLine.getAProduct().getClass().isAssignableFrom(Appliance.class)) {
+			returnString.append("\n\tColor: ");
+			returnString.append(((AppliancesOrderLine)anOrderLine).getCopy().getColor());
+		}
+		
 	
 		return returnString.toString();
 	}
@@ -205,6 +213,9 @@ public class OrderMenu extends Menu {
 					catch (ProductNotFoundException pnf) {
 						System.out.println(pnf.getLocalizedMessage());
 					}
+					catch (NotEnoughInStockException neise) {
+						System.out.println(neise.getLocalizedMessage());
+					}
 					
 				}
 			}
@@ -217,6 +228,14 @@ public class OrderMenu extends Menu {
 		return retVal;
 	}
 	
+	public int paymentType() {
+		Menu menu = new PlaceholderMenu("Payment", "Cancel");
+		menu.addOption("Pay here");
+		menu.addOption("Send invoice");
+		
+		return menu.selectOption();
+	}
+	
 	/**
 	 * Ask customer to make a payment
 	 * @return True if the payment was successful
@@ -225,49 +244,51 @@ public class OrderMenu extends Menu {
 		boolean retVal = false;
 		if(!orderCtrl.isEmpty()) {
 			System.out.println(getProductsAndPrice(orderCtrl.getCurrentOrder()));
-			int answer = input.inputInt("Please make a payment. Chose 1 to pay here or 2 for sending an invoice");
+			int answer = paymentType();
 			
-			if(answer == 1) {
-			
-				boolean finalized = false;
-				
-				while(!finalized) {
-					String s = input.inputString("Is the payment succesfull? y/n");
+			switch (answer) {
+				case 1:
+					boolean finalized = false;
 					
-					if(s.equals("y")) {
-						System.out.println("Order succesfully paid");
-						try {
-							String receipt = getOrderReceipt(orderCtrl.getCurrentOrder());
-							orderCtrl.finishOrder();
-							System.out.println(receipt);
+					while(!finalized) {
+						String s = input.inputString("Is the payment succesfull? y/n");
+						
+						if(s.equals("y")) {
+							System.out.println("Order succesfully paid");
+							try {
+								String receipt = getOrderReceipt(orderCtrl.getCurrentOrder());
+								orderCtrl.finishOrder();
+								System.out.println(receipt);
+							}
+							catch (EmptyOrderException eo) {
+								System.out.println(eo.getLocalizedMessage());
+								System.out.println(cancelOrder(orderCtrl.getCurrentOrder()));
+								orderCtrl.cancelOrder();
+							}
+						
+							finalized = true;
+							retVal = true;
 						}
-						catch (EmptyOrderException eo) {
-							System.out.println(eo.getLocalizedMessage());
+						else if(s.equals("n")) {
 							System.out.println(cancelOrder(orderCtrl.getCurrentOrder()));
-							orderCtrl.cancelOrder();
+							orderCtrl.getCurrentOrder();
+							finalized = true;
 						}
-					
-						finalized = true;
-						retVal = true;
+						else {
+							System.out.println("Payment failed, try again");
+						}
 					}
-					else if(s.equals("n")) {
-						System.out.println(cancelOrder(orderCtrl.getCurrentOrder()));
-						orderCtrl.getCurrentOrder();
-						finalized = true;
-					}
-					else {
-						System.out.println("Payment failed, try again");
-					}
-				}
-			}
-			else if(answer == 2){
-				String p = input.inputString("Please input CVR");
-				// maybe changes later
-				System.out.println("Invoice sent");
-				retVal = true;
-			}
-			else {
-				System.out.println("Try again");
+					break;
+				case 2:
+					String p = input.inputString("Please input CVR");
+					// maybe changes later
+					System.out.println("Invoice sent");
+					retVal = true;
+					break;
+				case 3:
+					System.out.println(cancelOrder(orderCtrl.getCurrentOrder()));
+					orderCtrl.cancelOrder();
+					break;
 			}
 		}
 		return retVal;

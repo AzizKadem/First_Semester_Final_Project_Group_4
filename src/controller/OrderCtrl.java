@@ -1,6 +1,7 @@
 package controller;
 
 import exceptions.EmptyOrderException;
+import exceptions.NotEnoughInStockException;
 import exceptions.ProductNotFoundException;
 import exceptions.QuantityUnderrunException;
 import model.Appliance;
@@ -48,9 +49,11 @@ public class OrderCtrl {
 	 * @param quantity Amount of the product ordered
 	 * @return True if the order line was created successfully
 	 * @throws QuantityUnderrunException
+	 * @throws NotEnoughInStockException 
+	 * @throws ProductNotFoundException
 	 */
 	public boolean createOrderline(String barcode, int quantity) throws QuantityUnderrunException,
-			ProductNotFoundException {
+			ProductNotFoundException, NotEnoughInStockException {
 		boolean	retVal = false;
 		Product product = productCtrl.searchProduct(barcode);
 
@@ -77,6 +80,9 @@ public class OrderCtrl {
 					if (currentOrder.addOrderLine(orderLine)) {
 						retVal = true;
 					}
+				}
+				else {
+					throw new NotEnoughInStockException();
 				}
 			}
 			else {

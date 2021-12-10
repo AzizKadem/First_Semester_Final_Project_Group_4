@@ -8,6 +8,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import exceptions.NotEnoughInStockException;
+import exceptions.ProductNotFoundException;
+import exceptions.QuantityUnderrunException;
 import model.*;
 
 
@@ -42,7 +45,8 @@ class OrderCtrlTest {
 	}
 
 	@Test
-	void testCreateOrderline() {
+	void testCreateOrderline() throws QuantityUnderrunException,
+			ProductNotFoundException, NotEnoughInStockException {
 		ctrl.createOrder("1");
 		assertEquals(true, ctrl.createOrderline("1", 1));
 		ArrayList<OrderLine> orderLines = new ArrayList<>();
