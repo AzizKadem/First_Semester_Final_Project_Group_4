@@ -40,4 +40,15 @@ public class AppliancesOrderLine extends OrderLine {
 	public ApplianceCopy getCopy() {
 		return copy;
 	}
+
+	@Override
+	public void subtractFromStock() {
+		copy.setStock(copy.getStock() - super.getQuantity());
+	}
+
+	@Override
+	public void addToStock() {
+		copy.setStock(copy.getStock() + super.getQuantity());
+		
+	}
 }

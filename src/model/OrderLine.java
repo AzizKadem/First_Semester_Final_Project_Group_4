@@ -28,18 +28,12 @@ public abstract class OrderLine {
 	/**
 	 * Subtract quantity from the stock
 	 */
-	public void subtractFromStock() {
-		getAProduct().setStock(getAProduct().getStock() - quantity);
-		//delete later
-		System.out.println("Stock: " + getAProduct().getStock());
-	}
+	public abstract void subtractFromStock();
 
 	/**
 	 * Add a quantity to stock
 	 */
-	public void addToStock() {
-		getAProduct().setStock(getAProduct().getStock() + quantity);
-	}
+	public abstract void addToStock();
 
 	/**
 	 * Get quantity.

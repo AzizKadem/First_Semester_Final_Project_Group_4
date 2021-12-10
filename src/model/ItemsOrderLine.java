@@ -15,4 +15,14 @@ public class ItemsOrderLine extends OrderLine {
 		return aProduct;
 	}
 
+	@Override
+	public void subtractFromStock() {
+		getAProduct().setStock(getAProduct().getStock() - super.getQuantity());
+	}
+
+	@Override
+	public void addToStock() {
+		getAProduct().setStock(getAProduct().getStock() + super.getQuantity());
+	}
+
 }
