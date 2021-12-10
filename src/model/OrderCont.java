@@ -46,4 +46,12 @@ public class OrderCont {
 	public ArrayList<Order> getOrders() {
 		return orders;
 	}
+	/**
+	 * Empty the container
+	 */
+	public void emptyContainer() {
+		for(Order element: orders) {
+			orders.remove(element);
+		}
+	}
 }

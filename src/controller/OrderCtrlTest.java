@@ -31,6 +31,7 @@ class OrderCtrlTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
+		
 	}
 
 	@Test
@@ -45,14 +46,9 @@ class OrderCtrlTest {
 		ctrl.createOrder("1");
 		assertEquals(true, ctrl.createOrderline("1", 1));
 		ArrayList<OrderLine> orderLines = new ArrayList<>();
-		OrderLine orderLine = new ItemsOrderLine(10, p);
+		ItemsOrderLine orderLine = new ItemsOrderLine(10, p);
 		orderLines.add(orderLine);
 		assertEquals(123, ctrl.getTotal());
+		OrderCont.getInstance().emptyContainer();
 	}
-
-	//@Test
-	//void testFinishOrder() {
-	//	fail("Not yet implemented");
-	//}
-
 }

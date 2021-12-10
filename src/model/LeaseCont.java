@@ -41,4 +41,14 @@ public final class LeaseCont {
 	public boolean removeLease(Lease l) {
 		return leases.remove(l);
 	}
+	
+	public int getContainerSize() {
+		return leases.size();
+	}
+	
+	public void emptyContainer() {
+		for(Lease element: leases) {
+			leases.remove(element);
+		}
+	}
 }

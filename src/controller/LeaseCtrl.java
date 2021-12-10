@@ -26,11 +26,12 @@ public class LeaseCtrl {
 	
 	public boolean confirmLease(Customer c, Machine m) {
 		Lease l = new Lease(c, m);
-		m.setLease(false);
+		m.setLease(true);
 		return LeaseCont.getInsatnce().addLease(l);
 	}
 	
 	public boolean removeLease(Lease l) {
+		l.getMachine().setLease(true);
 		return LeaseCont.getInsatnce().removeLease(l);
 	}
 }
