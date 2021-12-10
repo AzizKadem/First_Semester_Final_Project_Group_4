@@ -9,8 +9,9 @@ public class Main {
 		CustomerCont.getInstance().addCustommer(new Customer("Bob", 
 					"123", "Home", "ThisCity", "0"));
 		
-		ProductCont.getInstance().addProduct(new Item("Wrench",
-				new Price(new Date(), 50), 40, "Tools", "1"));
+		Item item1 = new Item("Wrench", new Price(new Date(), 50), 40, "Tools", "1");
+		
+		ProductCont.getInstance().addProduct(item1);
 
 
 		ProductCont.getInstance().addProduct(new Item("Hammer",
@@ -28,7 +29,12 @@ public class Main {
 		
 		MachineCont.getInstance().addMachine(new Machine(1, "Vacum"));
 		
+		Packages package1 = new Packages("Fridge and wrench package", "4");
 		
+		package1.add(appliance, 1);
+		package1.add(item1, 5);
+		
+		ProductCont.getInstance().addProduct(package1);
 
 
 		menu.start();

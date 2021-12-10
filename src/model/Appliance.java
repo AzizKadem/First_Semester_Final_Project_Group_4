@@ -2,13 +2,21 @@ package model;
 
 import java.util.ArrayList;
 
-public class Appliance extends Product {
+public class Appliance extends SingleProduct {
 	private int generation;
 	private int waranty;
 	private String brand;
 	private int id;
 	private ArrayList<ApplianceCopy> applianceCopies;
 
+	/**
+	 * @param name the name of the appliance
+	 * @param price the price of the appliance
+	 * @param id the id
+	 * @param generation the generation of the appliance
+	 * @param waranty the warranty of the appliance
+	 * @param brand the brand of the appliance
+	 */
 	public Appliance(String name, Price price, int id,
 			int generation, int waranty, String brand) {
 		super(name, price);

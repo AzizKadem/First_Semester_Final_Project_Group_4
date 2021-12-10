@@ -7,10 +7,12 @@ import exceptions.QuantityUnderrunException;
 import model.Appliance;
 import model.AppliancesOrderLine;
 import model.Customer;
+import model.Item;
 import model.ItemsOrderLine;
 import model.Order;
 import model.OrderCont;
 import model.OrderLine;
+import model.PackageOrderLine;
 import model.Product;
 
 public class OrderCtrl {
@@ -64,6 +66,8 @@ public class OrderCtrl {
 			if (product != null) {
 				if (currentOrder.checkOrderForProduct(product)) {
 					quantity += currentOrder.getQuantityOfOrderLine(product);
+					/*TODO if you have some = products and then add more of the same but 
+					more than the stock it has it just straight up removes the order line */
 					currentOrder.addToStock(product);
 					currentOrder.deleteOrderLine(product);
 					
@@ -73,8 +77,11 @@ public class OrderCtrl {
 					if (product.getClass().isAssignableFrom(Appliance.class)) {
 						orderLine = new AppliancesOrderLine(quantity, product, barcode);
 					}
-					else {
+					else if (product.getClass().isAssignableFrom(Item.class)){
 						orderLine = new ItemsOrderLine(quantity, product);
+					}
+					else {
+						orderLine = new PackageOrderLine(quantity, product);
 					}
 					
 					if (currentOrder.addOrderLine(orderLine)) {

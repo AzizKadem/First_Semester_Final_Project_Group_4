@@ -1,10 +1,17 @@
 package model;
 
-public class Item extends Product {
+public class Item extends SingleProduct {
 	private String barcode;
 	private String category;
 	private int stock;
 	
+	/**
+	 * @param name the name of the item
+	 * @param price the price of the item
+	 * @param stock the stock which the item has
+	 * @param category the category in which the item belongs
+	 * @param barcode the barcode of the item
+	 */
 	public Item(String name, Price price, int stock, String category, String barcode) {
 		super(name, price);
 		this.barcode = barcode;
@@ -13,7 +20,7 @@ public class Item extends Product {
 	}
 
 	/**
-	 * Does this item contains the barcode
+	 * Does this item contain the barcode
 	 * @param barcode The barcode to match
 	 * @return True if the barcode is the same
 	 */

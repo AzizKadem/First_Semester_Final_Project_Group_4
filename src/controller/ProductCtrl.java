@@ -1,6 +1,8 @@
 package controller;
 
 import model.Appliance;
+import model.Item;
+import model.Packages;
 import model.Product;
 import model.ProductCont;
 
@@ -35,8 +37,12 @@ public class ProductCtrl {
 		if (foundProduct.getClass().isAssignableFrom(Appliance.class)) {
 			retVal = ((Appliance)foundProduct).getCopyByBarcode(barcode).isEnoughInStock(quantity);
 		}
+		else if (foundProduct.getClass().isAssignableFrom(Item.class)) {
+			retVal = ((Item)foundProduct).isEnoughInStock(quantity);
+		}
+		
 		else {
-			retVal = foundProduct.isEnoughInStock(quantity);
+			retVal = ((Packages)foundProduct).isEnoughInStock(quantity);
 		}
 
 		return retVal;

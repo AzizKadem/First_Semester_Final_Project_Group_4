@@ -1,6 +1,7 @@
 package model;
 
 public class ItemsOrderLine extends OrderLine {
+	//TODO maybe move the aProduct to super class
 	private Product aProduct;
 
 	public ItemsOrderLine(int quantity, Product aProduct) {

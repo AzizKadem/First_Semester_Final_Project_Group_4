@@ -49,4 +49,11 @@ public final class CustomerCont {
 		}
 		return retVal;
 	}
+	
+	/**
+	 * Empty the container
+	 */
+	public void emptyContainer() {
+		cust.clear();
+	}
 }

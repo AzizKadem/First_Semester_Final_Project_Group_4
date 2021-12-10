@@ -10,6 +10,7 @@ public class ApplianceCopy {
 		this.color = color;
 		this.state = state;
 		this.barcode = barcode;
+		//TODO move stock to appliance??
 		this.stock = stock;
 	}
 	

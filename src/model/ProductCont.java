@@ -57,4 +57,11 @@ public class ProductCont {
 		}
 		return retProduct;
 	}
+	
+	/**
+	 * Empty the container
+	 */
+	public void emptyContainer() {
+		products.clear();
+	}
 }

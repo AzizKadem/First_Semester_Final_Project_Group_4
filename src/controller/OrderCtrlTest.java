@@ -16,7 +16,6 @@ import model.*;
 
 class OrderCtrlTest {
 	private Customer c;
-	private CustomerCont CustCon;
 	private OrderCtrl ctrl;
 	private Date date;
 	private Price price;
@@ -34,7 +33,8 @@ class OrderCtrlTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
-		
+		ProductCont.getInstance().emptyContainer();
+		CustomerCont.getInstance().emptyContainer();
 	}
 
 	@Test

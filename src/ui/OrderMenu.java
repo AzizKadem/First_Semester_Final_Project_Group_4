@@ -210,8 +210,8 @@ public class OrderMenu extends Menu {
 					catch (QuantityUnderrunException que) {
 						System.out.println(que.getLocalizedMessage());
 					}
-					catch (ProductNotFoundException pnf) {
-						System.out.println(pnf.getLocalizedMessage());
+					catch (ProductNotFoundException pnfe) {
+						System.out.println(pnfe.getLocalizedMessage());
 					}
 					catch (NotEnoughInStockException neise) {
 						System.out.println(neise.getLocalizedMessage());
