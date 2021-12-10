@@ -1,8 +1,8 @@
 package controller;
 
-import Exceptions.EmptyOrderException;
-import Exceptions.ProductNotFoundException;
-import Exceptions.QuantityUnderrunException;
+import exceptions.EmptyOrderException;
+import exceptions.ProductNotFoundException;
+import exceptions.QuantityUnderrunException;
 import model.Appliance;
 import model.AppliancesOrderLine;
 import model.Customer;

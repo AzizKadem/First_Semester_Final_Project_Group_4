@@ -1,10 +1,9 @@
 package ui;
 
-import Exceptions.EmptyOrderException;
-import Exceptions.ProductNotFoundException;
-import Exceptions.QuantityUnderrunException;
 import controller.OrderCtrl;
-
+import exceptions.EmptyOrderException;
+import exceptions.ProductNotFoundException;
+import exceptions.QuantityUnderrunException;
 import model.OrderLine;
 import model.Order;
 
@@ -136,6 +135,19 @@ public class OrderMenu extends Menu {
 		return returnString.toString();
 		
 	}
+	
+	/**
+	 * Select how what is the customer
+	 * @return selected customer type as int
+	 */
+	public int handleCustomer() {
+		Menu menu = new PlaceholderMenu("Customer", "Cancel");
+		menu.addOption("Existing customer");
+		menu.addOption("New customer");
+		menu.addOption("Continue as guest");
+		
+		return menu.selectOption();
+	}
 
 	/**
 	 * Create order
@@ -143,8 +155,26 @@ public class OrderMenu extends Menu {
 	 */
 	public boolean createOrder() {
 		boolean retVal = false;
+		
+		int cust = handleCustomer();
+		
+		String phone = "";
 
-		String phone = input.inputString("Enter customer phone number");
+		switch (cust) {
+			case 1:
+				phone = input.inputString("Enter customer phone number");
+				
+				
+				break;
+			case 2:
+				//create new customer
+				break;
+			case 3:
+				//make a guest with unique id
+				break;
+				
+			
+		}
 		
 		if (orderCtrl.createOrder(phone)) {
 			String barcode = "";
@@ -181,7 +211,7 @@ public class OrderMenu extends Menu {
 			retVal = makePayment();
 		}
 		else {
-			String m = input.inputString("The phone number doesn't exist in the system, try again or create a new customer profile");
+			System.out.println("The customer was not found");
 		}
 		
 		return retVal;

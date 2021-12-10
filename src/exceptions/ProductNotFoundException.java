@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class ProductNotFoundException extends IllegalArgumentException {
 	private String key;
