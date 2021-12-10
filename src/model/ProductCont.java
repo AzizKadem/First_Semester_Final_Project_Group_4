@@ -50,7 +50,7 @@ public class ProductCont {
 		for(int i = 0; !found && i < products.size(); i++) {
 			Product element = products.get(i);
 			
-			if (element.getBarcode().equals(barcode)) {
+			if (element.isWithBarcode(barcode)) {
 				retProduct = element;
 				found = true;
 			}

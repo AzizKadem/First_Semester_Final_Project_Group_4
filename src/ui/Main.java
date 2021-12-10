@@ -16,7 +16,19 @@ public class Main {
 		ProductCont.getInstance().addProduct(new Item("Hammer",
 					new Price(new Date(), 50), 40, "Tools", "2"));
 		
-		MachineCont.getInstance().addMachine(new Machine(1,"Vacum"));
+		Appliance appliance = new Appliance("Fridge", 
+									new Price(new Date(), 200), 1,
+									1, 2, "Super Fridge");
+		
+		ApplianceCopy appCopy = new ApplianceCopy("Yellow", "new", "3", 10);
+		
+		appliance.addCopy(appCopy);
+		
+		ProductCont.getInstance().addProduct(appliance);
+		
+		MachineCont.getInstance().addMachine(new Machine(1, "Vacum"));
+		
+		
 
 
 		menu.start();

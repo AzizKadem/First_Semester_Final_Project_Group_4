@@ -45,7 +45,7 @@ class OrderCtrlTest {
 		ctrl.createOrder("1");
 		assertEquals(true, ctrl.createOrderline("1", 1));
 		ArrayList<OrderLine> orderLines = new ArrayList<>();
-		OrderLine orderLine = new OrderLine(10, p);
+		OrderLine orderLine = new ItemsOrderLine(10, p);
 		orderLines.add(orderLine);
 		assertEquals(123, ctrl.getTotal());
 	}

@@ -1,5 +1,6 @@
 package controller;
 
+import model.Appliance;
 import model.Product;
 import model.ProductCont;
 
@@ -26,11 +27,16 @@ public class ProductCtrl {
 	 * @param quantity Quantity to be checked
 	 * @return True if the quantity is enough
 	 */
-	public boolean isEnoughInStock(Product aProduct, int quantity) {
+	public boolean isEnoughInStock(String barcode, int quantity) {
 		boolean retVal = false;
 		
-		if (aProduct.isEnoughInStock(quantity)) {
-			retVal = true;
+		Product foundProduct = searchProduct(barcode);
+		
+		if (foundProduct.getClass().isAssignableFrom(Appliance.class)) {
+			retVal = ((Appliance)foundProduct).getCopyByBarcode(barcode).isEnoughInStock(quantity);
+		}
+		else {
+			retVal = foundProduct.isEnoughInStock(quantity);
 		}
 
 		return retVal;

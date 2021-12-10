@@ -3,7 +3,10 @@ package controller;
 import Exceptions.EmptyOrderException;
 import Exceptions.ProductNotFoundException;
 import Exceptions.QuantityUnderrunException;
+import model.Appliance;
+import model.AppliancesOrderLine;
 import model.Customer;
+import model.ItemsOrderLine;
 import model.Order;
 import model.OrderCont;
 import model.OrderLine;
@@ -50,6 +53,7 @@ public class OrderCtrl {
 			ProductNotFoundException {
 		boolean	retVal = false;
 		Product product = productCtrl.searchProduct(barcode);
+
 		if (quantity < 1) {
 			throw new QuantityUnderrunException();
 		}
@@ -61,8 +65,15 @@ public class OrderCtrl {
 					currentOrder.deleteOrderLine(product);
 					
 				}
-				if (productCtrl.isEnoughInStock(product, quantity)) {
-					OrderLine orderLine = new OrderLine(quantity, product);
+				if (productCtrl.isEnoughInStock(barcode, quantity)) {
+					OrderLine orderLine = null;
+					if (product.getClass().isAssignableFrom(Appliance.class)) {
+						orderLine = new AppliancesOrderLine(quantity, product, barcode);
+					}
+					else {
+						orderLine = new ItemsOrderLine(quantity, product);
+					}
+					
 					if (currentOrder.addOrderLine(orderLine)) {
 						retVal = true;
 					}

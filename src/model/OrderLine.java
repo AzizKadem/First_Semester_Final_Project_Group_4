@@ -1,20 +1,25 @@
 package model;
 
-public class OrderLine {
+public abstract class OrderLine {
 	private int quantity;
 	private double subTotal;
-	private Product aProduct;
 	private double discount;
 
 	/**
 	 * @param quantity
 	 * @param aProduct
 	 */
-	public OrderLine(int quantity, Product aProduct) {
+	public OrderLine(int quantity) {
 		this.quantity = quantity;
-		this.aProduct = aProduct;
-		subTotal = aProduct.getPrice() * quantity;
-		if(quantity > 9) {
+	}
+	
+	/**
+	 * Calculate sub total price from the product
+	 */
+	public void calculateSubTotal() {
+		subTotal = getAProduct().getPrice() * quantity;
+		
+		if (quantity > 9) {
 			discount = subTotal * 0.05;
 			subTotal = subTotal * 0.95;
 		}
@@ -24,15 +29,16 @@ public class OrderLine {
 	 * Subtract quantity from the stock
 	 */
 	public void subtractFromStock() {
-		aProduct.setStock(aProduct.getStock() - quantity);
-		System.out.println("Stock: " + aProduct.getStock());
+		getAProduct().setStock(getAProduct().getStock() - quantity);
+		//delete later
+		System.out.println("Stock: " + getAProduct().getStock());
 	}
 
 	/**
 	 * Add a quantity to stock
 	 */
 	public void addToStock() {
-		aProduct.setStock(aProduct.getStock() + quantity);
+		getAProduct().setStock(getAProduct().getStock() + quantity);
 	}
 
 	/**
@@ -76,9 +82,7 @@ public class OrderLine {
 	 *
 	 * @return aProduct as Product.
 	 */
-	public Product getAProduct() {
-	    return aProduct;
-	}
+	public abstract Product getAProduct();
 
 	/**
 	 * Get discount.

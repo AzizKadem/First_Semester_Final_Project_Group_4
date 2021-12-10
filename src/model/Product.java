@@ -6,7 +6,6 @@ public abstract class Product {
 
 	private String name;
 	private ArrayList<Price> prices;
-	private int stock;
 	//private Department department;
 	
 	/**
@@ -17,12 +16,11 @@ public abstract class Product {
 	 * @param category the category of the product
 	 * @param barcode the barcode of the product
 	 */
-	public Product(String name, Price price, int stock) {
+	public Product(String name, Price price) {
 		super();
 		this.name = name;
 		prices = new ArrayList<>();
 		prices.add(price);
-		this.stock = stock;
 	}
 	
 	/**
@@ -32,7 +30,7 @@ public abstract class Product {
 	 */
 	public boolean isEnoughInStock(int amount) {
 		boolean retVal = false;
-		if ((stock - amount) >= 0) {
+		if ((getStock() - amount) >= 0) {
 			retVal = true;
 		}
 		return retVal;
@@ -55,13 +53,8 @@ public abstract class Product {
 		return prices.get(prices.size()-1).getPrice();
 	}
 
-	/**
-	 * Get barcode.
-	 * 
-	 * @return the barcode
-	 */
-	public abstract String getBarcode();
-	
+	public abstract boolean isWithBarcode(String barcode);
+
 	/**
 	 * Change the current price.
 	 *  
@@ -79,16 +72,12 @@ public abstract class Product {
 	 *
 	 * @return stock as int.
 	 */
-	public int getStock() {
-	    return stock;
-	}
-
+	public abstract int getStock();
+	
 	/**
-	 * Set stock.
-	 *
-	 * @param stock the value to set.
+	 * Set stock
+	 * 
+	 * @param Stock new stock
 	 */
-	public void setStock(int stock) {
-	    this.stock = stock;
-	}
+	public abstract void setStock(int stock);
 }
