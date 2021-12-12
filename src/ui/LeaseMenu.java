@@ -76,7 +76,7 @@ public class LeaseMenu extends Menu{
 			//display info about lease
 			String answ = input.inputString("Confirm return of the machine y/n");
 			if(answ.equals("y")) {
-				l.getMachine().setLease(false);
+				l.getMachine().setLeased(false);
 				leaseCtrl.removeLease(l);
 				retVal = true;
 				System.out.println("Machine returned succesfully");

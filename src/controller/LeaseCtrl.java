@@ -47,7 +47,7 @@ public class LeaseCtrl {
 	 */
 	public boolean confirmLease(Customer c, Machine m) {
 		Lease l = new Lease(c, m);
-		m.setLease(true);
+		m.setLeased(true);
 		return LeaseCont.getInstance().addLease(l);
 	}
 	
@@ -57,7 +57,7 @@ public class LeaseCtrl {
 	 * @return True if the lease was removed successfully
 	 */
 	public boolean removeLease(Lease l) {
-		l.getMachine().setLease(true);
+		l.getMachine().setLeased(true);
 		return LeaseCont.getInstance().removeLease(l);
 	}
 }
