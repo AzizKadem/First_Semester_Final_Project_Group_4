@@ -6,7 +6,6 @@ public class BusinessCustomer extends Customer{
 	private double businessDiscount;
 	
 	public BusinessCustomer(String name, String phoneNumber, String address, String city, String zipCode) {
-		// TODO Auto-generated constructor stub
 		super(name, phoneNumber, address, city, zipCode);
 	}
 

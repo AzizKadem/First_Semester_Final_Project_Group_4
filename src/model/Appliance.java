@@ -90,9 +90,11 @@ public class Appliance extends SingleProduct {
 		return applianceCopies.size();
 	}
 
+	/**
+	 * Cannot change stock
+	 */
 	@Override
 	public void setStock(int stock) {
-		// TODO Auto-generated method stub
-		
+		// do nothing
 	}
 }

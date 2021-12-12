@@ -32,19 +32,18 @@ class LeaseCtrlTest {
 
 	@Test
 	void testSearchCustomer() {
-		
-		assertEquals(true, ctrl.searchCustomer("1").equals(c));
+		assertEquals(true, ctrl.searchCustomer("1").getPhoneNumber().equals(c.getPhoneNumber()));
 	}
 
 	@Test
 	void testSearchMachine() {
-		assertEquals(true, ctrl.searchMachine(2).equals(m2));
+		assertEquals(true, ctrl.searchMachine(2).getName().equals(m2.getName()));
 	}
 
 	@Test
 	void testSearchLease() {
 		Lease l = new Lease(c, m);
-		LeaseCont.getInsatnce().addLease(l);
+		LeaseCont.getInstance().addLease(l);
 		assertEquals(l, ctrl.searchLease(1));
 	}
 	
@@ -54,7 +53,7 @@ class LeaseCtrlTest {
 	void testConfirmLease() {
 		assertEquals(true, ctrl.confirmLease(c, m));
 		assertEquals(m ,ctrl.searchLease(1).getMachine());
-		LeaseCont.getInsatnce().emptyContainer();
+		LeaseCont.getInstance().emptyContainer();
 		ctrl.removeLease(ctrl.searchLease(1));
 	}
 	
@@ -62,7 +61,7 @@ class LeaseCtrlTest {
 	void testRemoveLease() {
 		ctrl.confirmLease(c, m);
 		ctrl.removeLease(ctrl.searchLease(1));
-		assertEquals(0, LeaseCont.getInsatnce().getContainerSize());
+		assertEquals(0, LeaseCont.getInstance().getContainerSize());
 	}
 
 	

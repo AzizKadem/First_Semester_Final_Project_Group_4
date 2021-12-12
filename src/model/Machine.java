@@ -13,40 +13,76 @@ public class Machine {
 		price = 100;
 		
 	}
-	
-	public double getPrice() {
-		return price;
-	}
-	
-	public void setPrice(double p) {
-		price = p;
-	}
 
 	/**
-	 * @return ID
-	 */
-	public int getID() {
-		return ID;
-	}
-
-	/**
-	 * @return name
+	 * Get name.
+	 *
+	 * @return name as String.
 	 */
 	public String getName() {
-		return name;
+	    return name;
 	}
-	
+
 	/**
-	 * @param l
+	 * Set name.
+	 *
+	 * @param name the value to set.
 	 */
-	public void setLease(boolean l) {
-		leased = l;
+	public void setName(String name) {
+	    this.name = name;
 	}
-	
+
 	/**
-	 * @return leased
+	 * Get ID.
+	 *
+	 * @return ID as int.
+	 */
+	public int getID() {
+	    return ID;
+	}
+
+	/**
+	 * Set ID.
+	 *
+	 * @param ID the value to set.
+	 */
+	public void setID(int ID) {
+	    this.ID = ID;
+	}
+
+	/**
+	 * Get price.
+	 *
+	 * @return price as double.
+	 */
+	public double getPrice() {
+	    return price;
+	}
+
+	/**
+	 * Set price.
+	 *
+	 * @param price the value to set.
+	 */
+	public void setPrice(double price) {
+	    this.price = price;
+	}
+
+	/**
+	 * Get leased.
+	 *
+	 * @return leased as boolean.
 	 */
 	public boolean isLeased() {
-		return leased;
+	    return leased;
+	}
+
+	/**
+	 * Set leased.
+	 *
+	 * @param leased the value to set.
+	 */
+	public void setLeased(boolean leased) {
+	    this.leased = leased;
 	}
 }

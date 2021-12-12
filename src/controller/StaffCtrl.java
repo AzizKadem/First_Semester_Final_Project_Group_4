@@ -1,7 +1,6 @@
 package controller;
 
-import model.*;
-;
+import model.Staff;
 
 public class StaffCtrl {
 	private Staff loged;	
@@ -12,7 +11,8 @@ public class StaffCtrl {
 	}
 	
 	/**
-	 * @param amount
+	 * Add a total amount to the staff
+	 * @param amount The amount to be added
 	 */
 	public void addTotal(double amount) {
 		loged.updateTotal(amount);

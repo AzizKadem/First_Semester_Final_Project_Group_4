@@ -59,31 +59,44 @@ public class OrderCtrl {
 		boolean	retVal = false;
 		Product product = productCtrl.searchProduct(barcode);
 
+		//check if the quantity is not 0 or negative
 		if (quantity < 1) {
 			throw new QuantityUnderrunException();
 		}
 		else {
+			//check if product is not null
 			if (product != null) {
-				if (currentOrder.checkOrderForProduct(product)) {
-					quantity += currentOrder.getQuantityOfOrderLine(product);
-					/*TODO if you have some = products and then add more of the same but 
-					more than the stock it has it just straight up removes the order line */
-					currentOrder.addToStock(product);
-					currentOrder.deleteOrderLine(product);
-					
-				}
+				
+				//check if there is enough products in stock
 				if (productCtrl.isEnoughInStock(barcode, quantity)) {
+					
+					//check if the product is already ordered, if so merge the order line
+					if (currentOrder.checkOrderForProduct(product)) {
+						quantity += currentOrder.getQuantityOfOrderLine(product);
+
+						currentOrder.addToStock(product);
+						currentOrder.deleteOrderLine(product);
+						
+					}
+					
 					OrderLine orderLine = null;
+					
+					//check if the product is an appliance
 					if (product.getClass().isAssignableFrom(Appliance.class)) {
 						orderLine = new AppliancesOrderLine(quantity, product, barcode);
 					}
+					
+					//check if the product is an item
 					else if (product.getClass().isAssignableFrom(Item.class)){
 						orderLine = new ItemsOrderLine(quantity, product);
 					}
+					
+					//else it is a package
 					else {
 						orderLine = new PackageOrderLine(quantity, product);
 					}
 					
+					//check if the order line was added successfully
 					if (currentOrder.addOrderLine(orderLine)) {
 						retVal = true;
 					}
@@ -108,7 +121,8 @@ public class OrderCtrl {
 	public boolean finishOrder() throws EmptyOrderException {
 		boolean retVal = false;
 
-		if(currentOrder.isEmpty()) {
+		//check if the order is empty
+		if (currentOrder.isEmpty()) {
 			throw new EmptyOrderException();
 		}
 		else {

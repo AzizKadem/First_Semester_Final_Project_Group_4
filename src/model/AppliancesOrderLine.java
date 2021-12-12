@@ -27,6 +27,11 @@ public class AppliancesOrderLine extends OrderLine {
 		this.details = details;
 	}
 
+	/**
+	 * Get a product
+	 * 
+	 * @return A product as Product
+	 */
 	@Override
 	public Product getAProduct() {
 		return product;
@@ -41,11 +46,17 @@ public class AppliancesOrderLine extends OrderLine {
 		return copy;
 	}
 
+	/**
+	 * Subtract a quantity from stock
+	 */
 	@Override
 	public void subtractFromStock() {
 		copy.setStock(copy.getStock() - super.getQuantity());
 	}
 
+	/**
+	 * Add a quantity to the stock
+	 */
 	@Override
 	public void addToStock() {
 		copy.setStock(copy.getStock() + super.getQuantity());
