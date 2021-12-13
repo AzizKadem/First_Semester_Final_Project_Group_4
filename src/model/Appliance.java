@@ -64,11 +64,6 @@ public class Appliance extends SingleProduct {
 		return retVal;
 	}
 
-	/**
-	 * Does a copy contain a barcode
-	 * @param barcode The barcode to check
-	 * @return True if the copy contains the barcode
-	 */
 	@Override
 	public boolean isWithBarcode(String barcode) {
 		boolean found = false;
@@ -87,14 +82,18 @@ public class Appliance extends SingleProduct {
 	 */
 	@Override
 	public int getStock() {
-		return applianceCopies.size();
+		int retVal = 0;
+		for(ApplianceCopy copy:applianceCopies) {
+			retVal += copy.getStock();
+		}
+		return retVal;
 	}
 
 	/**
-	 * Cannot change stock
+	 * Add to the stock
 	 */
 	@Override
-	public void setStock(int stock) {
-		// do nothing
+	public void addToStock(int stock, ApplianceCopy copy) {
+		copy.setStock(copy.getStock() + stock);
 	}
 }

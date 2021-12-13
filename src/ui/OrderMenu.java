@@ -9,6 +9,8 @@ import model.Appliance;
 import model.AppliancesOrderLine;
 import model.Order;
 import model.OrderLine;
+import model.PackageLine;
+import model.Packages;
 
 public class OrderMenu extends Menu {
 	private OrderCtrl orderCtrl;
@@ -68,7 +70,19 @@ public class OrderMenu extends Menu {
 			returnString.append(((AppliancesOrderLine)anOrderLine).getCopy().getColor());
 		}
 		
+		if(anOrderLine.getAProduct().getClass().isAssignableFrom(Packages.class)) {
+			for(PackageLine line:((Packages)anOrderLine.getAProduct()).getLines()) {
+				returnString.append("\n\t" + getPackageLineInfo(line));
+			}
+		}
 	
+		return returnString.toString();
+	}
+	
+	public String getPackageLineInfo(PackageLine line) {
+		StringBuilder returnString = new StringBuilder();
+		returnString.append(line.getaProduct().getName());
+		returnString.append("\t" + line.getQuantity());	
 		return returnString.toString();
 	}
 	

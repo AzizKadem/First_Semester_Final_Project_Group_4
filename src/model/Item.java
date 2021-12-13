@@ -19,11 +19,6 @@ public class Item extends SingleProduct {
 		this.stock = stock;
 	}
 
-	/**
-	 * Does this item contain the barcode
-	 * @param barcode The barcode to match
-	 * @return True if the barcode is the same
-	 */
 	@Override
 	public boolean isWithBarcode(String barcode) {
 		boolean retVal = false;
@@ -38,9 +33,13 @@ public class Item extends SingleProduct {
 		return stock;
 	}
 
-	@Override
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+
+	@Override
+	public void addToStock(int stock, ApplianceCopy copy) {
+		this.stock += stock;		
 	}
 
 }

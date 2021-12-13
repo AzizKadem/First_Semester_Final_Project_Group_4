@@ -1,12 +1,13 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Packages extends Product {
 
 	private String barcode;
-	private HashMap<Product, Integer> content;
+	private ArrayList<PackageLine> lines;
 	private HashMap<SingleProduct, Integer> neededAmount; //this map only contains the products as a key
 	
 	/**
@@ -15,40 +16,29 @@ public class Packages extends Product {
 	public Packages(String name, String barcode, Price price) {
 		super(name, price);
 		this.barcode = barcode;
-		content = new HashMap<>();
+		lines = new ArrayList<>();
 		neededAmount = new HashMap<>();
 	}
 	
 	/**
-	 * Adds a product to the package, if it already exists then just increases 
-	 * the value of the product by the amount
-	 * @param p the product to be added
-	 * @param amount the amount of the product which is added
+	 * Add a package line to the package
+	 * @param p The package line to be added
+	 * @return True if the package line was successfully added
 	 */
-	public void add(SingleProduct p, int amount) {
-		addToNeededSinlgeProduct(p, amount);
-		if(!content.containsKey(p)) {
-			content.put(p, amount);
+	public boolean add(PackageLine p) {
+		Product product = p.getaProduct();
+		if(product.getClass().isAssignableFrom(Packages.class)) {
+			addToNeededPackage((Packages)p.getaProduct(), p.getQuantity());
 		}
 		else {
-			content.put(p, content.get(p) + amount);
+			addToNeededSinlgeProduct((SingleProduct)p.getaProduct(), p.getQuantity());
 		}
-	}
-	
-	/**
-	 * Adds a package to the package, if it already exists then just increases 
-	 * the value of the package by the amount
-	 * @param p the package to be added
-	 * @param amount the amount of the package which is added
-	 */
-	public void add(Packages p, int amount) {
-		addToNeededPackage(p, amount);
-		if(!content.containsKey(p)) {
-			content.put(p, amount);
+		boolean retVal = false;
+		if(lines.add(p)) {
+			retVal = true;
 		}
-		else {
-			content.put(p, content.get(p) + amount);
-		}
+		
+		return retVal;
 	}
 	
 	/**
@@ -64,8 +54,7 @@ public class Packages extends Product {
 			else {
 				neededAmount.put(p, neededAmount.get(p) + amount);
 			}
-	}
-	
+	}	
 	
 	/**
 	 * Adds each of the products to the needed products that the package contains,
@@ -81,6 +70,28 @@ public class Packages extends Product {
 				addToNeededSinlgeProduct(key, value * amount);
 			}
 	}
+	
+	/**
+	 * Finds the package line which contains the product
+	 * 
+	 * @param p the product to search for
+	 * @return the PackageLine which contains the product, null if there is no PackageLine 
+	 * containing the product
+	 */
+	public PackageLine findProductInLines(Product p) {
+		boolean found = false;
+		PackageLine retVal = null;
+		for(int i = 0; !found && i<lines.size(); i++) {
+			PackageLine element = lines.get(i);
+			if(element.getaProduct().equals(p)) {
+				found = true;
+				retVal = element;
+			}
+		}
+		return retVal;
+	}
+	
+	
 
 	/**
 	 * Get the amount of products that is needed for the package
@@ -115,21 +126,19 @@ public class Packages extends Product {
 	 */
 	public double calculatePrice() {
 		double retPrice = 0.0;
-		for(Map.Entry<Product, Integer> element:content.entrySet()) {
-			Product key = element.getKey();
-			int value = element.getValue();
-			retPrice += key.getPrice() * value;
+		for(PackageLine element:lines) {
+			retPrice += element.getaProduct().getPrice()*element.getQuantity();
 		}
-		return retPrice;
+		return retPrice*0.9;
 	}
 
 	/**
-	 * Get the content
+	 * Get the lines
 	 * 
-	 * @return the content
+	 * @return the lines
 	 */
-	public HashMap<Product, Integer> getContent() {
-		return content;
+	public ArrayList<PackageLine> getLines() {
+		return lines;
 	}
 
 	/**
@@ -159,13 +168,11 @@ public class Packages extends Product {
 		}
 		return smallest;
 	}
-
+	
 	@Override
-	public void setStock(int stock) {
-		for(Map.Entry<SingleProduct, Integer> element:neededAmount.entrySet()) {
-			SingleProduct key = element.getKey();
-			Integer value = element.getValue();
-			key.setStock(key.getStock() + stock * value);
+	public void addToStock(int stock, ApplianceCopy copy) {
+		for(PackageLine element:lines) {
+			element.getaProduct().addToStock(element.getQuantity()*stock, element.getaCopy());
 		}
 	}
 	
