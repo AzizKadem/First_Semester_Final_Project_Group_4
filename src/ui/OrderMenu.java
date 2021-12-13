@@ -191,6 +191,8 @@ public class OrderMenu extends Menu {
 			while (!barcode.equals("finish")) {
 				quantity = 1;
 				barcode = input.inputString("Enter product barcode(finish)");
+				
+				//finish also with empty barcode
 				if (barcode.equals("")) {
 					barcode = "finish";
 				}
