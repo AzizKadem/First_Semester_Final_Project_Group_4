@@ -205,6 +205,8 @@ public class OrderMenu extends Menu {
 			while (!barcode.equals("finish")) {
 				quantity = 1;
 				barcode = input.inputString("Enter product barcode(finish)");
+				
+				//finish also with empty barcode
 				if (barcode.equals("")) {
 					barcode = "finish";
 				}
@@ -242,6 +244,10 @@ public class OrderMenu extends Menu {
 		return retVal;
 	}
 	
+	/**
+	 * Crate menu for selecting the payment type
+	 * @return chosen type as int
+	 */
 	public int paymentType() {
 		Menu menu = new PlaceholderMenu("Payment", "Cancel");
 		menu.addOption("Pay here");
