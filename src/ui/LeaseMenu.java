@@ -22,7 +22,7 @@ public class LeaseMenu extends Menu{
 		
 		switch (selected) {
 			case 0:
-				super.setExit(isExit());
+				super.setExit(!isExit());
 				break;
 			case 1:
 				if(createLease()) {
