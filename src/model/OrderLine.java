@@ -4,20 +4,22 @@ public abstract class OrderLine {
 	private int quantity;
 	private double subTotal;
 	private double discount;
+	private Product aProduct;
 
 	/**
 	 * @param quantity
 	 * @param aProduct
 	 */
-	public OrderLine(int quantity) {
+	public OrderLine(int quantity, Product aProduct) {
 		this.quantity = quantity;
+		this.aProduct = aProduct;
 	}
 	
 	/**
 	 * Calculate sub total price from the product
 	 */
 	public void calculateSubTotal() {
-		subTotal = getAProduct().getPrice() * quantity;
+		subTotal = aProduct.getPrice() * quantity;
 		
 		if (quantity > 9) {
 			discount = subTotal * 0.05;
@@ -76,7 +78,9 @@ public abstract class OrderLine {
 	 *
 	 * @return aProduct as Product.
 	 */
-	public abstract Product getAProduct();
+	public Product getAProduct() {
+		return aProduct;
+	}
 
 	/**
 	 * Get discount.

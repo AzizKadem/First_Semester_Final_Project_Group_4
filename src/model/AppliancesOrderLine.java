@@ -3,12 +3,10 @@ package model;
 public class AppliancesOrderLine extends OrderLine {
 	private String details;
 	private ApplianceCopy copy;
-	private Product product;
 	
 	public AppliancesOrderLine(int quantity, Product aProduct, String barcode) {
-		super(quantity);
-		product = aProduct;
-		copy = ((Appliance)product).getCopyByBarcode(barcode);
+		super(quantity, aProduct);
+		copy = ((Appliance)super.getAProduct()).getCopyByBarcode(barcode);
 		
 		super.calculateSubTotal();
 	}
@@ -25,16 +23,6 @@ public class AppliancesOrderLine extends OrderLine {
 	 */
 	public void setDetails(String details) {
 		this.details = details;
-	}
-
-	/**
-	 * Get a product
-	 * 
-	 * @return A product as Product
-	 */
-	@Override
-	public Product getAProduct() {
-		return product;
 	}
 
 	/**
