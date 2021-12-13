@@ -57,6 +57,9 @@ public class LeaseMenu extends Menu{
 				if(conf.equals("y")) {
 					retVal = leaseCtrl.confirmLease(leaseCtrl.searchCustomer(phone), leaseCtrl.searchMachine(id));
 				}
+				else {
+					System.out.println("Lease cancelled");
+				}
 			}
 			else {
 				System.out.println("Barcode not found, try again");
