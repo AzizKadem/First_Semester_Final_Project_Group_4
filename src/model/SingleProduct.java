@@ -2,18 +2,15 @@ package model;
 
 public abstract class SingleProduct extends Product{
 	
-	private int stock;
 	//private Department department;
 	
 	/**
 	 * SingleProduct constructor
 	 * @param name the name of the product
 	 * @param price the price of the product
-	 * @param stock the stock of the appliance
 	 */
 	public SingleProduct(String name, Price price) {
 		super(name, price);
-		this.stock = stock;
 	}
 	
 	/**
