@@ -13,6 +13,9 @@ public class Lease {
 		period = 1;
 	}
 	
+	/**
+	 * Prints lease info
+	 */
 	public void printLeaseInfo() {
 		
 		System.out.println("Lease of " + m.getName() + " for a period of " + period + " month(s)");
@@ -20,10 +23,16 @@ public class Lease {
 		System.out.println("Date: " + date.getDateTime());
 	}
 	
-	public int getMachineId(int id) {
+	/**
+	 * @return machineID
+	 */
+	public int getMachineId() {
 		return m.getID();
 	}
 	
+	/**
+	 * @return Machine
+	 */
 	public Machine getMachine() {
 		return m;
 	}
