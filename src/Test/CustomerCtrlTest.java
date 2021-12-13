@@ -1,4 +1,4 @@
-package controller;
+package Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
+import controller.CustomerCtrl;
 import model.Customer;
 import model.CustomerCont;
 
