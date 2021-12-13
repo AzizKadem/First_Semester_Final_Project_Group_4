@@ -3,7 +3,6 @@ package model;
 public class Item extends SingleProduct {
 	private String barcode;
 	private String category;
-	private int stock;
 	
 	/**
 	 * @param name the name of the item
@@ -13,10 +12,9 @@ public class Item extends SingleProduct {
 	 * @param barcode the barcode of the item
 	 */
 	public Item(String name, Price price, int stock, String category, String barcode) {
-		super(name, price);
+		super(name, price, stock);
 		this.barcode = barcode;
 		this.category = category;
-		this.stock = stock;
 	}
 
 	/**
@@ -32,15 +30,4 @@ public class Item extends SingleProduct {
 		}
 		return retVal;
 	}
-
-	@Override
-	public int getStock() {
-		return stock;
-	}
-
-	@Override
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
-
 }

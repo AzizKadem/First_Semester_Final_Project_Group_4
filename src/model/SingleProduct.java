@@ -1,18 +1,19 @@
 package model;
 
-import java.util.ArrayList;
-
 public abstract class SingleProduct extends Product{
-
+	
+	private int stock;
 	//private Department department;
 	
 	/**
 	 * SingleProduct constructor
 	 * @param name the name of the product
 	 * @param price the price of the product
+	 * @param stock the stock of the appliance
 	 */
-	public SingleProduct(String name, Price price) {
+	public SingleProduct(String name, Price price, int stock) {
 		super(name, price);
+		this.stock = stock;
 	}
 	
 	/**
@@ -48,12 +49,16 @@ public abstract class SingleProduct extends Product{
 	 *
 	 * @return stock as int.
 	 */
-	public abstract int getStock();
+	public int getStock() {
+		return stock;
+	}
 	
 	/**
 	 * Set stock
 	 * 
 	 * @param Stock new stock
 	 */
-	public abstract void setStock(int stock);
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 }

@@ -36,7 +36,7 @@ public class ProductCtrl {
 		
 		//check if the product is an appliance
 		if (foundProduct.getClass().isAssignableFrom(Appliance.class)) {
-			retVal = ((Appliance)foundProduct).getCopyByBarcode(barcode).isEnoughInStock(quantity);
+			retVal = ((Appliance)foundProduct).isEnoughInStock(quantity);
 		}
 		
 		//check if the product is an item

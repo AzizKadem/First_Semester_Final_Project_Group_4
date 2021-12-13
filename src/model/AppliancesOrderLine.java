@@ -39,7 +39,7 @@ public class AppliancesOrderLine extends OrderLine {
 	 */
 	@Override
 	public void subtractFromStock() {
-		copy.setStock(copy.getStock() - getQuantity());
+		getAProduct().setStock(getAProduct().getStock() - getQuantity());
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class AppliancesOrderLine extends OrderLine {
 	 */
 	@Override
 	public void addToStock() {
-		copy.setStock(copy.getStock() + getQuantity());
+		getAProduct().setStock(getAProduct().getStock() + getQuantity());
 		
 	}
 }
