@@ -12,8 +12,8 @@ public class Packages extends Product {
 	/**
 	 * @param name the name of the package
 	 */
-	public Packages(String name, String barcode) {
-		super(name);
+	public Packages(String name, String barcode, Price price) {
+		super(name, price);
 		this.barcode = barcode;
 		content = new HashMap<>();
 		neededAmount = new HashMap<>();
@@ -113,8 +113,7 @@ public class Packages extends Product {
 	 * Get price.
 	 * @return the price
 	 */
-	@Override
-	public double getPrice() {
+	public double calculatePrice() {
 		double retPrice = 0.0;
 		for(Map.Entry<Product, Integer> element:content.entrySet()) {
 			Product key = element.getKey();
