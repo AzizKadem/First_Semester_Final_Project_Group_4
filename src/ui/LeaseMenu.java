@@ -38,6 +38,10 @@ public class LeaseMenu extends Menu{
 		}
 	}
 	
+	/**
+	 * Handle creating lease
+	 * @return True if the lease was created succesfully
+	 */
 	public boolean createLease() {
 		boolean retVal = false;
 		
@@ -67,6 +71,11 @@ public class LeaseMenu extends Menu{
 		return retVal;
 	}
 	
+	/**
+	 * Handle returning of the lease
+	 * @param machineID The machine id
+	 * @return True if the returning was successful
+	 */
 	public boolean returnLease(int machineID) {
 		boolean retVal = false;
 		Lease l = leaseCtrl.searchLease(machineID);
