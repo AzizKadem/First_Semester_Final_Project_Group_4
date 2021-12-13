@@ -44,7 +44,7 @@ public final class LeaseCont {
 		boolean found = false;
 		Lease retVal = null;
 		for(int i = 0; i < leases.size() || !found; i++ ) {
-			if(leases.get(i).getMachineId(id) == id) {
+			if(leases.get(i).getMachineId() == id) {
 				found = true;
 				retVal = leases.get(i);
 			}
