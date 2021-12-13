@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public abstract class SingleProduct extends Product{
 
-	private ArrayList<Price> prices;
 	//private Department department;
 	
 	/**
@@ -13,9 +12,7 @@ public abstract class SingleProduct extends Product{
 	 * @param price the price of the product
 	 */
 	public SingleProduct(String name, Price price) {
-		super(name);
-		prices = new ArrayList<>();
-		prices.add(price);
+		super(name, price);
 	}
 	
 	/**
@@ -32,15 +29,6 @@ public abstract class SingleProduct extends Product{
 		return retVal;
 	}
 
-	/**
-	 * Get price.
-	 * @return the price
-	 */
-	@Override
-	public double getPrice() {
-		return prices.get(prices.size()-1).getPrice();
-	}
-
 	public abstract boolean isWithBarcode(String barcode);
 
 	/**
@@ -50,7 +38,7 @@ public abstract class SingleProduct extends Product{
 	 * @return true if the change was successful
 	 */
 	public boolean changePrice(Price newPrice) {
-		return prices.add(newPrice);
+		return getPrices().add(newPrice);
 	}
 
 	

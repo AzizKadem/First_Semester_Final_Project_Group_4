@@ -29,7 +29,7 @@ public class Main {
 		
 		MachineCont.getInstance().addMachine(new Machine(1, "Vacum"));
 		
-		Packages package1 = new Packages("Fridge and wrench package", "4");
+		Packages package1 = new Packages("Fridge and wrench package", "4", new Price(new Date(), 50));
 		
 		package1.add(appliance, 1);
 		package1.add(item1, 5);
