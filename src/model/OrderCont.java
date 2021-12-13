@@ -3,8 +3,8 @@ package model;
 import java.util.ArrayList;
 
 public class OrderCont {
-	public static OrderCont instance;
-	public ArrayList<Order> orders;
+	private static OrderCont instance;
+	private ArrayList<Order> orders;
 
 	/**
 	 * Constructor of the singleton pattern

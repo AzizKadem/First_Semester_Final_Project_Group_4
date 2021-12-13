@@ -1,8 +1,6 @@
 package Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,24 +10,61 @@ import controller.OrderCtrl;
 import exceptions.NotEnoughInStockException;
 import exceptions.ProductNotFoundException;
 import exceptions.QuantityUnderrunException;
-import model.*;
+import model.Appliance;
+import model.ApplianceCopy;
+import model.Customer;
+import model.CustomerCont;
+import model.Date;
+import model.Item;
+import model.OrderCont;
+import model.Packages;
+import model.Price;
+import model.Product;
+import model.ProductCont;
+import model.SingleProduct;
 
 
 class OrderCtrlTest {
-	private Customer c;
+	private Customer customer;
 	private OrderCtrl ctrl;
 	private Date date;
 	private Price price;
-	private Product p;
+	private Product item;
+	private Appliance appliance;
+	private ApplianceCopy appCopy;
+	private Packages aPackage;
+	
+	private int stock;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		c = new Customer("1", "1", "1", "1", "1");
-		price = new Price(date, 123);
-		p = new Item("1", price, 12, "1", "1");
-		ProductCont.getInstance().addProduct(p);
+		
+		customer = new Customer("1", "1", "1", "1", "1");
+		price = new Price(date, 10);
+		
+		stock = 10;
+		
+		item = new Item("1", price, stock, "1", "1");
+		
+		
+		appliance = new Appliance("2", price, 2, 2, 2, "2");
+		appCopy = new ApplianceCopy("2", "2", "2", stock);
+		
+		appliance.addCopy(appCopy);
+		
+		aPackage = new Packages("3", "3", price);
+		
+		aPackage.add(appliance, 1);
+		aPackage.add((SingleProduct) item, 1);
+		
+		
+		
+		ProductCont.getInstance().addProduct(item);
+		ProductCont.getInstance().addProduct(appliance);
+		ProductCont.getInstance().addProduct(aPackage);
+		
 		ctrl = new OrderCtrl();
-		CustomerCont.getInstance().addCustommer(c);
+		CustomerCont.getInstance().addCustommer(customer);
 	}
 
 	@AfterEach
@@ -41,19 +76,54 @@ class OrderCtrlTest {
 	@Test
 	void testCreateOrder() {
 		assertEquals(true, ctrl.createOrder("1"));
-		assertEquals(c, ctrl.getCurrentOrder().getACustomer());
+		assertEquals(customer, ctrl.getCurrentOrder().getACustomer());
 		
 	}
 
 	@Test
-	void testCreateOrderline() throws QuantityUnderrunException,
+	void testCreateOrderlineItem() throws QuantityUnderrunException,
 			ProductNotFoundException, NotEnoughInStockException {
 		ctrl.createOrder("1");
+		
 		assertEquals(true, ctrl.createOrderline("1", 1));
-		ArrayList<OrderLine> orderLines = new ArrayList<>();
-		ItemsOrderLine orderLine = new ItemsOrderLine(10, p);
-		orderLines.add(orderLine);
-		assertEquals(123, ctrl.getTotal());
-		OrderCont.getInstance().emptyContainer();
+		assertEquals(price.getPrice(), ctrl.getTotal());
+		assertEquals((stock - 1), item.getStock());
 	}
+	
+	@Test
+	void testCancelOrder() throws QuantityUnderrunException,
+			ProductNotFoundException, NotEnoughInStockException {
+		ctrl.createOrder("1");
+		
+		assertEquals(true, ctrl.createOrderline("1", 1));
+		assertEquals(stock - 1, item.getStock());
+		
+		ctrl.cancelOrder();
+		
+		assertEquals(0, OrderCont.getInstance().getOrders().size());
+		assertEquals(stock, item.getStock());
+	}
+	
+	@Test
+	void testCreateOrderLineAppliance() throws QuantityUnderrunException,
+			ProductNotFoundException, NotEnoughInStockException {
+		ctrl.createOrder("1");
+		
+		assertEquals(true, ctrl.createOrderline("2", 1));
+		assertEquals(stock - 1, appCopy.getStock());
+	}
+	
+	@Test
+	void testCreateOrderLinePackage() throws QuantityUnderrunException,
+			ProductNotFoundException, NotEnoughInStockException {
+		ctrl.createOrder("1");
+	
+		assertEquals(true, ctrl.createOrderline("3", 1));
+		assertEquals(stock - 1, item.getStock());
+		System.out.println(stock + "");
+		System.out.println("" + appCopy.getStock());
+		assertEquals(stock - 1, appCopy.getStock());
+		assertEquals(stock - 1, aPackage.getStock());
+	}
+	
 }
