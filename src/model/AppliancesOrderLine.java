@@ -3,10 +3,12 @@ package model;
 public class AppliancesOrderLine extends OrderLine {
 	private String details;
 	private ApplianceCopy copy;
+	private Product product;
 	
 	public AppliancesOrderLine(int quantity, Product aProduct, String barcode) {
-		super(quantity, aProduct);
-		copy = ((Appliance)super.getAProduct()).getCopyByBarcode(barcode);
+		super(quantity);
+		product = aProduct;
+		copy = ((Appliance)product).getCopyByBarcode(barcode);
 		
 		super.calculateSubTotal();
 	}
@@ -26,6 +28,16 @@ public class AppliancesOrderLine extends OrderLine {
 	}
 
 	/**
+	 * Get a product
+	 * 
+	 * @return A product as Product
+	 */
+	@Override
+	public Product getAProduct() {
+		return product;
+	}
+
+	/**
 	 * Get copy
 	 * 
 	 * @return copy as ApplianceCopy
@@ -39,15 +51,13 @@ public class AppliancesOrderLine extends OrderLine {
 	 */
 	@Override
 	public void subtractFromStock() {
-		getAProduct().setStock(getAProduct().getStock() - getQuantity());
-	}
+		copy.setStock(copy.getStock() - getQuantity());	}
 
 	/**
 	 * Add a quantity to the stock
 	 */
 	@Override
 	public void addToStock() {
-		getAProduct().setStock(getAProduct().getStock() + getQuantity());
-		
+		copy.setStock(copy.getStock() + getQuantity());	
 	}
 }

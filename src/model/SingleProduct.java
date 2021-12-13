@@ -11,7 +11,7 @@ public abstract class SingleProduct extends Product{
 	 * @param price the price of the product
 	 * @param stock the stock of the appliance
 	 */
-	public SingleProduct(String name, Price price, int stock) {
+	public SingleProduct(String name, Price price) {
 		super(name, price);
 		this.stock = stock;
 	}
@@ -49,16 +49,12 @@ public abstract class SingleProduct extends Product{
 	 *
 	 * @return stock as int.
 	 */
-	public int getStock() {
-		return stock;
-	}
+	public abstract int getStock();
 	
 	/**
 	 * Set stock
 	 * 
 	 * @param Stock new stock
 	 */
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
+	public abstract void setStock(int stock);
 }

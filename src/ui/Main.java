@@ -19,9 +19,9 @@ public class Main {
 		
 		Appliance appliance = new Appliance("Fridge", 
 									new Price(new Date(), 200), 1,
-									1, 2, "Super Fridge", 10);
+									1, 2, "Super Fridge");
 		
-		ApplianceCopy appCopy = new ApplianceCopy("Yellow", "new", "3");
+		ApplianceCopy appCopy = new ApplianceCopy("Yellow", "new", "3", 10);
 		
 		appliance.addCopy(appCopy);
 		

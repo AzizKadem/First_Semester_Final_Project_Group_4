@@ -16,11 +16,10 @@ public class Appliance extends SingleProduct {
 	 * @param generation the generation of the appliance
 	 * @param waranty the warranty of the appliance
 	 * @param brand the brand of the appliance
-	 * @param stock the stock of the appliance
 	 */
 	public Appliance(String name, Price price, int id,
-			int generation, int waranty, String brand, int stock) {
-		super(name, price, stock);
+			int generation, int waranty, String brand) {
+		super(name, price);
 		this.waranty = waranty;
 		this.brand = brand;
 		applianceCopies = new ArrayList<>();
