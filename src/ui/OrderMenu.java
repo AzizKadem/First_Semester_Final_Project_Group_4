@@ -285,7 +285,7 @@ public class OrderMenu extends Menu {
 					System.out.println("Invoice sent");
 					retVal = true;
 					break;
-				case 3:
+				default:
 					System.out.println(cancelOrder(orderCtrl.getCurrentOrder()));
 					orderCtrl.cancelOrder();
 					break;

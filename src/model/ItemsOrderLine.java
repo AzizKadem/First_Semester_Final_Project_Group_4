@@ -17,5 +17,4 @@ public class ItemsOrderLine extends OrderLine {
 	public void addToStock() {
 		getAProduct().setStock(getAProduct().getStock() + getQuantity());
 	}
-
 }
