@@ -1,4 +1,4 @@
-	package model;
+package model;
 
 public abstract class SingleProduct extends Product{
 	
