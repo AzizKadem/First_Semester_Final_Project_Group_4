@@ -139,7 +139,6 @@ public class OrderCtrl {
 	
 	/**
 	 * Cancel the current order
-	 * @return Information about cancellation
 	 */
 	public void cancelOrder() {
 		currentOrder.cancelOrder();
