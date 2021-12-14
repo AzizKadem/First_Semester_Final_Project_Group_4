@@ -63,7 +63,7 @@ public class OrderMenu extends Menu {
 		}
 		else {
 			returnString.append(" " + (anOrderLine.getSubTotal() + anOrderLine.getDiscount()));
-			returnString.append(" -" + anOrderLine.getQuantity());
+			returnString.append(" -" + anOrderLine.getDiscount());
 			returnString.append(" " + anOrderLine.getSubTotal());
 		}
 		
@@ -72,7 +72,7 @@ public class OrderMenu extends Menu {
 			returnString.append(((AppliancesOrderLine)anOrderLine).getCopy().getColor());
 		}
 		
-		if(anOrderLine.getAProduct().getClass().isAssignableFrom(Packages.class)) {
+		if (anOrderLine.getAProduct().getClass().isAssignableFrom(Packages.class)) {
 			for(PackageLine line:((Packages)anOrderLine.getAProduct()).getLines()) {
 				returnString.append("\n" + getPackageLineInfo(line));
 			}
@@ -88,16 +88,23 @@ public class OrderMenu extends Menu {
 	 */
 	public String getPackageLineInfo(PackageLine line) {
 		StringBuilder returnString = new StringBuilder();
+		
 		returnString.append("\t" + line.getaProduct().getName());
 		returnString.append("\t" + line.getQuantity());	
-		if(line.getaProduct().getClass().isAssignableFrom(Packages.class)) {
-			for(PackageLine element:((Packages)line.getaProduct()).getLines()) {
+		
+		if (line.getaProduct().getClass().isAssignableFrom(Packages.class)) {
+			
+			for (PackageLine element:((Packages)line.getaProduct()).getLines()) {
 				returnString.append("\n");
-				for(int i = 0; i<packageLineTimes;i++) {
+				
+				for (int i = 0; i<packageLineTimes;i++) {
 					returnString.append("\t");
 				}
+				
 				packageLineTimes++;
+				
 				returnString.append(getPackageLineInfo(element));
+				
 				packageLineTimes--;
 			}
 		}
@@ -275,6 +282,22 @@ public class OrderMenu extends Menu {
 	}
 	
 	/**
+	 * Finish the order and catch exceptions
+	 */
+	public void finishOrder() {
+		try {
+			String receipt = getOrderReceipt(orderCtrl.getCurrentOrder());
+			orderCtrl.finishOrder();
+			System.out.println(receipt);
+		}
+		catch (EmptyOrderException eo) {
+			System.out.println(eo.getLocalizedMessage());
+			System.out.println(cancelOrder(orderCtrl.getCurrentOrder()));
+			orderCtrl.cancelOrder();
+		}
+	}
+	
+	/**
 	 * Ask customer to make a payment
 	 * @return True if the payment was successful
 	 */
@@ -293,16 +316,7 @@ public class OrderMenu extends Menu {
 						
 						if(s.equals("y")) {
 							System.out.println("Order succesfully paid");
-							try {
-								String receipt = getOrderReceipt(orderCtrl.getCurrentOrder());
-								orderCtrl.finishOrder();
-								System.out.println(receipt);
-							}
-							catch (EmptyOrderException eo) {
-								System.out.println(eo.getLocalizedMessage());
-								System.out.println(cancelOrder(orderCtrl.getCurrentOrder()));
-								orderCtrl.cancelOrder();
-							}
+							finishOrder();
 						
 							finalized = true;
 							retVal = true;
@@ -320,7 +334,10 @@ public class OrderMenu extends Menu {
 				case 2:
 					String p = input.inputString("Please input CVR");
 					// maybe changes later
+					
+					finishOrder();
 					System.out.println("Invoice sent");
+					
 					retVal = true;
 					break;
 				default:

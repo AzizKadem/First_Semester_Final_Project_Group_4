@@ -126,8 +126,6 @@ class OrderCtrlTest {
 	
 		assertEquals(true, ctrl.createOrderline("3", 1));
 		assertEquals(stock - 1, item.getStock());
-		System.out.println(stock + "");
-		System.out.println("" + appCopy.getStock());
 		assertEquals(stock - 1, appCopy.getStock());
 		assertEquals(stock - 1, aPackage.getStock());
 	}
