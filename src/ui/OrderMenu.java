@@ -15,6 +15,7 @@ import model.Packages;
 public class OrderMenu extends Menu {
 	private OrderCtrl orderCtrl;
 	private TextInput input;
+	private int packageLineTimes = 1;
 
 	public OrderMenu() {
 		super("Order Menu", "Back");
@@ -48,6 +49,7 @@ public class OrderMenu extends Menu {
 
 	/**
 	 * Get info of the orderLine
+	 * @param anOrderLine the order line to get the info of
 	 * @return String about the info
 	 */
 	public String getOrderLineInfo(OrderLine anOrderLine) {
@@ -72,17 +74,33 @@ public class OrderMenu extends Menu {
 		
 		if(anOrderLine.getAProduct().getClass().isAssignableFrom(Packages.class)) {
 			for(PackageLine line:((Packages)anOrderLine.getAProduct()).getLines()) {
-				returnString.append("\n\t" + getPackageLineInfo(line));
+				returnString.append("\n" + getPackageLineInfo(line));
 			}
 		}
 	
 		return returnString.toString();
 	}
 	
+	/**
+	 * Get info of the packageLine
+	 * @param line the package line to get the info of
+	 * @return String about the info
+	 */
 	public String getPackageLineInfo(PackageLine line) {
 		StringBuilder returnString = new StringBuilder();
-		returnString.append(line.getaProduct().getName());
+		returnString.append("\t" + line.getaProduct().getName());
 		returnString.append("\t" + line.getQuantity());	
+		if(line.getaProduct().getClass().isAssignableFrom(Packages.class)) {
+			for(PackageLine element:((Packages)line.getaProduct()).getLines()) {
+				returnString.append("\n");
+				for(int i = 0; i<packageLineTimes;i++) {
+					returnString.append("\t");
+				}
+				packageLineTimes++;
+				returnString.append(getPackageLineInfo(element));
+				packageLineTimes--;
+			}
+		}
 		return returnString.toString();
 	}
 	
