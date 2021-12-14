@@ -17,6 +17,7 @@ import model.CustomerCont;
 import model.Date;
 import model.Item;
 import model.OrderCont;
+import model.PackageLine;
 import model.Packages;
 import model.Price;
 import model.Product;
@@ -33,6 +34,8 @@ class OrderCtrlTest {
 	private Appliance appliance;
 	private ApplianceCopy appCopy;
 	private Packages aPackage;
+	private PackageLine line1;
+	private PackageLine line2;
 	
 	private int stock;
 
@@ -52,10 +55,13 @@ class OrderCtrlTest {
 		
 		appliance.addCopy(appCopy);
 		
+		line1 = new PackageLine(item, 1);
+		line2 = new PackageLine(appliance, 1, appCopy);
+		
 		aPackage = new Packages("3", "3", price);
 		
-		aPackage.add(appliance, 1);
-		aPackage.add((SingleProduct) item, 1);
+		aPackage.add(line1);
+		aPackage.add(line2);
 		
 		
 		

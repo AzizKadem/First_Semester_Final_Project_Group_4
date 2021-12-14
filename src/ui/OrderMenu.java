@@ -9,10 +9,13 @@ import model.Appliance;
 import model.AppliancesOrderLine;
 import model.Order;
 import model.OrderLine;
+import model.PackageLine;
+import model.Packages;
 
 public class OrderMenu extends Menu {
 	private OrderCtrl orderCtrl;
 	private TextInput input;
+	private int packageLineTimes = 1;
 
 	public OrderMenu() {
 		super("Order Menu", "Back");
@@ -46,6 +49,7 @@ public class OrderMenu extends Menu {
 
 	/**
 	 * Get info of the orderLine
+	 * @param anOrderLine the order line to get the info of
 	 * @return String about the info
 	 */
 	public String getOrderLineInfo(OrderLine anOrderLine) {
@@ -68,7 +72,35 @@ public class OrderMenu extends Menu {
 			returnString.append(((AppliancesOrderLine)anOrderLine).getCopy().getColor());
 		}
 		
+		if(anOrderLine.getAProduct().getClass().isAssignableFrom(Packages.class)) {
+			for(PackageLine line:((Packages)anOrderLine.getAProduct()).getLines()) {
+				returnString.append("\n" + getPackageLineInfo(line));
+			}
+		}
 	
+		return returnString.toString();
+	}
+	
+	/**
+	 * Get info of the packageLine
+	 * @param line the package line to get the info of
+	 * @return String about the info
+	 */
+	public String getPackageLineInfo(PackageLine line) {
+		StringBuilder returnString = new StringBuilder();
+		returnString.append("\t" + line.getaProduct().getName());
+		returnString.append("\t" + line.getQuantity());	
+		if(line.getaProduct().getClass().isAssignableFrom(Packages.class)) {
+			for(PackageLine element:((Packages)line.getaProduct()).getLines()) {
+				returnString.append("\n");
+				for(int i = 0; i<packageLineTimes;i++) {
+					returnString.append("\t");
+				}
+				packageLineTimes++;
+				returnString.append(getPackageLineInfo(element));
+				packageLineTimes--;
+			}
+		}
 		return returnString.toString();
 	}
 	
@@ -191,6 +223,8 @@ public class OrderMenu extends Menu {
 			while (!barcode.equals("finish")) {
 				quantity = 1;
 				barcode = input.inputString("Enter product barcode(finish)");
+				
+				//finish also with empty barcode
 				if (barcode.equals("")) {
 					barcode = "finish";
 				}
@@ -228,6 +262,10 @@ public class OrderMenu extends Menu {
 		return retVal;
 	}
 	
+	/**
+	 * Crate menu for selecting the payment type
+	 * @return chosen type as int
+	 */
 	public int paymentType() {
 		Menu menu = new PlaceholderMenu("Payment", "Cancel");
 		menu.addOption("Pay here");

@@ -12,10 +12,10 @@ public class Main {
 		Item item1 = new Item("Wrench", new Price(new Date(), 50), 40, "Tools", "1");
 		
 		ProductCont.getInstance().addProduct(item1);
+		
+		Item item2 = new Item("Hammer", new Price(new Date(), 50), 40, "Tools", "2");
 
-
-		ProductCont.getInstance().addProduct(new Item("Hammer",
-					new Price(new Date(), 50), 40, "Tools", "2"));
+		ProductCont.getInstance().addProduct(item2);
 		
 		Appliance appliance = new Appliance("Fridge", 
 									new Price(new Date(), 200), 1,
@@ -29,13 +29,42 @@ public class Main {
 		
 		MachineCont.getInstance().addMachine(new Machine(1, "Vacum"));
 		
-		Packages package1 = new Packages("Fridge and wrench package", "4", new Price(new Date(), 50));
+		Packages package1 = new Packages("Fridge and wrench package", "4", new Price(new Date(), 400));
 		
-		package1.add(appliance, 1);
-		package1.add(item1, 5);
+		Packages package2 = new Packages("Package in package", "5", new Price(new Date(), 800));
+		
+		Packages package3 = new Packages("Package in package in package", "6", new Price(new Date(), 1500));
+		
+		Packages package4 = new Packages("Packageception", "7", new Price(new Date(), 3000));
+		
+		PackageLine line1 = new PackageLine(item1, 5);
+		
+		PackageLine line2 = new PackageLine(appliance, 1, appCopy);
+		
+		PackageLine line3 = new PackageLine(item2, 2);
+		
+		PackageLine line4 = new PackageLine(package1, 2);
+		
+		PackageLine line5 = new PackageLine(package2, 2);
+
+		PackageLine line6 = new PackageLine(package3, 1);
+		
+		package1.add(line1);
+		package1.add(line2);
+		
+		package2.add(line4);
+		package2.add(line3);
+		
+		package3.add(line5);
+		package3.add(line2);
+		
+		package4.add(line6);
+		package4.add(line1);
 		
 		ProductCont.getInstance().addProduct(package1);
-
+		ProductCont.getInstance().addProduct(package2);
+		ProductCont.getInstance().addProduct(package3);	
+		ProductCont.getInstance().addProduct(package4);			
 
 		menu.start();
 		

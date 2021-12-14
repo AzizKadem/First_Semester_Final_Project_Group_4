@@ -76,7 +76,7 @@ public class LeaseMenu extends Menu{
 	public boolean returnLease(int machineID) {
 		boolean retVal = false;
 		Lease l = leaseCtrl.searchLease(machineID);
-		if(leaseCtrl.searchLease(machineID) != null) {
+		if(l != null) {
 			System.out.println("Lease found");
 			l.printLeaseInfo();
 			//display info about lease

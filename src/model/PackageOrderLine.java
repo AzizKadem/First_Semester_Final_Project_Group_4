@@ -13,13 +13,13 @@ public class PackageOrderLine extends OrderLine {
 
 	@Override
 	public void subtractFromStock() {
-		getAProduct().setStock(-getQuantity());
+		getAProduct().addToStock(-getQuantity(), null);
 
 	}
 
 	@Override
 	public void addToStock() {
-		getAProduct().setStock(getQuantity());
+		getAProduct().addToStock(getQuantity(), null);
 
 	}
 }

@@ -55,6 +55,6 @@ public abstract class Product {
 	 */
 	public abstract int getStock();
 	
-	public abstract void setStock(int stock);
+	public abstract void addToStock(int stock, ApplianceCopy copy);
 	
 }

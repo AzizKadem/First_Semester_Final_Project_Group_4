@@ -39,13 +39,14 @@ public class AppliancesOrderLine extends OrderLine {
 	 */
 	@Override
 	public void subtractFromStock() {
-		copy.setStock(copy.getStock() - getQuantity());	}
+		getAProduct().addToStock(-getQuantity(), copy);
+	}
 
 	/**
 	 * Add a quantity to the stock
 	 */
 	@Override
 	public void addToStock() {
-		copy.setStock(copy.getStock() + getQuantity());	
+		getAProduct().addToStock(getQuantity(), copy);	
 	}
 }

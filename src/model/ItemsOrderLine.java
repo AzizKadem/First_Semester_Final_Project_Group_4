@@ -10,11 +10,11 @@ public class ItemsOrderLine extends OrderLine {
 
 	@Override
 	public void subtractFromStock() {
-		getAProduct().setStock(getAProduct().getStock() - getQuantity());
+		getAProduct().addToStock(-getQuantity(), null);
 	}
 
 	@Override
 	public void addToStock() {
-		getAProduct().setStock(getAProduct().getStock() + getQuantity());
+		getAProduct().addToStock(getQuantity(), null);
 	}
 }

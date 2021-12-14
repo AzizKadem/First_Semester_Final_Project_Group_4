@@ -26,7 +26,12 @@ public abstract class SingleProduct extends Product{
 		}
 		return retVal;
 	}
-
+	
+	/**
+	 * Does this single product contain the barcode
+	 * @param barcode The barcode to match
+	 * @return True if the barcode is the same
+	 */
 	public abstract boolean isWithBarcode(String barcode);
 
 	/**
@@ -38,20 +43,10 @@ public abstract class SingleProduct extends Product{
 	public boolean changePrice(Price newPrice) {
 		return getPrices().add(newPrice);
 	}
-
 	
-
-	/**
-	 * Get stock.
-	 *
-	 * @return stock as int.
-	 */
+	@Override
 	public abstract int getStock();
 	
-	/**
-	 * Set stock
-	 * 
-	 * @param Stock new stock
-	 */
-	public abstract void setStock(int stock);
+	@Override
+	public abstract void addToStock(int stock, ApplianceCopy copy);
 }
