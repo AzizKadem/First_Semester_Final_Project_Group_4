@@ -43,7 +43,7 @@ public final class LeaseCont {
 	public Lease searchLease(int id) {
 		boolean found = false;
 		Lease retVal = null;
-		for(int i = 0; i < leases.size() || !found; i++ ) {
+		for(int i = 0; i < leases.size() && !found; i++ ) {
 			if(leases.get(i).getMachineId() == id) {
 				found = true;
 				retVal = leases.get(i);
