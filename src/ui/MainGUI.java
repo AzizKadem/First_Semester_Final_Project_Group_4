@@ -100,6 +100,22 @@ public class MainGUI extends JFrame {
 		Box verticalBox = Box.createVerticalBox();
 		panel_1.add(verticalBox);
 		
+		JButton btnNewButton = new JButton("Orders");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				openOrders();
+			}
+		});
+		verticalBox.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Leases");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				openLeases();
+			}
+		});
+		verticalBox.add(btnNewButton_1);
+		
 		JLabel lblNewLabel = new JLabel("Main menu");
 		contentPane.add(lblNewLabel, BorderLayout.NORTH);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
