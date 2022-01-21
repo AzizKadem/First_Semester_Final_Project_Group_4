@@ -13,11 +13,15 @@ import javax.swing.JLabel;
 import javax.swing.Box;
 import javax.swing.JButton;
 import java.awt.Font;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+
+import javax.swing.SwingConstants;
+
 
 public class MainGUI extends JFrame {
 
@@ -59,6 +63,7 @@ public class MainGUI extends JFrame {
 		
 		
 		
+
 		panel_2 = new JPanel();
 		panel_2.setVisible(false);
 		panel.add(panel_2);
@@ -94,26 +99,6 @@ public class MainGUI extends JFrame {
 		
 		Box verticalBox = Box.createVerticalBox();
 		panel_1.add(verticalBox);
-		
-		JButton btnNewButton = new JButton("Orders");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				openOrders();
-			}
-		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		verticalBox.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Leases");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				openLeases();
-			}
-		});
-		btnNewButton_1.setPreferredSize(new Dimension(50, 100));
-		btnNewButton_1.setIcon(null);
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		verticalBox.add(btnNewButton_1);
 		
 		JLabel lblNewLabel = new JLabel("Main menu");
 		contentPane.add(lblNewLabel, BorderLayout.NORTH);
