@@ -14,10 +14,14 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.Box;
+import java.awt.Component;
 
 public class CustomerLoginGUI extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private JPanel panel1;
+	private JPanel panel2;
 
 	/**
 	 * Launch the application.
@@ -40,29 +44,50 @@ public class CustomerLoginGUI extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		contentPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		{
-			JButton btnNewButton = new JButton("Existing customer");
-			btnNewButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					existingCustomer();
+			panel2 = new JPanel();
+			contentPanel.add(panel2);
+			
+			JLabel lblNewLabel_1 = new JLabel("Enter product barcode");
+			panel2.add(lblNewLabel_1);
+			panel2.setVisible(false);
+		}
+		{
+			panel1 = new JPanel();
+			contentPanel.add(panel1);
+			{
+				Box verticalBox = Box.createVerticalBox();
+				panel1.add(verticalBox);
+				{
+					JButton btnNewButton = new JButton("Existing customer ");
+					btnNewButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							existingCustomer();
+						}
+					});
+					btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+					verticalBox.add(btnNewButton);
 				}
-			});
-			btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			btnNewButton.setBounds(10, 30, 155, 25);
-			contentPanel.add(btnNewButton);
-		}
-		{
-			JButton btnNewButton_1 = new JButton("New customer");
-			btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			btnNewButton_1.setBounds(10, 80, 155, 25);
-			contentPanel.add(btnNewButton_1);
-		}
-		{
-			JButton btnNewButton_2 = new JButton("Continue as guest");
-			btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			btnNewButton_2.setBounds(10, 130, 155, 25);
-			contentPanel.add(btnNewButton_2);
+				{
+					Component verticalStrut = Box.createVerticalStrut(20);
+					verticalBox.add(verticalStrut);
+				}
+				{
+					JButton btnNewButton_1 = new JButton("   New customer  ");
+					btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+					verticalBox.add(btnNewButton_1);
+				}
+				{
+					Component verticalStrut = Box.createVerticalStrut(20);
+					verticalBox.add(verticalStrut);
+				}
+				{
+					JButton btnNewButton_2 = new JButton("Continue as guest");
+					btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+					verticalBox.add(btnNewButton_2);
+				}
+			}
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -86,6 +111,7 @@ public class CustomerLoginGUI extends JDialog {
 	}
 	public void existingCustomer()
 	{
-		contentPanel.setVisible(false);
+		panel1.setVisible(false);
+		panel2.setVisible(true);
 	}
 }
