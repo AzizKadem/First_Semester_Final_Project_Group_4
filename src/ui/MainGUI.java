@@ -108,13 +108,17 @@ public class MainGUI extends JFrame {
 		});
 		verticalBox.add(btnNewButton);
 		
+		Component verticalStrut = Box.createVerticalStrut(10);
+		verticalBox.add(verticalStrut);
+		
 		JButton btnNewButton_1 = new JButton("Leases");
+		verticalBox.add(btnNewButton_1);
+		btnNewButton_1.setMinimumSize(new Dimension(100, 500));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				openLeases();
 			}
 		});
-		verticalBox.add(btnNewButton_1);
 		
 		JLabel lblNewLabel = new JLabel("Main menu");
 		contentPane.add(lblNewLabel, BorderLayout.NORTH);
