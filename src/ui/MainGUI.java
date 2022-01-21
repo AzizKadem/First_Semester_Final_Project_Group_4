@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.Box;
 import javax.swing.JButton;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class MainGUI extends JFrame {
 
@@ -62,17 +63,26 @@ public class MainGUI extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(10, 52, 104, 201);
 		contentPane.add(panel_1);
+		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JButton btnNewButton = new JButton("Orders");
-		panel_1.add(btnNewButton);
+		btnNewButton.setBounds(172, 66, 104, 40);
+		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Leases");
-		panel_1.add(btnNewButton_1);
+		JButton btnNewButton_1 = new JButton("Customers");
+		btnNewButton_1.setBounds(227, 131, 104, 50);
+		contentPane.add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("Ya mama");
-		panel_1.add(btnNewButton_2);
+		JButton btnNewButton_2 = new JButton("Products");
+		btnNewButton_2.setBounds(322, 52, 104, 67);
+		contentPane.add(btnNewButton_2);
 		
-		Box verticalBox = Box.createVerticalBox();
-		panel_1.add(verticalBox);
+		JButton btnNewButton_3 = new JButton("Lease");
+		btnNewButton_3.setBounds(145, 153, 104, 100);
+		contentPane.add(btnNewButton_3);
+		
+		JButton btnNewButton_4 = new JButton("Staff");
+		btnNewButton_4.setBounds(332, 56, 104, 201);
+		contentPane.add(btnNewButton_4);
 	}
 }
