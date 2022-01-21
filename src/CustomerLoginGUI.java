@@ -12,6 +12,8 @@ import java.awt.Insets;
 import javax.swing.BoxLayout;
 import java.awt.Font;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CustomerLoginGUI extends JDialog {
 
@@ -41,6 +43,11 @@ public class CustomerLoginGUI extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JButton btnNewButton = new JButton("Existing customer");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					existingCustomer();
+				}
+			});
 			btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			btnNewButton.setBounds(10, 30, 155, 25);
 			contentPanel.add(btnNewButton);
@@ -76,5 +83,9 @@ public class CustomerLoginGUI extends JDialog {
 			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			panel.add(lblNewLabel, BorderLayout.NORTH);
 		}
+	}
+	public void existingCustomer()
+	{
+		contentPanel.setVisible(false);
 	}
 }
