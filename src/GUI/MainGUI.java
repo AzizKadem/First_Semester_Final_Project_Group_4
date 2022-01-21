@@ -1,4 +1,7 @@
-package ui;
+package GUI;
+
+import ui.*;
+
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -23,11 +26,14 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 
+
+
 public class MainGUI extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panel_2;
 	private JPanel panel_3;
+	private Generate g;
 	/**
 	 * Launch the application.
 	 */
@@ -50,6 +56,9 @@ public class MainGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public MainGUI() {
+		g = new Generate();
+		g.main(null);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -75,6 +84,11 @@ public class MainGUI extends JFrame {
 		verticalBox_1.add(lblNewLabel_1);
 		
 		JButton btnNewButton_2 = new JButton("Create order");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				openCreateOrder();
+			}
+		});
 		verticalBox_1.add(btnNewButton_2);
 		
 		panel_3 = new JPanel();
@@ -138,5 +152,10 @@ public class MainGUI extends JFrame {
 	private void hidePanels() {
 		panel_2.setVisible(false);
 		panel_3.setVisible(false);
+	}
+	
+	private void openCreateOrder() {
+		CustomerLoginGUI login = new CustomerLoginGUI();
+		login.main(null);
 	}
 }
