@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import controller.OrderCtrl;
+import exceptions.CustomerNotFoundException;
 import exceptions.NotEnoughInStockException;
 import exceptions.ProductNotFoundException;
 import exceptions.QuantityUnderrunException;
@@ -80,7 +81,7 @@ class OrderCtrlTest {
 	}
 
 	@Test
-	void testCreateOrder() {
+	void testCreateOrder() throws CustomerNotFoundException {
 		assertEquals(true, ctrl.createOrder("1"));
 		assertEquals(customer, ctrl.getCurrentOrder().getACustomer());
 		
@@ -88,7 +89,7 @@ class OrderCtrlTest {
 
 	@Test
 	void testCreateOrderlineItem() throws QuantityUnderrunException,
-			ProductNotFoundException, NotEnoughInStockException {
+			ProductNotFoundException, NotEnoughInStockException, CustomerNotFoundException {
 		ctrl.createOrder("1");
 		
 		assertEquals(true, ctrl.createOrderline("1", 1));
@@ -98,7 +99,7 @@ class OrderCtrlTest {
 	
 	@Test
 	void testCancelOrder() throws QuantityUnderrunException,
-			ProductNotFoundException, NotEnoughInStockException {
+			ProductNotFoundException, NotEnoughInStockException, CustomerNotFoundException {
 		ctrl.createOrder("1");
 		
 		assertEquals(true, ctrl.createOrderline("1", 1));
@@ -112,7 +113,7 @@ class OrderCtrlTest {
 	
 	@Test
 	void testCreateOrderLineAppliance() throws QuantityUnderrunException,
-			ProductNotFoundException, NotEnoughInStockException {
+			ProductNotFoundException, NotEnoughInStockException, CustomerNotFoundException {
 		ctrl.createOrder("1");
 		
 		assertEquals(true, ctrl.createOrderline("2", 1));
@@ -121,7 +122,7 @@ class OrderCtrlTest {
 	
 	@Test
 	void testCreateOrderLinePackage() throws QuantityUnderrunException,
-			ProductNotFoundException, NotEnoughInStockException {
+			ProductNotFoundException, NotEnoughInStockException, CustomerNotFoundException {
 		ctrl.createOrder("1");
 	
 		assertEquals(true, ctrl.createOrderline("3", 1));

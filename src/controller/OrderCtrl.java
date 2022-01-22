@@ -1,5 +1,6 @@
 package controller;
 
+import exceptions.CustomerNotFoundException;
 import exceptions.EmptyOrderException;
 import exceptions.NotEnoughInStockException;
 import exceptions.ProductNotFoundException;
@@ -33,13 +34,16 @@ public class OrderCtrl {
 	 * @param phone The phone number of the customer
 	 * @return True if the order was successfully created
 	 */
-	public boolean createOrder(String phone) {
+	public boolean createOrder(String phone) throws CustomerNotFoundException {
 		Customer currentCustomer = customerCtrl.searchCustomer(phone);
 		
 		boolean retVal = false;
 		if (currentCustomer != null) {
 			currentOrder = new Order(currentCustomer);
 			retVal = true;
+		}
+		else {
+			throw new CustomerNotFoundException();
 		}
 
 		return retVal;

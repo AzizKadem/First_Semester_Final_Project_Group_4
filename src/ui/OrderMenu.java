@@ -1,6 +1,7 @@
 package ui;
 
 import controller.OrderCtrl;
+import exceptions.CustomerNotFoundException;
 import exceptions.EmptyOrderException;
 import exceptions.NotEnoughInStockException;
 import exceptions.ProductNotFoundException;
@@ -223,47 +224,51 @@ public class OrderMenu extends Menu {
 			
 		}
 		
-		if (orderCtrl.createOrder(phone)) {
-			String barcode = "";
-			int quantity;
-			
-			while (!barcode.equals("finish")) {
-				quantity = 1;
-				barcode = input.inputString("Enter product barcode(finish)");
+		try {
+			if (orderCtrl.createOrder(phone)) {
+				String barcode = "";
+				int quantity;
 				
-				//finish also with empty barcode
-				if (barcode.equals("")) {
-					barcode = "finish";
-				}
-				
-				if (!barcode.equals("finish")) {
-					quantity = input.inputInt("Enter quantity");
+				while (!barcode.equals("finish")) {
+					quantity = 1;
+					barcode = input.inputString("Enter product barcode(finish)");
 					
-					try {
-						if (orderCtrl.createOrderline(barcode, quantity)) {
-							System.out.println("Product added successfully!");
+					//finish also with empty barcode
+					if (barcode.equals("")) {
+						barcode = "finish";
+					}
+					
+					if (!barcode.equals("finish")) {
+						quantity = input.inputInt("Enter quantity");
+						
+						try {
+							if (orderCtrl.createOrderline(barcode, quantity)) {
+								System.out.println("Product added successfully!");
 
+							}
+							else {
+								System.out.println("Error, try again.");
+							}
 						}
-						else {
-							System.out.println("Error, try again.");
+						catch (QuantityUnderrunException que) {
+							System.out.println(que.getLocalizedMessage());
 						}
+						catch (ProductNotFoundException pnfe) {
+							System.out.println(pnfe.getLocalizedMessage());
+						}
+						catch (NotEnoughInStockException neise) {
+							System.out.println(neise.getLocalizedMessage());
+						}
+						
 					}
-					catch (QuantityUnderrunException que) {
-						System.out.println(que.getLocalizedMessage());
-					}
-					catch (ProductNotFoundException pnfe) {
-						System.out.println(pnfe.getLocalizedMessage());
-					}
-					catch (NotEnoughInStockException neise) {
-						System.out.println(neise.getLocalizedMessage());
-					}
-					
 				}
+				retVal = makePayment();
 			}
-			retVal = makePayment();
-		}
-		else {
-			System.out.println("The customer was not found");
+			else {
+				System.out.println("The customer was not found");
+			}
+		} catch (CustomerNotFoundException e) {
+			System.out.println(e.getMessage());
 		}
 		
 		return retVal;

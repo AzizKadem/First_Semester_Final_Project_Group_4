@@ -1,10 +1,15 @@
+package gui;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import controller.*;
 
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -12,17 +17,16 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.GridLayout;
 
-public class LeaseOrderGUI extends JDialog {
+public class CreateLease extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private OrderCtrl ctrl;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			LeaseOrderGUI dialog = new LeaseOrderGUI();
+			CreateLease dialog = new CreateLease();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -33,36 +37,12 @@ public class LeaseOrderGUI extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public LeaseOrderGUI() {
+	public CreateLease() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new GridLayout(0, 3, 0, 0));
-		{
-			JLabel lblNewLabel_1 = new JLabel("New label");
-			contentPanel.add(lblNewLabel_1);
-		}
-		{
-			JLabel lblNewLabel = new JLabel("New label");
-			contentPanel.add(lblNewLabel);
-		}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
+		contentPanel.setLayout(new GridLayout(0, 1, 0, 0));
 	}
 
 }

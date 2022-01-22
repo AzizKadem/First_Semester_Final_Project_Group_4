@@ -1,10 +1,10 @@
-package GUI;
+package gui;
 
 import model.*;
 import ui.MainMenu;
 
-public class Generate {
-	public static void main(String[] args) {
+public class GenerateData {
+	public static void generateData() {
 		
 		CustomerCont.getInstance().addCustommer(new Customer("Bob", 
 					"123", "Home", "ThisCity", "0"));
