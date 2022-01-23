@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import javax.swing.border.LineBorder;
 
 
 public class MainMenu extends JFrame {
@@ -57,16 +58,19 @@ public class MainMenu extends JFrame {
 	private void initGui() {
 		setTitle("Main Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 500);
+		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setBackground(ColorScheme.BACKGROUND);
 		
 		JPanel interactivePanel = new JPanel();
+		interactivePanel.setBackground(ColorScheme.BACKGROUND);
 		FlowLayout fl_interactivePanel = (FlowLayout) interactivePanel.getLayout();
 		fl_interactivePanel.setAlignment(FlowLayout.LEFT);
 		
 		ordersPanel = new JPanel();
+		ordersPanel.setBackground(ColorScheme.BACKGROUND);
 		FlowLayout flowLayout = (FlowLayout) ordersPanel.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		ordersPanel.setVisible(false);
@@ -91,6 +95,7 @@ public class MainMenu extends JFrame {
 		verticalBox_1.add(btnNewButton_2);
 		
 		leasesPanel = new JPanel();
+		leasesPanel.setBackground(ColorScheme.BACKGROUND);
 		FlowLayout flowLayout_1 = (FlowLayout) leasesPanel.getLayout();
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		leasesPanel.setVisible(false);
@@ -114,15 +119,17 @@ public class MainMenu extends JFrame {
 		verticalBox_2.add(btnNewButton_3);
 
 		JSplitPane splitPane = new JSplitPane();
+		splitPane.setContinuousLayout(true);
+		splitPane.setDividerSize(2);
 		contentPane.add(splitPane, BorderLayout.CENTER);
 		
 		JPanel menuPanel = new JPanel();
-		menuPanel.setBackground(Color.decode("#5085a5"));
+		menuPanel.setBackground(ColorScheme.TAB);
 		splitPane.setLeftComponent(menuPanel);
 		
 		splitPane.setRightComponent(interactivePanel);
 		
-		splitPane.setResizeWeight(0.3);
+		splitPane.setResizeWeight(0.2);
 		
 		Box verticalBox = Box.createVerticalBox();
 		menuPanel.add(verticalBox);

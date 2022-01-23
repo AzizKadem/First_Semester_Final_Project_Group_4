@@ -186,6 +186,7 @@ public class Order {
 	 * @return totalPrice as double.
 	 */
 	public double getTotalPrice() {
+		calculateTotalPrice();
 	    return totalPrice;
 	}
 
