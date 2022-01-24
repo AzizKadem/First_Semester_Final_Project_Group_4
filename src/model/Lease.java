@@ -36,4 +36,25 @@ public class Lease {
 	public Machine getMachine() {
 		return m;
 	}
+
+	/**
+	 * @return the period
+	 */
+	public int getPeriod() {
+		return period;
+	}
+
+	/**
+	 * @return the date
+	 */
+	public Date getDate() {
+		return date;
+	}
+
+	/**
+	 * @return the c
+	 */
+	public Customer getCustomer() {
+		return c;
+	}
 }

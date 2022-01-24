@@ -129,9 +129,10 @@ public class CreateLease extends JDialog {
 		String phone = textFieldCustomer.getText();
 		int machine = Integer.parseInt(textFieldMachine.getText());
 		try {
-			
-			leaseCtrl.searchCustomer(phone);
-			leaseCtrl.searchMachine(machine);
+			leaseCtrl.confirmLease(leaseCtrl.searchCustomer(phone), leaseCtrl.searchMachine(machine));
+			LeaseCreated created = new LeaseCreated(leaseCtrl.searchLease(machine));
+			dispose();
+			created.setVisible(true);
 		} catch(MachineNotFoundException | CustomerNotFoundException e) {
 			e.getMessage();
 		}
