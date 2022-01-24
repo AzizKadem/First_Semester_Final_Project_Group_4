@@ -374,8 +374,8 @@ public class CreateOrder extends JDialog {
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 			created = true;
+			
 			dispose();
-			MainMenu.main(null);
 		} 
 		else {
 			lblErrorButton.setText(new EmptyOrderException().getMessage());
