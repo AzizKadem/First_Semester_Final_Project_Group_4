@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.OrderCtrl;
+import exceptions.EmptyOrderException;
 import model.Appliance;
 import model.AppliancesOrderLine;
 import model.Order;
@@ -35,6 +36,7 @@ public class OrderReceipt extends JDialog {
 	private OrderCtrl orderCtrl;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
+	
 
 	/**
 	 * Create the dialog.
@@ -98,6 +100,7 @@ public class OrderReceipt extends JDialog {
 					JButton btnNewButton = new JButton("Pay here");
 					btnNewButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
+							finishHere();
 							//waiting for the answer from terminal
 							
 						}
@@ -150,6 +153,22 @@ public class OrderReceipt extends JDialog {
 			}
 		}
 		return returnString.toString();
+	}
+	
+	private void finishOrder() throws EmptyOrderException {
+		orderCtrl.finishOrder();
+		dispose();
+	}
+	
+	private void finishHere() {
+		try {
+			Payment dialog = new Payment(orderCtrl);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+			finishOrder();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
