@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import controller.LeaseCtrl;
+import exceptions.CustomerNotFoundException;
+import exceptions.MachineNotFoundException;
 import model.*;
 
 class LeaseCtrlTest {
@@ -32,12 +34,12 @@ class LeaseCtrlTest {
 	}
 
 	@Test
-	void testSearchCustomer() {
+	void testSearchCustomer() throws CustomerNotFoundException {
 		assertEquals(true, ctrl.searchCustomer("1").getPhoneNumber().equals(c.getPhoneNumber()));
 	}
 
 	@Test
-	void testSearchMachine() {
+	void testSearchMachine() throws MachineNotFoundException {
 		assertEquals(true, ctrl.searchMachine(2).getName().equals(m2.getName()));
 	}
 

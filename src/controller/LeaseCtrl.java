@@ -1,5 +1,7 @@
 package controller;
 
+import exceptions.CustomerNotFoundException;
+import exceptions.MachineNotFoundException;
 import model.*;
 
 public class LeaseCtrl {
@@ -14,8 +16,9 @@ public class LeaseCtrl {
 	 * Search customer by phone number
 	 * @param phone The phone number the customer is searched by
 	 * @return found customer
+	 * @throws CustomerNotFoundException 
 	 */
-	public Customer searchCustomer(String phone) {
+	public Customer searchCustomer(String phone) throws CustomerNotFoundException {
 		customerController = new CustomerCtrl();
 		return customerController.searchCustomer(phone);
 	}
@@ -24,8 +27,9 @@ public class LeaseCtrl {
 	 * Search machine by id
 	 * @param id The id the machine is searched by
 	 * @return found machine
+	 * @throws MachineNotFoundException 
 	 */
-	public Machine searchMachine(int id) {
+	public Machine searchMachine(int id) throws MachineNotFoundException {
 		machineController = new MachineCtrl();
 		return machineController.searchMachine(id);
 	}
