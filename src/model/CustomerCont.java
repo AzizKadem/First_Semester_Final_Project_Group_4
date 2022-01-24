@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import exceptions.CustomerNotFoundException;
+
 public final class CustomerCont {
 	private static CustomerCont instance;
 	private ArrayList<Customer> cust;
@@ -37,8 +39,9 @@ public final class CustomerCont {
 	/**
 	 * @param phone
 	 * @return Customer
+	 * @throws CustomerNotFoundException 
 	 */
-	public Customer searchCustomer(String phone) {
+	public Customer searchCustomer(String phone) throws CustomerNotFoundException {
 		boolean found = false;
 		Customer retVal = null;
 		for(int i=0; !found && i<cust.size(); i++) {
@@ -46,6 +49,9 @@ public final class CustomerCont {
 				retVal = cust.get(i);
 				found = true;
 			}
+		}
+		if(retVal == null) {
+			throw new CustomerNotFoundException();
 		}
 		return retVal;
 	}

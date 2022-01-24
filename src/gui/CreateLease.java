@@ -3,6 +3,8 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import controller.*;
+import exceptions.CustomerNotFoundException;
+import exceptions.MachineNotFoundException;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -105,7 +107,7 @@ public class CreateLease extends JDialog {
 		JButton btnConfirm = new JButton("Confirm Lease");
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				createLease();
+					createLease();				
 			}
 		});
 		buttonPanel.add(btnConfirm);
@@ -123,10 +125,15 @@ public class CreateLease extends JDialog {
 		dispose();
 	}
 	
-	private void createLease() {
+	private void createLease(){
 		String phone = textFieldCustomer.getText();
-		if(leaseCtrl.searchCustomer(phone) != null) {
-			System.out.print("nice");
+		int machine = Integer.parseInt(textFieldMachine.getText());
+		try {
+			
+			leaseCtrl.searchCustomer(phone);
+			leaseCtrl.searchMachine(machine);
+		} catch(MachineNotFoundException | CustomerNotFoundException e) {
+			e.getMessage();
 		}
 	}
 }

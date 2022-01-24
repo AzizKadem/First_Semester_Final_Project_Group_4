@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import controller.CustomerCtrl;
+import exceptions.CustomerNotFoundException;
 import model.Customer;
 import model.CustomerCont;
 
@@ -27,7 +28,7 @@ class CustomerCtrlTest {
 	}
 	
 	@Test
-	public void testSearchCustomer() {
+	public void testSearchCustomer() throws CustomerNotFoundException {
 		Customer c = new Customer("1", "1", "1", "1", "1");
 		CustomerCont.getInstance().addCustommer(c);
 		CustomerCtrl ctrl = new CustomerCtrl();

@@ -1,6 +1,8 @@
 package ui;
 
 import controller.LeaseCtrl;
+import exceptions.CustomerNotFoundException;
+import exceptions.MachineNotFoundException;
 import model.Lease;
 
 public class LeaseMenu extends Menu{
@@ -17,7 +19,7 @@ public class LeaseMenu extends Menu{
 	}
 	
 	@Override
-	public void handleMenu() {
+	public void handleMenu(){
 		int selected = super.selectOption();
 		
 		switch (selected) {
@@ -41,29 +43,31 @@ public class LeaseMenu extends Menu{
 	/**
 	 * Handle creating lease
 	 * @return True if the lease was created succesfully
+	 * @throws MachineNotFoundException 
 	 */
-	public boolean createLease() {
+	public boolean createLease(){
 		boolean retVal = false;
 		
 		String phone = input.inputString("Enter customer phone");
 		
-		if(leaseCtrl.searchCustomer(phone) != null) {
+		try{
+			leaseCtrl.searchCustomer(phone);
 			int id;
 		
 			id = input.inputInt("Enter product id");
-			if(leaseCtrl.searchMachine(id) != null){
+			try{ 
+				leaseCtrl.searchMachine(id);
 			//TODO print info about the product!!
 				String conf = input.inputString("Would you like to confirm the lease? y/n");
 				if(conf.equals("y")) {
 					retVal = leaseCtrl.confirmLease(leaseCtrl.searchCustomer(phone), leaseCtrl.searchMachine(id));
 				}
+			} catch (MachineNotFoundException e) {
+				System.out.println(e.getMessage());
 			}
-			else {
-				System.out.println("Barcode not found, try again");
-			}
-		}
-		else {
-			System.out.println("Customer not found, try again");
+			
+		} catch (CustomerNotFoundException e) {
+			System.out.println(e.getMessage());
 		}
 		return retVal;
 	}

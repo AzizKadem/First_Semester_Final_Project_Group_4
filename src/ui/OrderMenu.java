@@ -225,7 +225,7 @@ public class OrderMenu extends Menu {
 		}
 		
 		try {
-			if (orderCtrl.createOrder(phone)) {
+			orderCtrl.createOrder(phone);
 				String barcode = "";
 				int quantity;
 				
@@ -263,10 +263,8 @@ public class OrderMenu extends Menu {
 					}
 				}
 				retVal = makePayment();
-			}
-			else {
-				System.out.println("The customer was not found");
-			}
+			
+			
 		} catch (CustomerNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
