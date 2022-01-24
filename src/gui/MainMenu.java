@@ -111,6 +111,7 @@ public class MainMenu extends JFrame {
 		JButton btnNewButton_3 = new JButton("Create Lease");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				createLease();
 			}
 		});
 		
@@ -192,5 +193,11 @@ public class MainMenu extends JFrame {
 		
 		login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		login.setVisible(true);
+	}
+	
+	private void createLease() {
+		CreateLease lease = new CreateLease();
+		
+		lease.setVisible(true);
 	}
 }
