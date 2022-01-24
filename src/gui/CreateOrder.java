@@ -374,6 +374,7 @@ public class CreateOrder extends JDialog {
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 			dispose();
+			created = true;
 			MainMenu.main(null);
 		} 
 		else {

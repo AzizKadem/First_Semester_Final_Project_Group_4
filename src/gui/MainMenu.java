@@ -27,6 +27,7 @@ public class MainMenu extends JFrame {
 	private JPanel contentPane;
 	private JPanel ordersPanel;
 	private JPanel leasesPanel;
+	private JLabel lblNewLabel;
 	
 	/**
 	 * Launch the application.
@@ -66,14 +67,13 @@ public class MainMenu extends JFrame {
 		
 		JPanel interactivePanel = new JPanel();
 		interactivePanel.setBackground(ColorScheme.BACKGROUND);
-		FlowLayout fl_interactivePanel = (FlowLayout) interactivePanel.getLayout();
-		fl_interactivePanel.setAlignment(FlowLayout.LEFT);
 		
 		ordersPanel = new JPanel();
 		ordersPanel.setBackground(ColorScheme.BACKGROUND);
 		FlowLayout flowLayout = (FlowLayout) ordersPanel.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		ordersPanel.setVisible(false);
+		interactivePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		interactivePanel.add(ordersPanel);
 		
 		Box verticalBox_1 = Box.createVerticalBox();
@@ -129,6 +129,16 @@ public class MainMenu extends JFrame {
 		splitPane.setLeftComponent(menuPanel);
 		
 		splitPane.setRightComponent(interactivePanel);
+		
+		Box verticalBox_3 = Box.createVerticalBox();
+		interactivePanel.add(verticalBox_3);
+		
+		JPanel panel = new JPanel();
+		verticalBox_3.add(panel);
+		
+		lblNewLabel = new JLabel("Order was successfully created");
+		verticalBox_3.add(lblNewLabel);
+		lblNewLabel.setVisible(false);
 		
 		splitPane.setResizeWeight(0.2);
 		
@@ -194,7 +204,7 @@ public class MainMenu extends JFrame {
 		login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		login.setVisible(true);
 		if(login.isCreated()) {
-			
+			lblNewLabel.setVisible(true);
 		}
 	}
 	
