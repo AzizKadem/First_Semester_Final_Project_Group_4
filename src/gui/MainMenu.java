@@ -20,7 +20,7 @@ import javax.swing.border.LineBorder;
 
 public class MainMenu extends JFrame {
 	/**
-	 * 
+	 * Serial version 
 	 */
 	private static final long serialVersionUID = 7694456555976937236L;
 	
