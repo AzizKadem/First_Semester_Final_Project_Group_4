@@ -3,26 +3,28 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import javax.swing.Box;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JSplitPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 import controller.OrderCtrl;
 import exceptions.CustomerNotFoundException;
@@ -31,7 +33,6 @@ import exceptions.NotEnoughInStockException;
 import exceptions.ProductNotFoundException;
 import exceptions.QuantityUnderrunException;
 import model.OrderLine;
-import javax.swing.SwingConstants;
 
 public class CreateOrder extends JDialog {
 
@@ -55,7 +56,7 @@ public class CreateOrder extends JDialog {
 	private JTextField textBarcode;
 	private JButton btnFinishOrder;
 	private JSpinner spinnerQuantity;
-	private JList<OrderLine> list;
+	private JTable table;
 	private JLabel lblTotalPrice;
 	private JLabel lblErrorButton;
 	private JButton btnBack;
@@ -224,8 +225,9 @@ public class CreateOrder extends JDialog {
 					JScrollPane scrollPane = new JScrollPane();
 					splitPane.setRightComponent(scrollPane);
 					{
-						list = new JList<OrderLine>();
-						scrollPane.setViewportView(list);
+						table = new JTable();
+						table.setDefaultEditor(Object.class, null);
+						scrollPane.setViewportView(table);
 					}
 				}
 			}
@@ -249,6 +251,7 @@ public class CreateOrder extends JDialog {
 					lblErrorButton = new JLabel("");
 					rightButtonPanel.add(lblErrorButton);
 					lblErrorButton.setHorizontalAlignment(SwingConstants.RIGHT);
+					lblErrorButton.setForeground(ColorScheme.BACKGROUND);
 				}
 				btnFinishOrder = new JButton("Finish Order");
 				rightButtonPanel.add(btnFinishOrder);
@@ -335,18 +338,21 @@ public class CreateOrder extends JDialog {
 			orderCtrl.createOrderline(textBarcode.getText(), (int)spinnerQuantity.getValue());
 			removeErrorBorder();
 			updateList();
-			lblTotalPrice.setText("Total: " + orderCtrl.getCurrentOrder().getTotalPrice());
+			lblTotalPrice.setText("Total: " + convertToCurrency(orderCtrl.getCurrentOrder().getTotalPrice()));
 			textBarcode.setText("");
 			
 			
 		} catch (QuantityUnderrunException que) {
 			spinnerQuantity.setBorder(new LineBorder(ColorScheme.BUTTON_HIGHTLIGHT, 1));
+			lblErrorButton.setText(que.getMessage());
 			
 		} catch (ProductNotFoundException pnfe) {
 			textBarcode.setBorder(new LineBorder(ColorScheme.BUTTON_HIGHTLIGHT, 1));
+			lblErrorButton.setText(pnfe.getMessage());
 			
 		} catch (NotEnoughInStockException neise) {
 			spinnerQuantity.setBorder(new LineBorder(ColorScheme.BUTTON_HIGHTLIGHT, 1));
+			lblErrorButton.setText(neise.getMessage());
 		}
 	}
 	
@@ -357,16 +363,20 @@ public class CreateOrder extends JDialog {
 	}
 	
 	private void updateList() {
-		DefaultListModel<OrderLine> myListModel = new DefaultListModel<>();
+		DefaultTableModel myTableModel = new DefaultTableModel();
 		
 		List<OrderLine> lists = orderCtrl.getCurrentOrder().getOrderLines();
 		
+		myTableModel.addColumn("Name");
+		myTableModel.addColumn("Quantity");
+		myTableModel.addColumn("Price");
+		
 		for (OrderLine element : lists) {
-			myListModel.addElement(element);
+			myTableModel.addRow(new Object[] {element.getAProduct().getName(),
+					element.getQuantity(), convertToCurrency(element.getSubTotal())});
 		}
 		
-		list.setCellRenderer(new OrderLineCellRenderer());
-		list.setModel(myListModel);
+		table.setModel(myTableModel);
 	}
 	
 	private void finishOrder() {
@@ -389,8 +399,7 @@ public class CreateOrder extends JDialog {
         	showSelectCustomerMethodPanel();
         	
         }
-        else
-        {
+        else {
         	if (selectProductsPanel.isVisible()) {
             	hideSelectProductsPanel();
             	showPhoneNumberPanel();
@@ -398,14 +407,12 @@ public class CreateOrder extends JDialog {
         }
     }
 	
-	private void hideSelectCustomerMethodPanel()
-    {
+	private void hideSelectCustomerMethodPanel() {
     	selectCustomerMethodPanel.setVisible(false);
         contentPanel.remove(selectCustomerMethodPanel);
     }
 	
-    private void showSelectCustomerMethodPanel()
-    {
+    private void showSelectCustomerMethodPanel() {
     	selectCustomerMethodPanel.setVisible(true);
         contentPanel.add(selectCustomerMethodPanel);
         
@@ -444,13 +451,21 @@ public class CreateOrder extends JDialog {
         updateList();
         btnFinishOrder.setVisible(true);
     }
+    
+	private String convertToCurrency(double d) {
+		BigDecimal b = new BigDecimal(d).setScale(2, RoundingMode.CEILING);
+		
+		return b.toString();
+	}
 	
 	private void cancel() {
 		dispose();
 	}
+	
 	public double getTotal() {
 		return orderCtrl.getCurrentOrder().getTotalPrice();
 	}
+	
 	public boolean isCreated() {
 		return created;
 	}
