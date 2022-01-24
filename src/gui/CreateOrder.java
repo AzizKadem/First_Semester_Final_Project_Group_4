@@ -336,6 +336,7 @@ public class CreateOrder extends JDialog {
 			removeErrorBorder();
 			updateList();
 			lblTotalPrice.setText("Total: " + orderCtrl.getCurrentOrder().getTotalPrice());
+			textBarcode.setText("");
 			
 			
 		} catch (QuantityUnderrunException que) {
@@ -415,6 +416,7 @@ public class CreateOrder extends JDialog {
         phoneNumberPanel.setVisible(false);
         contentPanel.remove(phoneNumberPanel);
         
+        phoneField.setText("");
         btnConfirm.setVisible(false);
     }
     
@@ -430,6 +432,8 @@ public class CreateOrder extends JDialog {
         selectProductsPanel.setVisible(false);
         contentPanel.remove(selectProductsPanel);
         
+        textBarcode.setText("");
+        orderCtrl.cancelOrder();
         btnFinishOrder.setVisible(false);
     }
     
@@ -437,6 +441,7 @@ public class CreateOrder extends JDialog {
         selectProductsPanel.setVisible(true);
         contentPanel.add(selectProductsPanel);
         
+        updateList();
         btnFinishOrder.setVisible(true);
     }
 	
