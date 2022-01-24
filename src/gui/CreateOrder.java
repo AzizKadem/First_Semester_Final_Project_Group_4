@@ -373,8 +373,8 @@ public class CreateOrder extends JDialog {
 			OrderReceipt dialog = new OrderReceipt(orderCtrl);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-			dispose();
 			created = true;
+			dispose();
 			MainMenu.main(null);
 		} 
 		else {

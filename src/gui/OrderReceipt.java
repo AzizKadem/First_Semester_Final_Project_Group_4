@@ -190,12 +190,6 @@ public class OrderReceipt extends JDialog {
 	}
 	
 	private void finishInvoice() {
-		lblNewLabel_3.setVisible(true);
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		finishOrder();
 	}
 
