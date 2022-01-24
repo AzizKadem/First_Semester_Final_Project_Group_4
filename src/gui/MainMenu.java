@@ -27,7 +27,7 @@ public class MainMenu extends JFrame {
 	private JPanel contentPane;
 	private JPanel ordersPanel;
 	private JPanel leasesPanel;
-
+	
 	/**
 	 * Launch the application.
 	 */
