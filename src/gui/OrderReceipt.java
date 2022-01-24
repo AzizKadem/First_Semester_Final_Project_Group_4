@@ -18,11 +18,13 @@ import model.PackageLine;
 import model.Packages;
 
 import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.Box;
 import java.awt.Component;
+import javax.swing.JScrollPane;
 
 public class OrderReceipt extends JDialog {
 
@@ -34,8 +36,7 @@ public class OrderReceipt extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	
 	private OrderCtrl orderCtrl;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
 	
 
 	/**
@@ -64,25 +65,37 @@ public class OrderReceipt extends JDialog {
 			}
 		}
 		{
-			JPanel panel = new JPanel();
-			contentPanel.add(panel, BorderLayout.CENTER);
-			panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 			{
-				Box verticalBox = Box.createVerticalBox();
-				panel.add(verticalBox);
-				{
-					lblNewLabel_1 = new JLabel(getItems());
-					verticalBox.add(lblNewLabel_1);
-				}
 				{
 					String a = new String("" + orderCtrl.getCurrentOrder().getTotalPrice());
-					lblNewLabel_2 = new JLabel("\n" + "Total: " + a);
-					verticalBox.add(lblNewLabel_2);
 				}
 			}
+		}
+		{
+			JPanel panel = new JPanel();
+			contentPanel.add(panel, BorderLayout.SOUTH);
+			panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			{
-				Box verticalBox = Box.createVerticalBox();
-				panel.add(verticalBox);
+				lblNewLabel_3 = new JLabel("Sending the invoice...");
+				lblNewLabel_3.setVerticalAlignment(SwingConstants.BOTTOM);
+				panel.add(lblNewLabel_3);
+				{
+					JScrollPane scrollPane = new JScrollPane();
+					contentPanel.add(scrollPane, BorderLayout.CENTER);
+					{
+						Box verticalBox = Box.createVerticalBox();
+						scrollPane.setViewportView(verticalBox);
+						{
+							JLabel lblNewLabel_1 = new JLabel(getItems());
+							verticalBox.add(lblNewLabel_1);
+						}
+						{
+							JLabel lblNewLabel_2 = new JLabel("Total: " + CurrencyHandler.convertToString(orderCtrl.getTotal()));
+							verticalBox.add(lblNewLabel_2);
+						}
+					}
+				}
+				lblNewLabel_3.setVisible(false);
 			}
 		}
 		{
@@ -92,6 +105,7 @@ public class OrderReceipt extends JDialog {
 				JButton finishOrderButton = new JButton("Send invoice");
 				finishOrderButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						finishInvoice();
 						//TODO finish order
 					}
 				});
@@ -136,7 +150,7 @@ public class OrderReceipt extends JDialog {
 		StringBuilder returnString = new StringBuilder();
 		for(OrderLine anOrderLine : orderCtrl.getCurrentOrder().getOrderLines()) {
 			returnString.append(anOrderLine.getAProduct().getName());
-			returnString.append("\t" + anOrderLine.getAProduct().getPrice());
+			returnString.append("    " + anOrderLine.getAProduct().getPrice());
 			returnString.append(" x" + anOrderLine.getQuantity());
 			if (anOrderLine.getQuantity() < 10) {
 				returnString.append(" " + anOrderLine.getSubTotal());
@@ -155,8 +169,12 @@ public class OrderReceipt extends JDialog {
 		return returnString.toString();
 	}
 	
-	private void finishOrder() throws EmptyOrderException {
-		orderCtrl.finishOrder();
+	private void finishOrder(){
+		try {
+			orderCtrl.finishOrder();
+		} catch (EmptyOrderException e) {
+			e.printStackTrace();
+		}
 		dispose();
 	}
 	
@@ -169,6 +187,10 @@ public class OrderReceipt extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void finishInvoice() {
+		finishOrder();
 	}
 
 }

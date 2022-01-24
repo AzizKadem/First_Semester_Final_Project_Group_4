@@ -3,26 +3,26 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.Box;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JSplitPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 import controller.OrderCtrl;
 import exceptions.CustomerNotFoundException;
@@ -31,7 +31,6 @@ import exceptions.NotEnoughInStockException;
 import exceptions.ProductNotFoundException;
 import exceptions.QuantityUnderrunException;
 import model.OrderLine;
-import javax.swing.SwingConstants;
 
 public class CreateOrder extends JDialog {
 
@@ -49,13 +48,12 @@ public class CreateOrder extends JDialog {
 
 	private OrderCtrl orderCtrl;
 	
-	private JLabel lblErrorMessage;
 	private JTextField phoneField;
 	private JButton btnConfirm;
 	private JTextField textBarcode;
 	private JButton btnFinishOrder;
 	private JSpinner spinnerQuantity;
-	private JList<OrderLine> list;
+	private JTable table;
 	private JLabel lblTotalPrice;
 	private JLabel lblErrorButton;
 	private JButton btnBack;
@@ -97,9 +95,11 @@ public class CreateOrder extends JDialog {
 		
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBackground(ColorScheme.BACKGROUND);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
 			phoneNumberPanel = new JPanel();
+			phoneNumberPanel.setBackground(ColorScheme.BACKGROUND);
 			phoneNumberPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			{
 				Box verticalBox = Box.createVerticalBox();
@@ -119,14 +119,11 @@ public class CreateOrder extends JDialog {
 					verticalBox.add(phoneField);
 					phoneField.setColumns(10);
 				}
-				{
-					lblErrorMessage = new JLabel(" ");
-					verticalBox.add(lblErrorMessage);
-				}
 			}
 		}
 		{
 			selectCustomerMethodPanel = new JPanel();
+			selectCustomerMethodPanel.setBackground(ColorScheme.BACKGROUND);
 			FlowLayout flowLayout = (FlowLayout) selectCustomerMethodPanel.getLayout();
 			flowLayout.setAlignment(FlowLayout.LEFT);
 			{
@@ -170,6 +167,7 @@ public class CreateOrder extends JDialog {
 		}
 		{
 			selectProductsPanel = new JPanel();
+			selectProductsPanel.setBackground(ColorScheme.BACKGROUND);
 			selectProductsPanel.setLayout(new BorderLayout(0, 0));
 			{
 				JSplitPane splitPane = new JSplitPane();
@@ -179,6 +177,7 @@ public class CreateOrder extends JDialog {
 				selectProductsPanel.add(splitPane);
 				{
 					JPanel addProductPanel = new JPanel();
+					addProductPanel.setBackground(ColorScheme.BACKGROUND);
 					splitPane.setLeftComponent(addProductPanel);
 					FlowLayout fl_addProductPanel = new FlowLayout(FlowLayout.CENTER, 5, 5);
 					fl_addProductPanel.setAlignOnBaseline(true);
@@ -222,10 +221,13 @@ public class CreateOrder extends JDialog {
 				}
 				{
 					JScrollPane scrollPane = new JScrollPane();
+					scrollPane.setBackground(ColorScheme.BACKGROUND);
 					splitPane.setRightComponent(scrollPane);
 					{
-						list = new JList<OrderLine>();
-						scrollPane.setViewportView(list);
+						table = new JTable();
+						table.setBackground(ColorScheme.BACKGROUND);
+						table.setDefaultEditor(Object.class, null);
+						scrollPane.setViewportView(table);
 					}
 				}
 			}
@@ -240,6 +242,21 @@ public class CreateOrder extends JDialog {
 				}
 			}
 			{
+				JPanel leftButtonPanel = new JPanel();
+				leftButtonPanel.setBackground(ColorScheme.TAB);
+				buttonPanel.add(leftButtonPanel, BorderLayout.WEST);
+				{
+					btnBack = new JButton("Back");
+					btnBack.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							back();
+						}
+					});
+					leftButtonPanel.add(btnBack);
+					btnBack.setHorizontalAlignment(SwingConstants.LEFT);
+				}
+			}
+			{
 				JPanel rightButtonPanel = new JPanel();
 				rightButtonPanel.setBackground(ColorScheme.TAB);
 				FlowLayout fl_rightButtonPanel = (FlowLayout) rightButtonPanel.getLayout();
@@ -249,6 +266,7 @@ public class CreateOrder extends JDialog {
 					lblErrorButton = new JLabel("");
 					rightButtonPanel.add(lblErrorButton);
 					lblErrorButton.setHorizontalAlignment(SwingConstants.RIGHT);
+					lblErrorButton.setForeground(ColorScheme.BACKGROUND);
 				}
 				btnFinishOrder = new JButton("Finish Order");
 				rightButtonPanel.add(btnFinishOrder);
@@ -266,21 +284,6 @@ public class CreateOrder extends JDialog {
 						}
 					});
 					btnCancel.setActionCommand("Cancel");
-				}
-				{
-					JPanel leftButtonPanel = new JPanel();
-					leftButtonPanel.setBackground(ColorScheme.TAB);
-					buttonPanel.add(leftButtonPanel, BorderLayout.WEST);
-					{
-						btnBack = new JButton("Back");
-						btnBack.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								back();
-							}
-						});
-						leftButtonPanel.add(btnBack);
-						btnBack.setHorizontalAlignment(SwingConstants.LEFT);
-					}
 				}
 				btnConfirm.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -323,49 +326,60 @@ public class CreateOrder extends JDialog {
 		try {
 			if(orderCtrl.createOrder(phone)) {
 				showProductScreen();
+				removeErrorMessage();
 			}
 
 		} catch (CustomerNotFoundException e) {
-			lblErrorMessage.setText(e.getMessage());
+			lblErrorButton.setText(e.getMessage());
+			phoneField.setBorder(new LineBorder(ColorScheme.BUTTON_HIGHTLIGHT));
 		}
 	}
 	
 	private void addProduct() {
 		try {
 			orderCtrl.createOrderline(textBarcode.getText(), (int)spinnerQuantity.getValue());
-			removeErrorBorder();
+			removeErrorMessage();
 			updateList();
-			lblTotalPrice.setText("Total: " + orderCtrl.getCurrentOrder().getTotalPrice());
-			
+			lblTotalPrice.setText("Total: " + CurrencyHandler.convertToString(orderCtrl.getTotal()));
+			textBarcode.setText("");
+			spinnerQuantity.setValue(1);
 			
 		} catch (QuantityUnderrunException que) {
 			spinnerQuantity.setBorder(new LineBorder(ColorScheme.BUTTON_HIGHTLIGHT, 1));
+			lblErrorButton.setText(que.getMessage());
 			
 		} catch (ProductNotFoundException pnfe) {
 			textBarcode.setBorder(new LineBorder(ColorScheme.BUTTON_HIGHTLIGHT, 1));
+			lblErrorButton.setText(pnfe.getMessage());
 			
 		} catch (NotEnoughInStockException neise) {
 			spinnerQuantity.setBorder(new LineBorder(ColorScheme.BUTTON_HIGHTLIGHT, 1));
+			lblErrorButton.setText(neise.getMessage());
 		}
 	}
 	
-	private void removeErrorBorder() {
+	private void removeErrorMessage() {
 		spinnerQuantity.setBorder(new LineBorder(Color.BLACK, 1));
 		textBarcode.setBorder(new LineBorder(Color.BLACK, 1));
+		phoneField.setBorder(new LineBorder(Color.BLACK, 1));
 		lblErrorButton.setText("");
 	}
 	
 	private void updateList() {
-		DefaultListModel<OrderLine> myListModel = new DefaultListModel<>();
+		DefaultTableModel myTableModel = new DefaultTableModel();
 		
 		List<OrderLine> lists = orderCtrl.getCurrentOrder().getOrderLines();
 		
+		myTableModel.addColumn("Name");
+		myTableModel.addColumn("Quantity");
+		myTableModel.addColumn("Price");
+		
 		for (OrderLine element : lists) {
-			myListModel.addElement(element);
+			myTableModel.addRow(new Object[] {element.getAProduct().getName(),
+					element.getQuantity(), CurrencyHandler.convertToString(element.getSubTotal())});
 		}
 		
-		list.setCellRenderer(new OrderLineCellRenderer());
-		list.setModel(myListModel);
+		table.setModel(myTableModel);
 	}
 	
 	private void finishOrder() {
@@ -373,8 +387,9 @@ public class CreateOrder extends JDialog {
 			OrderReceipt dialog = new OrderReceipt(orderCtrl);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			created = true;
+			
 			dispose();
-			MainMenu.main(null);
 		} 
 		else {
 			lblErrorButton.setText(new EmptyOrderException().getMessage());
@@ -382,13 +397,13 @@ public class CreateOrder extends JDialog {
 	}
 	
 	private void back() {
+		removeErrorMessage();
         if (phoneNumberPanel.isVisible()) {
         	hidePhoneNumberPanel();
         	showSelectCustomerMethodPanel();
         	
         }
-        else
-        {
+        else {
         	if (selectProductsPanel.isVisible()) {
             	hideSelectProductsPanel();
             	showPhoneNumberPanel();
@@ -396,14 +411,12 @@ public class CreateOrder extends JDialog {
         }
     }
 	
-	private void hideSelectCustomerMethodPanel()
-    {
+	private void hideSelectCustomerMethodPanel() {
     	selectCustomerMethodPanel.setVisible(false);
         contentPanel.remove(selectCustomerMethodPanel);
     }
 	
-    private void showSelectCustomerMethodPanel()
-    {
+    private void showSelectCustomerMethodPanel() {
     	selectCustomerMethodPanel.setVisible(true);
         contentPanel.add(selectCustomerMethodPanel);
         
@@ -414,6 +427,7 @@ public class CreateOrder extends JDialog {
         phoneNumberPanel.setVisible(false);
         contentPanel.remove(phoneNumberPanel);
         
+        phoneField.setText("");
         btnConfirm.setVisible(false);
     }
     
@@ -429,6 +443,8 @@ public class CreateOrder extends JDialog {
         selectProductsPanel.setVisible(false);
         contentPanel.remove(selectProductsPanel);
         
+        textBarcode.setText("");
+        orderCtrl.cancelOrder();
         btnFinishOrder.setVisible(false);
     }
     
@@ -436,13 +452,19 @@ public class CreateOrder extends JDialog {
         selectProductsPanel.setVisible(true);
         contentPanel.add(selectProductsPanel);
         
+        updateList();
         btnFinishOrder.setVisible(true);
     }
-	
+    
 	private void cancel() {
 		dispose();
 	}
+	
 	public double getTotal() {
 		return orderCtrl.getCurrentOrder().getTotalPrice();
+	}
+	
+	public boolean isCreated() {
+		return created;
 	}
 }
