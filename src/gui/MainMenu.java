@@ -193,6 +193,9 @@ public class MainMenu extends JFrame {
 		
 		login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		login.setVisible(true);
+		if(login.isCreated()) {
+			
+		}
 	}
 	
 	private void createLease() {

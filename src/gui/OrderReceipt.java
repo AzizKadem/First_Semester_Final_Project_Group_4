@@ -18,6 +18,7 @@ import model.PackageLine;
 import model.Packages;
 
 import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
@@ -36,6 +37,7 @@ public class OrderReceipt extends JDialog {
 	private OrderCtrl orderCtrl;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
 	
 
 	/**
@@ -86,12 +88,24 @@ public class OrderReceipt extends JDialog {
 			}
 		}
 		{
+			JPanel panel = new JPanel();
+			contentPanel.add(panel, BorderLayout.SOUTH);
+			panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+			{
+				lblNewLabel_3 = new JLabel("Sending the invoice...");
+				lblNewLabel_3.setVerticalAlignment(SwingConstants.BOTTOM);
+				panel.add(lblNewLabel_3);
+				lblNewLabel_3.setVisible(false);
+			}
+		}
+		{
 			JPanel buttonPane = new JPanel();
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton finishOrderButton = new JButton("Send invoice");
 				finishOrderButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						finishInvoice();
 						//TODO finish order
 					}
 				});
@@ -155,8 +169,12 @@ public class OrderReceipt extends JDialog {
 		return returnString.toString();
 	}
 	
-	private void finishOrder() throws EmptyOrderException {
-		orderCtrl.finishOrder();
+	private void finishOrder(){
+		try {
+			orderCtrl.finishOrder();
+		} catch (EmptyOrderException e) {
+			e.printStackTrace();
+		}
 		dispose();
 	}
 	
@@ -169,6 +187,16 @@ public class OrderReceipt extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void finishInvoice() {
+		lblNewLabel_3.setVisible(true);
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		finishOrder();
 	}
 
 }

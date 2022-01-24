@@ -445,4 +445,7 @@ public class CreateOrder extends JDialog {
 	public double getTotal() {
 		return orderCtrl.getCurrentOrder().getTotalPrice();
 	}
+	public boolean isCreated() {
+		return created;
+	}
 }
