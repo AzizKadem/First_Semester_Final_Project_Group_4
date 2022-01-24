@@ -44,6 +44,7 @@ public class CreateOrder extends JDialog {
 	private JPanel selectCustomerMethodPanel;
 	private JPanel phoneNumberPanel;
 	private JPanel selectProductsPanel;
+	private JPanel previousPanel;
 	
 	private boolean created;
 
@@ -305,6 +306,7 @@ public class CreateOrder extends JDialog {
 	}
 
 	public void selectExistingCustomer() {
+		previousPanel = selectCustomerMethodPanel;
 		contentPanel.remove(selectCustomerMethodPanel);
 		contentPanel.add(phoneNumberPanel);
 		
@@ -315,6 +317,7 @@ public class CreateOrder extends JDialog {
 	}
 	
 	public void showProductScreen() {
+		previousPanel = phoneNumberPanel;
 		contentPanel.remove(phoneNumberPanel);
 		contentPanel.add(selectProductsPanel);
 
@@ -384,8 +387,8 @@ public class CreateOrder extends JDialog {
 	}
 	
 	private void back() {
-		//TODO this
-		System.out.println("Nothing yet");
+		dispose();
+		contentPanel.add(previousPanel);
 	}
 	
 	private void cancel() {
