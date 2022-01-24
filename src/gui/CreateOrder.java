@@ -387,8 +387,8 @@ public class CreateOrder extends JDialog {
 	}
 	
 	private void back() {
-		dispose();
-		contentPanel.add(previousPanel);
+		contentPanel.remove(selectProductsPanel);
+		contentPanel.add(phoneNumberPanel);
 	}
 	
 	private void cancel() {
