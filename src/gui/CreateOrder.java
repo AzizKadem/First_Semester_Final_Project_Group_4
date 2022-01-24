@@ -397,6 +397,7 @@ public class CreateOrder extends JDialog {
 	}
 	
 	private void back() {
+		removeErrorMessage();
         if (phoneNumberPanel.isVisible()) {
         	hidePhoneNumberPanel();
         	showSelectCustomerMethodPanel();
