@@ -44,7 +44,6 @@ public class CreateOrder extends JDialog {
 	private JPanel selectCustomerMethodPanel;
 	private JPanel phoneNumberPanel;
 	private JPanel selectProductsPanel;
-	private JPanel previousPanel;
 	
 	private boolean created;
 
@@ -59,6 +58,7 @@ public class CreateOrder extends JDialog {
 	private JList<OrderLine> list;
 	private JLabel lblTotalPrice;
 	private JLabel lblErrorButton;
+	private JButton btnBack;
 	
 	/**
 	 * Launch the application.
@@ -272,7 +272,7 @@ public class CreateOrder extends JDialog {
 					leftButtonPanel.setBackground(ColorScheme.TAB);
 					buttonPanel.add(leftButtonPanel, BorderLayout.WEST);
 					{
-						JButton btnBack = new JButton("Back");
+						btnBack = new JButton("Back");
 						btnBack.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								back();
@@ -294,6 +294,7 @@ public class CreateOrder extends JDialog {
 					}
 				});
 				btnFinishOrder.setVisible(false);
+				btnBack.setVisible(false);
 			}
 		}
 		{
@@ -306,23 +307,15 @@ public class CreateOrder extends JDialog {
 	}
 
 	public void selectExistingCustomer() {
-		previousPanel = selectCustomerMethodPanel;
-		contentPanel.remove(selectCustomerMethodPanel);
-		contentPanel.add(phoneNumberPanel);
-		
+		hideSelectCustomerMethodPanel();
+		showPhoneNumberPanel();
 		FlowLayout flowLayout = (FlowLayout) phoneNumberPanel.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
-		
-		btnConfirm.setVisible(true);
 	}
 	
 	public void showProductScreen() {
-		previousPanel = phoneNumberPanel;
-		contentPanel.remove(phoneNumberPanel);
-		contentPanel.add(selectProductsPanel);
-
-		btnConfirm.setVisible(false);
-		btnFinishOrder.setVisible(true);
+		hidePhoneNumberPanel();
+		showSelectProductsPanel();
 	}
 	
 	private void checkPhoneNumber() {
@@ -380,6 +373,8 @@ public class CreateOrder extends JDialog {
 			OrderReceipt dialog = new OrderReceipt(orderCtrl);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			dispose();
+			MainMenu.main(null);
 		} 
 		else {
 			lblErrorButton.setText(new EmptyOrderException().getMessage());
@@ -387,11 +382,67 @@ public class CreateOrder extends JDialog {
 	}
 	
 	private void back() {
-		contentPanel.remove(selectProductsPanel);
-		contentPanel.add(phoneNumberPanel);
-	}
+        if (phoneNumberPanel.isVisible()) {
+        	hidePhoneNumberPanel();
+        	showSelectCustomerMethodPanel();
+        	
+        }
+        else
+        {
+        	if (selectProductsPanel.isVisible()) {
+            	hideSelectProductsPanel();
+            	showPhoneNumberPanel();
+            }
+        }
+    }
+	
+	private void hideSelectCustomerMethodPanel()
+    {
+    	selectCustomerMethodPanel.setVisible(false);
+        contentPanel.remove(selectCustomerMethodPanel);
+    }
+	
+    private void showSelectCustomerMethodPanel()
+    {
+    	selectCustomerMethodPanel.setVisible(true);
+        contentPanel.add(selectCustomerMethodPanel);
+        
+        btnBack.setVisible(false);
+    }
+    
+    private void hidePhoneNumberPanel() {
+        phoneNumberPanel.setVisible(false);
+        contentPanel.remove(phoneNumberPanel);
+        
+        btnConfirm.setVisible(false);
+    }
+    
+    private void showPhoneNumberPanel() {
+        phoneNumberPanel.setVisible(true);
+        contentPanel.add(phoneNumberPanel);
+        
+        btnBack.setVisible(true);
+        btnConfirm.setVisible(true);
+    }
+    
+    private void hideSelectProductsPanel() {
+        selectProductsPanel.setVisible(false);
+        contentPanel.remove(selectProductsPanel);
+        
+        btnFinishOrder.setVisible(false);
+    }
+    
+    private void showSelectProductsPanel() {
+        selectProductsPanel.setVisible(true);
+        contentPanel.add(selectProductsPanel);
+        
+        btnFinishOrder.setVisible(true);
+    }
 	
 	private void cancel() {
 		dispose();
+	}
+	public double getTotal() {
+		return orderCtrl.getCurrentOrder().getTotalPrice();
 	}
 }
