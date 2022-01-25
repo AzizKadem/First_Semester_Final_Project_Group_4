@@ -139,7 +139,7 @@ public class LeaseCreated extends JDialog {
 		}
 		{
 			JPanel buttonPanel = new JPanel();
-			buttonPanel.setBackground(new Color(80, 133, 165));
+			buttonPanel.setBackground(ColorScheme.TAB);
 			getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 			buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 			{
