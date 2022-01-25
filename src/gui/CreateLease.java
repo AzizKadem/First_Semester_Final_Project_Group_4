@@ -21,12 +21,14 @@ import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import net.miginfocom.swing.MigLayout;
 
 public class CreateLease extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldCustomer;
 	private JTextField textFieldMachine;
+	private JLabel lblError = new JLabel("");
 	
 	private LeaseCtrl leaseCtrl;
 
@@ -60,18 +62,23 @@ public class CreateLease extends JDialog {
 		JPanel panel = new JPanel();
 		contentPanel.add(panel, BorderLayout.CENTER);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0, 102, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gbl_panel.columnWidths = new int[]{1, 139, 96, 0};
+		gbl_panel.rowHeights = new int[]{1, 19, 19, 0, 0, 0, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
+		GridBagConstraints gbc_lblError = new GridBagConstraints();
+		gbc_lblError.insets = new Insets(0, 0, 5, 5);
+		gbc_lblError.gridx = 0;
+		gbc_lblError.gridy = 0;
+		panel.add(lblError, gbc_lblError);
 		
 		JLabel lblCustomer = new JLabel("Enter customer phone number");
 		GridBagConstraints gbc_lblCustomer = new GridBagConstraints();
 		gbc_lblCustomer.anchor = GridBagConstraints.EAST;
 		gbc_lblCustomer.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCustomer.gridx = 1;
-		gbc_lblCustomer.gridy = 1;
+		gbc_lblCustomer.gridy = 2;
 		panel.add(lblCustomer, gbc_lblCustomer);
 		
 		textFieldCustomer = new JTextField();
@@ -79,23 +86,32 @@ public class CreateLease extends JDialog {
 		gbc_textFieldCustomer.anchor = GridBagConstraints.WEST;
 		gbc_textFieldCustomer.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldCustomer.gridx = 2;
-		gbc_textFieldCustomer.gridy = 1;
+		gbc_textFieldCustomer.gridy = 2;
 		panel.add(textFieldCustomer, gbc_textFieldCustomer);
 		textFieldCustomer.setColumns(10);
 		
+		JPanel panel_1 = new JPanel();
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 1;
+		gbc_panel_1.gridy = 3;
+		panel.add(panel_1, gbc_panel_1);
+		
 		JLabel lblMachine = new JLabel("Enter machine id");
 		GridBagConstraints gbc_lblMachine = new GridBagConstraints();
-		gbc_lblMachine.insets = new Insets(0, 0, 0, 5);
 		gbc_lblMachine.anchor = GridBagConstraints.EAST;
+		gbc_lblMachine.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMachine.gridx = 1;
-		gbc_lblMachine.gridy = 3;
+		gbc_lblMachine.gridy = 4;
 		panel.add(lblMachine, gbc_lblMachine);
 		
 		textFieldMachine = new JTextField();
 		GridBagConstraints gbc_textFieldMachine = new GridBagConstraints();
+		gbc_textFieldMachine.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldMachine.anchor = GridBagConstraints.WEST;
 		gbc_textFieldMachine.gridx = 2;
-		gbc_textFieldMachine.gridy = 3;
+		gbc_textFieldMachine.gridy = 4;
 		panel.add(textFieldMachine, gbc_textFieldMachine);
 		textFieldMachine.setColumns(10);
 		
@@ -134,7 +150,7 @@ public class CreateLease extends JDialog {
 			dispose();
 			created.setVisible(true);
 		} catch(MachineNotFoundException | CustomerNotFoundException e) {
-			e.getMessage();
+			lblError.setText(e.getMessage());
 		}
 	}
 }
