@@ -209,7 +209,7 @@ public class MainMenu extends JFrame {
 			lblNewLabel.setVisible(true);
 		}
 		else {
-			lblNewLabel.setText("/n Order wasn't created successfully");
+			lblNewLabel.setText("\n Unfortunately, your order was cancelled");
 			lblNewLabel.setVisible(true);
 		}
 	}
