@@ -2,7 +2,10 @@ package controller;
 
 import exceptions.CustomerNotFoundException;
 import exceptions.MachineNotFoundException;
-import model.*;
+import model.Customer;
+import model.Lease;
+import model.LeaseCont;
+import model.Machine;
 
 public class LeaseCtrl {
 	private CustomerCtrl customerController;

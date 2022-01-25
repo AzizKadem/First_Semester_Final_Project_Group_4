@@ -1,7 +1,8 @@
 package controller;
 
 import exceptions.CustomerNotFoundException;
-import model.*;
+import model.Customer;
+import model.CustomerCont;
 
 public class CustomerCtrl {
 	
