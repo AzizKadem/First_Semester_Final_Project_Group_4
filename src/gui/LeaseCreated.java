@@ -135,7 +135,7 @@ public class LeaseCreated extends JDialog {
 			gbc_lblDate.gridx = 3;
 			gbc_lblDate.gridy = 9;
 			contentPanel.add(lblDate, gbc_lblDate);
-			lblDate.setText(lease.getDate().toString());
+			lblDate.setText(lease.getDate().getDateTime());
 		}
 		{
 			JPanel buttonPanel = new JPanel();
