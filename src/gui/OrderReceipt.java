@@ -1,30 +1,25 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import controller.OrderCtrl;
 import exceptions.EmptyOrderException;
 import model.Appliance;
 import model.AppliancesOrderLine;
-import model.Order;
 import model.OrderLine;
-import model.PackageLine;
-import model.Packages;
-
-import java.awt.event.ActionListener;
-import java.util.concurrent.TimeUnit;
-import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
-import javax.swing.JLabel;
-import javax.swing.Box;
-import java.awt.Component;
-import javax.swing.JScrollPane;
 
 public class OrderReceipt extends JDialog {
 

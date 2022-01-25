@@ -1,6 +1,19 @@
 package ui;
 
-import model.*;
+import model.Appliance;
+import model.ApplianceCopy;
+import model.Customer;
+import model.CustomerCont;
+import model.Date;
+import model.Item;
+import model.Machine;
+import model.MachineCont;
+import model.Order;
+import model.OrderCont;
+import model.PackageLine;
+import model.Packages;
+import model.Price;
+import model.ProductCont;
 
 public class Main {
 	public static void main(String[] args) {

@@ -1,7 +1,6 @@
 package Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +9,12 @@ import org.junit.jupiter.api.Test;
 import controller.LeaseCtrl;
 import exceptions.CustomerNotFoundException;
 import exceptions.MachineNotFoundException;
-import model.*;
+import model.Customer;
+import model.CustomerCont;
+import model.Lease;
+import model.LeaseCont;
+import model.Machine;
+import model.MachineCont;
 
 class LeaseCtrlTest {
 	private Customer c;

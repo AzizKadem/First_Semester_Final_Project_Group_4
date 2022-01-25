@@ -23,7 +23,6 @@ import model.Packages;
 import model.Price;
 import model.Product;
 import model.ProductCont;
-import model.SingleProduct;
 
 
 class OrderCtrlTest {
