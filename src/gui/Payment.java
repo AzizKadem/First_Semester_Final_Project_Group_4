@@ -77,6 +77,7 @@ public class Payment extends JDialog {
 	}
 	
 	public void notPayed() {
+		Confirmation.getInstance().setCreated(false);
 		dispose();
 	}
 

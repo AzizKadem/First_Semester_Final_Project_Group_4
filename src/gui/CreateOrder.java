@@ -453,14 +453,11 @@ public class CreateOrder extends JDialog {
     }
     
 	private void cancel() {
+		Confirmation.getInstance().setCreated(false);
 		dispose();
 	}
 	
 	public double getTotal() {
 		return orderCtrl.getCurrentOrder().getTotalPrice();
-	}
-	
-	public boolean isCreated() {
-		return created;
 	}
 }

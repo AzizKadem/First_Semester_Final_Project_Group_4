@@ -133,6 +133,7 @@ public class OrderReceipt extends JDialog {
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						//TODO cancel window
+						Confirmation.getInstance().setCreated(false);
 						dispose();
 					}
 				});
