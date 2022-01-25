@@ -27,6 +27,7 @@ public class CreateLease extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldCustomer;
 	private JTextField textFieldMachine;
+	private JLabel lblError = new JLabel("");
 	
 	private LeaseCtrl leaseCtrl;
 
@@ -60,10 +61,10 @@ public class CreateLease extends JDialog {
 		JPanel panel = new JPanel();
 		contentPanel.add(panel, BorderLayout.CENTER);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0, 102, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.columnWidths = new int[]{0, 0, 102, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
 		JLabel lblCustomer = new JLabel("Enter customer phone number");
@@ -77,7 +78,7 @@ public class CreateLease extends JDialog {
 		textFieldCustomer = new JTextField();
 		GridBagConstraints gbc_textFieldCustomer = new GridBagConstraints();
 		gbc_textFieldCustomer.anchor = GridBagConstraints.WEST;
-		gbc_textFieldCustomer.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldCustomer.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldCustomer.gridx = 2;
 		gbc_textFieldCustomer.gridy = 1;
 		panel.add(textFieldCustomer, gbc_textFieldCustomer);
@@ -85,7 +86,7 @@ public class CreateLease extends JDialog {
 		
 		JLabel lblMachine = new JLabel("Enter machine id");
 		GridBagConstraints gbc_lblMachine = new GridBagConstraints();
-		gbc_lblMachine.insets = new Insets(0, 0, 0, 5);
+		gbc_lblMachine.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMachine.anchor = GridBagConstraints.EAST;
 		gbc_lblMachine.gridx = 1;
 		gbc_lblMachine.gridy = 3;
@@ -93,11 +94,19 @@ public class CreateLease extends JDialog {
 		
 		textFieldMachine = new JTextField();
 		GridBagConstraints gbc_textFieldMachine = new GridBagConstraints();
+		gbc_textFieldMachine.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldMachine.anchor = GridBagConstraints.WEST;
 		gbc_textFieldMachine.gridx = 2;
 		gbc_textFieldMachine.gridy = 3;
 		panel.add(textFieldMachine, gbc_textFieldMachine);
 		textFieldMachine.setColumns(10);
+		
+		
+		GridBagConstraints gbc_lblError = new GridBagConstraints();
+		gbc_lblError.gridwidth = 2;
+		gbc_lblError.gridx = 2;
+		gbc_lblError.gridy = 5;
+		panel.add(lblError, gbc_lblError);
 		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setBackground(ColorScheme.TAB);
@@ -134,7 +143,7 @@ public class CreateLease extends JDialog {
 			dispose();
 			created.setVisible(true);
 		} catch(MachineNotFoundException | CustomerNotFoundException e) {
-			e.getMessage();
+			lblError.setText(e.getMessage());
 		}
 	}
 }
