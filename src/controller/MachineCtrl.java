@@ -1,7 +1,8 @@
 package controller;
 
 import exceptions.MachineNotFoundException;
-import model.*;
+import model.Machine;
+import model.MachineCont;
 
 
 public class MachineCtrl {
