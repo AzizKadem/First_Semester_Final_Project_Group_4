@@ -136,7 +136,7 @@ public class MainMenu extends JFrame {
 		JPanel panel = new JPanel();
 		verticalBox_3.add(panel);
 		
-		lblNewLabel = new JLabel("Order was successfully created");
+		lblNewLabel = new JLabel("");
 		verticalBox_3.add(lblNewLabel);
 		lblNewLabel.setVisible(false);
 		
@@ -206,6 +206,7 @@ public class MainMenu extends JFrame {
 		login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		login.setVisible(true);
 		if(Confirmation.getInstance().isCreated()) {
+			lblNewLabel.setText("\n Order was successfully created");
 			lblNewLabel.setVisible(true);
 		}
 		else {
