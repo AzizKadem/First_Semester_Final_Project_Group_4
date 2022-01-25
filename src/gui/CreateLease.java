@@ -59,18 +59,13 @@ public class CreateLease extends JDialog {
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
-		contentPanel.add(panel, BorderLayout.CENTER);
+		contentPanel.add(panel, BorderLayout.NORTH);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{1, 139, 96, 0};
-		gbl_panel.rowHeights = new int[]{1, 19, 19, 0, 0, 0, 0};
+		gbl_panel.columnWidths = new int[]{27, 139, 96, 0};
+		gbl_panel.rowHeights = new int[]{25, 19, 19, 0, 0, 20, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
-		GridBagConstraints gbc_lblError = new GridBagConstraints();
-		gbc_lblError.insets = new Insets(0, 0, 5, 5);
-		gbc_lblError.gridx = 0;
-		gbc_lblError.gridy = 0;
-		panel.add(lblError, gbc_lblError);
 		
 		JLabel lblCustomer = new JLabel("Enter customer phone number");
 		GridBagConstraints gbc_lblCustomer = new GridBagConstraints();
@@ -114,6 +109,12 @@ public class CreateLease extends JDialog {
 		panel.add(textFieldMachine, gbc_textFieldMachine);
 		textFieldMachine.setColumns(10);
 		
+		
+		GridBagConstraints gbc_lblError = new GridBagConstraints();
+		gbc_lblError.gridx = 2;
+		gbc_lblError.gridy = 5;
+		panel.add(lblError, gbc_lblError);
+		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setBackground(ColorScheme.TAB);
 		getContentPane().add(buttonPanel, BorderLayout.SOUTH);
@@ -142,14 +143,17 @@ public class CreateLease extends JDialog {
 	
 	private void createLease(){
 		String phone = textFieldCustomer.getText();
-		int machine = Integer.parseInt(textFieldMachine.getText());
+		
 		try {
+			int machine = Integer.parseInt(textFieldMachine.getText());
 			leaseCtrl.confirmLease(leaseCtrl.searchCustomer(phone), leaseCtrl.searchMachine(machine));
 			LeaseCreated created = new LeaseCreated(leaseCtrl.searchLease(machine));
 			dispose();
 			created.setVisible(true);
+		} catch(NumberFormatException e) {
+			lblError.setText("The machine id must be a number.");
 		} catch(MachineNotFoundException | CustomerNotFoundException e) {
 			lblError.setText(e.getMessage());
-		}
+		} 
 	}
 }
