@@ -18,6 +18,7 @@ import controller.LeaseCtrl;
 import exceptions.CustomerNotFoundException;
 import exceptions.MachineNotFoundException;
 
+
 public class CreateLease extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
