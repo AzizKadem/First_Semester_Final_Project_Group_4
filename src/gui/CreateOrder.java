@@ -43,8 +43,6 @@ public class CreateOrder extends JDialog {
 	private JPanel selectCustomerMethodPanel;
 	private JPanel phoneNumberPanel;
 	private JPanel selectProductsPanel;
-	
-	private boolean created;
 
 	private OrderCtrl orderCtrl;
 	
@@ -387,8 +385,6 @@ public class CreateOrder extends JDialog {
 			OrderReceipt dialog = new OrderReceipt(orderCtrl);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-			created = true;
-			
 			dispose();
 		} 
 		else {

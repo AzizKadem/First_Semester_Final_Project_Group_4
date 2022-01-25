@@ -205,7 +205,11 @@ public class MainMenu extends JFrame {
 		
 		login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		login.setVisible(true);
-		if(login.isCreated()) {
+		if(Confirmation.getInstance().isCreated()) {
+			lblNewLabel.setVisible(true);
+		}
+		else {
+			lblNewLabel.setText("Order wasn't created");
 			lblNewLabel.setVisible(true);
 		}
 	}

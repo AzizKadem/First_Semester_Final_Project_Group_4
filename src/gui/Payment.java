@@ -19,6 +19,7 @@ public class Payment extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	
 	private OrderCtrl orderctrl;
+	
 
 	/**
 	 * Launch the application.
@@ -50,7 +51,7 @@ public class Payment extends JDialog {
 				JButton okButton = new JButton("Yes");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						dispose();
+						payed();
 					}
 				});
 				okButton.setActionCommand("Yes");
@@ -61,12 +62,22 @@ public class Payment extends JDialog {
 				JButton cancelButton = new JButton("No");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						notPayed();
 					}
 				});
 				cancelButton.setActionCommand("No");
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+	
+	public void payed() {
+		Confirmation.getInstance().setCreated(true);
+		dispose();
+	}
+	
+	public void notPayed() {
+		dispose();
 	}
 
 }
