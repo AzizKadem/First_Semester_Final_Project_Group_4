@@ -61,6 +61,7 @@ public class Payment extends JDialog {
 				JButton cancelButton = new JButton("No");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						dispose();
 					}
 				});
 				cancelButton.setActionCommand("No");
