@@ -21,7 +21,6 @@ import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import net.miginfocom.swing.MigLayout;
 
 public class CreateLease extends JDialog {
 
