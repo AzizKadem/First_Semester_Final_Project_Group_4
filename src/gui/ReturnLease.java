@@ -49,7 +49,6 @@ public class ReturnLease extends JDialog {
 	 * Create the dialog.
 	 */
 	public ReturnLease(LeaseCtrl leaseCtrl) {
-		setModal(true);
 		this.leaseCtrl = leaseCtrl;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -154,10 +153,9 @@ public class ReturnLease extends JDialog {
 		dispose();
 	}
 	
-	public void returnLease() {
+	public void returnLease() 
+	{
 		String phone = textFieldCustomer.getText();
-		
-		created = true;
 		
 		try {
 				int machine = Integer.parseInt(textFieldId.getText());
@@ -165,16 +163,14 @@ public class ReturnLease extends JDialog {
 				DeletedLease deleted = new DeletedLease(leaseCtrl.searchLease(leaseCtrl.searchCustomer(phone), machine), leaseCtrl);
 				dispose();
 				deleted.setVisible(true);
-				created = deleted.isCreated();
 		} catch(NumberFormatException e) {
 				lblError.setText("The machine id must be a number.");
 		} catch(CustomerNotFoundException | NotCorrectCustomerException | LeaseNotFoundException e) {
 				lblError.setText(e.getMessage());
 		} 
-<<<<<<< HEAD
 		
-=======
->>>>>>> 21a95a2ecb4c5865043e694f87916d65a402ed7c
+		created = true;
+		
 	}
 	
 	public boolean isCreated()
