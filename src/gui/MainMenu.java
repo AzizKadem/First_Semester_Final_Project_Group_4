@@ -102,7 +102,7 @@ public class MainMenu extends JFrame {
 		Box verticalBox_2 = Box.createVerticalBox();
 		leasesPanel.add(verticalBox_2);
 		
-		JLabel lblNewLabel_2 = new JLabel("Leases");
+		JLabel lblNewLabel_2 = new JLabel("Create");
 		lblNewLabel_2.setAlignmentX(0.1f);
 		verticalBox_2.add(lblNewLabel_2);
 		
@@ -116,6 +116,24 @@ public class MainMenu extends JFrame {
 		Component verticalStrut_2 = Box.createVerticalStrut(5);
 		verticalBox_2.add(verticalStrut_2);
 		verticalBox_2.add(btnNewButton_3);
+		
+		Box verticalBox_2_1 = Box.createVerticalBox();
+		leasesPanel.add(verticalBox_2_1);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("Return");
+		lblNewLabel_2_1.setAlignmentX(0.1f);
+		verticalBox_2_1.add(lblNewLabel_2_1);
+		
+		Component verticalStrut_2_1 = Box.createVerticalStrut(5);
+		verticalBox_2_1.add(verticalStrut_2_1);
+		
+		JButton btnNewButton_3_1 = new JButton("Return Lease");
+		btnNewButton_3_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				returnLease();
+			}
+		});
+		verticalBox_2_1.add(btnNewButton_3_1);
 
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setContinuousLayout(true);
@@ -216,6 +234,12 @@ public class MainMenu extends JFrame {
 	
 	private void createLease() {
 		CreateLease lease = new CreateLease();
+		
+		lease.setVisible(true);
+	}
+	
+	private void returnLease() {
+		ReturnLease lease = new ReturnLease();
 		
 		lease.setVisible(true);
 	}
