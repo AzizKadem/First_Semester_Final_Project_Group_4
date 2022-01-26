@@ -20,6 +20,7 @@ import exceptions.EmptyOrderException;
 import model.Appliance;
 import model.AppliancesOrderLine;
 import model.OrderLine;
+import javax.swing.JList;
 
 public class OrderReceipt extends JDialog {
 
@@ -32,6 +33,7 @@ public class OrderReceipt extends JDialog {
 	
 	private OrderCtrl orderCtrl;
 	private JLabel lblNewLabel_3;
+	private Box verticalBox;
 
 	private boolean finished;
 	
@@ -75,11 +77,10 @@ public class OrderReceipt extends JDialog {
 					JScrollPane scrollPane = new JScrollPane();
 					contentPanel.add(scrollPane, BorderLayout.CENTER);
 					{
-						Box verticalBox = Box.createVerticalBox();
+						verticalBox = Box.createVerticalBox();
 						scrollPane.setViewportView(verticalBox);
 						{
-							JLabel lblNewLabel_1 = new JLabel(getItems());
-							verticalBox.add(lblNewLabel_1);
+							getItems();
 						}
 						{
 							JLabel lblNewLabel_2 = new JLabel("Total: " + CurrencyHandler.convertToString(orderCtrl.getTotal()));
@@ -136,9 +137,16 @@ public class OrderReceipt extends JDialog {
 		}
 	}
 	
-	private String getItems() {
-		StringBuilder returnString = new StringBuilder();
-		for(OrderLine anOrderLine : orderCtrl.getCurrentOrder().getOrderLines()) {
+	private void getItems() {
+		for(int i  = 0; i < orderCtrl.getCurrentOrder().getOrderLines().size(); i++) {
+			
+			JLabel lblNewLabel = new JLabel("");
+			verticalBox.add(lblNewLabel);
+			
+			StringBuilder returnString = new StringBuilder();
+			OrderLine anOrderLine = orderCtrl.getCurrentOrder().getOrderLines().get(i);
+			
+			returnString.append("\n");
 			returnString.append(anOrderLine.getAProduct().getName());
 			returnString.append("    " + anOrderLine.getAProduct().getPrice());
 			returnString.append(" x" + anOrderLine.getQuantity());
@@ -152,11 +160,12 @@ public class OrderReceipt extends JDialog {
 			}
 			
 			if (anOrderLine.getAProduct().getClass().isAssignableFrom(Appliance.class)) {
-				returnString.append("\n\tColor: ");
+				returnString.append("\t Color: ");
 				returnString.append(((AppliancesOrderLine)anOrderLine).getCopy().getColor());
 			}
+			lblNewLabel.setText(returnString.toString());
 		}
-		return returnString.toString();
+		
 	}
 	
 	private void finishOrder(){
