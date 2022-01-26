@@ -62,4 +62,15 @@ public final class CustomerCont {
 	public void emptyContainer() {
 		cust.clear();
 	}
+	
+	public boolean addCustomer(Customer customer) {
+		if(cust.contains(customer)) {
+			return false;
+		}
+		else {
+			cust.add(customer);
+			return true;
+		}
+		
+	}
 }
