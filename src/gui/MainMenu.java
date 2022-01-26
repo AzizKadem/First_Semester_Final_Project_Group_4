@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import controller.LeaseCtrl;
+import model.LeaseCont;
 
 
 public class MainMenu extends JFrame {
@@ -247,6 +248,7 @@ public class MainMenu extends JFrame {
 			lblNewLabel.setText("\n      Your lease was not created      ");
 			lblNewLabel.setVisible(true);
 		}
+		System.out.println(LeaseCont.getInstance().getContainerSize());
 	}
 	
 	private void returnLease() {
@@ -262,5 +264,6 @@ public class MainMenu extends JFrame {
 			lblNewLabel.setText("\n      Your lease was not returned      ");
 			lblNewLabel.setVisible(true);
 		}
+		System.out.println(LeaseCont.getInstance().getContainerSize());
 	}
 }
