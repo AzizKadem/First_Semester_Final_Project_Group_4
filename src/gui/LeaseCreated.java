@@ -44,11 +44,20 @@ public class LeaseCreated extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPanel.columnWidths = new int[]{32, 0, 0, 0, 0};
+		gbl_contentPanel.rowHeights = new int[]{10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
+		{
+			JPanel panel = new JPanel();
+			GridBagConstraints gbc_panel = new GridBagConstraints();
+			gbc_panel.insets = new Insets(0, 0, 5, 5);
+			gbc_panel.fill = GridBagConstraints.BOTH;
+			gbc_panel.gridx = 0;
+			gbc_panel.gridy = 0;
+			contentPanel.add(panel, gbc_panel);
+		}
 		{
 			JLabel lblNewLabel = new JLabel("Customer");
 			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -65,6 +74,15 @@ public class LeaseCreated extends JDialog {
 			gbc_lblCustomer.gridy = 1;
 			contentPanel.add(lblCustomer, gbc_lblCustomer);
 			lblCustomer.setText(lease.getCustomer().getName());
+		}
+		{
+			JPanel panel = new JPanel();
+			GridBagConstraints gbc_panel = new GridBagConstraints();
+			gbc_panel.insets = new Insets(0, 0, 5, 5);
+			gbc_panel.fill = GridBagConstraints.BOTH;
+			gbc_panel.gridx = 0;
+			gbc_panel.gridy = 2;
+			contentPanel.add(panel, gbc_panel);
 		}
 		{
 			JLabel lblNewLabel_1 = new JLabel("Leased machine");
@@ -84,6 +102,15 @@ public class LeaseCreated extends JDialog {
 			lblMachine.setText(lease.getMachine().getName());
 		}
 		{
+			JPanel panel = new JPanel();
+			GridBagConstraints gbc_panel = new GridBagConstraints();
+			gbc_panel.insets = new Insets(0, 0, 5, 5);
+			gbc_panel.fill = GridBagConstraints.BOTH;
+			gbc_panel.gridx = 0;
+			gbc_panel.gridy = 4;
+			contentPanel.add(panel, gbc_panel);
+		}
+		{
 			JLabel lblNewLabel_2 = new JLabel("Period");
 			GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 			gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
@@ -101,6 +128,15 @@ public class LeaseCreated extends JDialog {
 			lblPeriod.setText(Integer.toString(lease.getPeriod()));
 		}
 		{
+			JPanel panel = new JPanel();
+			GridBagConstraints gbc_panel = new GridBagConstraints();
+			gbc_panel.insets = new Insets(0, 0, 5, 5);
+			gbc_panel.fill = GridBagConstraints.BOTH;
+			gbc_panel.gridx = 0;
+			gbc_panel.gridy = 6;
+			contentPanel.add(panel, gbc_panel);
+		}
+		{
 			JLabel lblNewLabel_3 = new JLabel("Price");
 			GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 			gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
@@ -116,6 +152,15 @@ public class LeaseCreated extends JDialog {
 			gbc_lblPrice.gridy = 7;
 			contentPanel.add(lblPrice, gbc_lblPrice);
 			lblPrice.setText(Double.toString(lease.getMachine().getPrice()));
+		}
+		{
+			JPanel panel = new JPanel();
+			GridBagConstraints gbc_panel = new GridBagConstraints();
+			gbc_panel.insets = new Insets(0, 0, 5, 5);
+			gbc_panel.fill = GridBagConstraints.BOTH;
+			gbc_panel.gridx = 0;
+			gbc_panel.gridy = 8;
+			contentPanel.add(panel, gbc_panel);
 		}
 		{
 			JLabel lblNewLabel_4 = new JLabel("Date");
