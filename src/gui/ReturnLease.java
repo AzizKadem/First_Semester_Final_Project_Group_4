@@ -171,10 +171,6 @@ public class ReturnLease extends JDialog {
 		} catch(CustomerNotFoundException | NotCorrectCustomerException | LeaseNotFoundException e) {
 				lblError.setText(e.getMessage());
 		} 
-<<<<<<< HEAD
-		
-=======
->>>>>>> 21a95a2ecb4c5865043e694f87916d65a402ed7c
 	}
 	
 	public boolean isCreated()
