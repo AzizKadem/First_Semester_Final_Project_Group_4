@@ -32,18 +32,22 @@ public class OrderReceipt extends JDialog {
 	
 	private OrderCtrl orderCtrl;
 	private JLabel lblNewLabel_3;
+
+	private boolean finished;
 	
 
 	/**
 	 * Create the dialog.
 	 */
 	public OrderReceipt(OrderCtrl orderCtrl) {
-		setModal(true);
 		this.orderCtrl = orderCtrl;
+		finished = false;
+		
 		initGui();
 	}
 	
 	private void initGui() {
+		setModal(true);
 		setTitle("Order for " + orderCtrl.getCurrentOrder().getACustomer().getName());
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -57,13 +61,6 @@ public class OrderReceipt extends JDialog {
 			{
 				JLabel lblNewLabel = new JLabel("Receipt");
 				panel.add(lblNewLabel);
-			}
-		}
-		{
-			{
-				{
-					String a = new String("" + orderCtrl.getCurrentOrder().getTotalPrice());
-				}
 			}
 		}
 		{
@@ -101,7 +98,6 @@ public class OrderReceipt extends JDialog {
 				finishOrderButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						finishInvoice();
-						//TODO finish order
 					}
 				});
 				buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -127,9 +123,7 @@ public class OrderReceipt extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						//TODO cancel window
-						Confirmation.getInstance().setCreated(false);
-						dispose();
+						cancel();
 					}
 				});
 				{
@@ -168,6 +162,7 @@ public class OrderReceipt extends JDialog {
 	private void finishOrder(){
 		try {
 			orderCtrl.finishOrder();
+			finished = true;
 		} catch (EmptyOrderException e) {
 			e.printStackTrace();
 		}
@@ -179,7 +174,9 @@ public class OrderReceipt extends JDialog {
 			Payment dialog = new Payment(orderCtrl);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-			finishOrder();
+			if (dialog.isPaid()) {
+				finishOrder();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -188,5 +185,12 @@ public class OrderReceipt extends JDialog {
 	private void finishInvoice() {
 		finishOrder();
 	}
-
+	
+	public boolean isFinished() {
+		return finished;
+	}
+	
+	private void cancel() {
+		dispose();
+	}
 }

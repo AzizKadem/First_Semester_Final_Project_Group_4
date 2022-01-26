@@ -18,21 +18,23 @@ public class Payment extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	
 	private OrderCtrl orderctrl;
+	private boolean paid;
 	
 
 	/**
 	 * Launch the application.
 	 */
 	public Payment(OrderCtrl ctrl) {
-		setModal(true);
+		paid = false;
 		this.orderctrl = ctrl;
-		initPayment();
+		initGui();
 	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public void initPayment() {
+	private void initGui() {
+		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
@@ -50,7 +52,7 @@ public class Payment extends JDialog {
 				JButton okButton = new JButton("Yes");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						payed();
+						yes();
 					}
 				});
 				okButton.setActionCommand("Yes");
@@ -61,7 +63,7 @@ public class Payment extends JDialog {
 				JButton cancelButton = new JButton("No");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						notPayed();
+						no();
 					}
 				});
 				cancelButton.setActionCommand("No");
@@ -70,14 +72,17 @@ public class Payment extends JDialog {
 		}
 	}
 	
-	public void payed() {
-		Confirmation.getInstance().setCreated(true);
+	private void yes() {
+		paid = true;
 		dispose();
 	}
 	
-	public void notPayed() {
-		Confirmation.getInstance().setCreated(false);
+	private void no() {
 		dispose();
+	}
+	
+	public boolean isPaid() {
+		return paid;
 	}
 
 }

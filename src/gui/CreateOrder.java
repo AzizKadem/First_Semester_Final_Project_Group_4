@@ -45,6 +45,7 @@ public class CreateOrder extends JDialog {
 	private JPanel selectProductsPanel;
 
 	private OrderCtrl orderCtrl;
+	private boolean created;
 	
 	private JTextField phoneField;
 	private JButton btnConfirm;
@@ -390,6 +391,9 @@ public class CreateOrder extends JDialog {
 			OrderReceipt dialog = new OrderReceipt(orderCtrl);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			
+			created = dialog.isFinished();
+			
 			dispose();
 		} 
 		else {
@@ -458,7 +462,6 @@ public class CreateOrder extends JDialog {
     }
     
 	private void cancel() {
-		Confirmation.getInstance().setCreated(false);
 		dispose();
 	}
 	
@@ -476,5 +479,9 @@ public class CreateOrder extends JDialog {
 				lblErrorButton.setText(e.getMessage());
 				phoneField.setBorder(new LineBorder(ColorScheme.BUTTON_HIGHTLIGHT));
 		}
+	}
+	
+	public boolean isCreated() {
+		return created;
 	}
 }
