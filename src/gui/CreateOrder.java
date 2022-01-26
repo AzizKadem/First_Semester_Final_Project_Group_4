@@ -405,6 +405,13 @@ public class CreateOrder extends JDialog {
 	}
 	
 	private void back() {
+		if (currentPanel.equals(selectProductsPanel)) {
+			orderCtrl.cancelOrder();
+		} else {
+			if (currentPanel.equals(phoneNumberPanel)) {
+				phoneField.setText("");
+			}
+		}
 		showPanel(backPath.get(backPath.size() - 2));
 		backPath.remove(backPath.size() - 1);
 		handleButtons();
@@ -414,6 +421,8 @@ public class CreateOrder extends JDialog {
     	if (currentPanel != null) {
     		hidePanel(currentPanel);
     	}
+		
+		
     	
     	panel.setVisible(true);
     	contentPanel.add(panel);
@@ -421,6 +430,10 @@ public class CreateOrder extends JDialog {
     	
     	addToBackPath();
     	handleButtons();
+    	
+		if (currentPanel.equals(selectProductsPanel)) {
+			updateList();
+		}
     }
     
     private void hidePanel(JPanel panel) {
