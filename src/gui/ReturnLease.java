@@ -156,7 +156,9 @@ public class ReturnLease extends JDialog {
 	public void returnLease() 
 	{
 		String phone = textFieldCustomer.getText();
-			
+		
+		created = true;
+		
 		try {
 				int machine = Integer.parseInt(textFieldId.getText());
 				leaseCtrl.searchLease(leaseCtrl.searchCustomer(phone), machine);
@@ -169,7 +171,6 @@ public class ReturnLease extends JDialog {
 				lblError.setText(e.getMessage());
 		} 
 		
-		created = true;
 	}
 	
 	public boolean isCreated()
