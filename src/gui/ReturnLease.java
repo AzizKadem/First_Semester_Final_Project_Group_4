@@ -30,7 +30,8 @@ public class ReturnLease extends JDialog {
 	
 	private LeaseCtrl leaseCtrl;
 	private JLabel lblError;
-
+	private boolean created = false;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -167,6 +168,13 @@ public class ReturnLease extends JDialog {
 		} catch(CustomerNotFoundException | NotCorrectCustomerException | LeaseNotFoundException e) {
 				lblError.setText(e.getMessage());
 		} 
+		
+		created = true;
+	}
+	
+	public boolean isCreated()
+	{
+		return created;
 	}
 
 }

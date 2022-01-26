@@ -239,11 +239,27 @@ public class MainMenu extends JFrame {
 		CreateLease lease = new CreateLease(leaseCtrl);
 		
 		lease.setVisible(true);
+		if(lease.isCreated()) {
+			lblNewLabel.setText("\n Lease was successfully created");
+			lblNewLabel.setVisible(true);
+		}
+		else {
+			lblNewLabel.setText("\n      Your lease was not created      ");
+			lblNewLabel.setVisible(true);
+		}
 	}
 	
 	private void returnLease() {
 		ReturnLease lease = new ReturnLease(leaseCtrl);
 		
 		lease.setVisible(true);
+		if(lease.isCreated()) {
+			lblNewLabel.setText("\n Lease was successfully returned");
+			lblNewLabel.setVisible(true);
+		}
+		else {
+			lblNewLabel.setText("\n      Your lease was not returned      ");
+			lblNewLabel.setVisible(true);
+		}
 	}
 }

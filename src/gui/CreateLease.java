@@ -29,6 +29,7 @@ public class CreateLease extends JDialog {
 	private JLabel lblError = new JLabel("");
 	
 	private LeaseCtrl leaseCtrl;
+	private boolean create = false;
 
 	/**
 	 * Launch the application.
@@ -154,5 +155,12 @@ public class CreateLease extends JDialog {
 		} catch(MachineNotFoundException | CustomerNotFoundException | NotCorrectCustomerException | LeaseNotFoundException e) {
 			lblError.setText(e.getMessage());
 		} 
+		
+		create = true;
+	}
+	
+	public boolean isCreated()
+	{
+		return create;
 	}
 }
