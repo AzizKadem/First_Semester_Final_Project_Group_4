@@ -468,14 +468,13 @@ public class CreateOrder extends JDialog {
 	
 	public void randomCustomer() {
 		try {
-			orderCtrl.createOrder("0");
+			orderCtrl.createOrder("Guest");
 			showSelectProductsPanel();
 			hideSelectCustomerMethodPanel();
 		}
 		catch (CustomerNotFoundException e) {
 				lblErrorButton.setText(e.getMessage());
 				phoneField.setBorder(new LineBorder(ColorScheme.BUTTON_HIGHTLIGHT));
-			}
-		
+		}
 	}
 }
