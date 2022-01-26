@@ -10,6 +10,7 @@ public final class CustomerCont {
 	
 	private CustomerCont() {
 		cust = new ArrayList<>();
+		addCustomer(new Customer("Guest", "Guest", "", "", ""));
 	}
 	/**
 	 * Get instance of the singleton container
