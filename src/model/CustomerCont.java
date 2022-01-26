@@ -71,6 +71,14 @@ public final class CustomerCont {
 			cust.add(customer);
 			return true;
 		}
-		
+	}
+	
+	public boolean removeCustomer(Customer customer) {
+		boolean retVal = false;
+		if(cust.contains(customer)) {
+			cust.remove(customer);
+			retVal = true;
+		}
+		return retVal;
 	}
 }

@@ -20,6 +20,8 @@ public class GenerateData {
 		
 		CustomerCont.getInstance().addCustommer(new Customer("Bob", 
 					"123", "Home", "ThisCity", "0"));
+		CustomerCont.getInstance().addCustommer(new Customer("Guest", 
+				"0", "s", "s", "s"));
 		
 		Item item1 = new Item("Wrench", new Price(new Date(), 50), 40, "Tools", "1");
 		

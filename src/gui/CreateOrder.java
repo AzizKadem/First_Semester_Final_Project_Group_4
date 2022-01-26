@@ -159,6 +159,11 @@ public class CreateOrder extends JDialog {
 				}
 				{
 					JButton btnNewButton_2 = new JButton("Continue as guest");
+					btnNewButton_2.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							randomCustomer();
+						}
+					});
 					verticalBox.add(btnNewButton_2);
 				}
 			}
@@ -459,5 +464,17 @@ public class CreateOrder extends JDialog {
 	
 	public double getTotal() {
 		return orderCtrl.getCurrentOrder().getTotalPrice();
+	}
+	
+	public void randomCustomer() {
+		try {
+			orderCtrl.createOrder("0");
+			showSelectProductsPanel();
+		}
+		catch (CustomerNotFoundException e) {
+				lblErrorButton.setText(e.getMessage());
+				phoneField.setBorder(new LineBorder(ColorScheme.BUTTON_HIGHTLIGHT));
+			}
+		
 	}
 }
