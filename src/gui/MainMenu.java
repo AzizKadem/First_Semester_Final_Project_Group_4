@@ -253,6 +253,7 @@ public class MainMenu extends JFrame {
 		ReturnLease lease = new ReturnLease(leaseCtrl);
 		
 		lease.setVisible(true);
+		
 		if(lease.isCreated()) {
 			lblNewLabel.setText("\n Lease was successfully returned");
 			lblNewLabel.setVisible(true);

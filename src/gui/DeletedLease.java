@@ -22,6 +22,8 @@ public class DeletedLease extends JDialog {
 
 	private LeaseCtrl leaseCtrl = new LeaseCtrl();
 	private Lease l;
+	private boolean created = false;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -39,6 +41,7 @@ public class DeletedLease extends JDialog {
 	 * Create the dialog.
 	 */
 	public DeletedLease(Lease l, LeaseCtrl leaseCtrl) {
+		setModal(true);
 		this.leaseCtrl = leaseCtrl;
 		this.l = l;
 		setBounds(100, 100, 450, 300);
@@ -220,6 +223,11 @@ public class DeletedLease extends JDialog {
 	public void returnLease()
 	{
 		leaseCtrl.removeLease(l);
+		created = true;
 		dispose();
+	}
+	
+	public boolean isCreated() {
+		return created;
 	}
 }
