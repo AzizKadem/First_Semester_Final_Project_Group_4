@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import exceptions.LeaseNotFoundException;
+
 public final class LeaseCont {
 	private ArrayList<Lease> leases;
 	private static LeaseCont instance;
@@ -39,8 +41,9 @@ public final class LeaseCont {
 	 * Search for a lease by id
 	 * @param id The id the lease is searched by
 	 * @return Found lease, null if not found
+	 * @throws LeaseNotFoundException 
 	 */
-	public Lease searchLease(int id) {
+	public Lease searchLease(int id) throws LeaseNotFoundException  {
 		boolean found = false;
 		Lease retVal = null;
 		for(int i = 0; i < leases.size() && !found; i++ ) {
@@ -48,6 +51,10 @@ public final class LeaseCont {
 				found = true;
 				retVal = leases.get(i);
 			}
+		}
+		if (retVal == null)
+		{
+			throw new LeaseNotFoundException();
 		}
 		return retVal;
 	}
@@ -77,5 +84,23 @@ public final class LeaseCont {
 		for(Lease element: leases) {
 			leases.remove(element);
 		}
+	}
+	
+	/**
+	 * Checks whether the lease matches the customer
+	 * @param c the customer to search for
+	 * @param l the lease to check if it contains the customer
+	 * @return true if the customer matches with the lease and false in case it doesn't
+	 */
+	public boolean checkForCustomer(Customer c, Lease l)
+	{
+		boolean x = false;
+		
+		if(l.getCustomer().equals(c))
+		{
+			x = true;
+		}
+		
+		return x;
 	}
 }

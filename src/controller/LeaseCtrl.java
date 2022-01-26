@@ -1,7 +1,9 @@
 package controller;
 
 import exceptions.CustomerNotFoundException;
+import exceptions.LeaseNotFoundException;
 import exceptions.MachineNotFoundException;
+import exceptions.NotCorrectCustomerException;
 import model.Customer;
 import model.Lease;
 import model.LeaseCont;
@@ -41,9 +43,18 @@ public class LeaseCtrl {
 	 * Search lease by id
 	 * @param id The id the lease is searched by
 	 * @return found lease
+	 * @throws NotCorrectCustomerException 
+	 * @throws LeaseNotFoundException 
 	 */
-	public Lease searchLease(int id) {
-		return LeaseCont.getInstance().searchLease(id);
+	public Lease searchLease(Customer c, int id) throws NotCorrectCustomerException, LeaseNotFoundException {
+		Lease lease = LeaseCont.getInstance().searchLease(id);
+		
+		if(!LeaseCont.getInstance().checkForCustomer(c, lease))
+		{
+			throw new NotCorrectCustomerException();
+		}
+		
+		return lease;
 	}
 	
 	/**

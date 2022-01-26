@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
+import controller.LeaseCtrl;
+
 
 public class MainMenu extends JFrame {
 	/**
@@ -26,6 +28,7 @@ public class MainMenu extends JFrame {
 	private JPanel ordersPanel;
 	private JPanel leasesPanel;
 	private JLabel lblNewLabel;
+	private LeaseCtrl leaseCtrl = new LeaseCtrl();
 	
 	/**
 	 * Launch the application.
@@ -233,13 +236,13 @@ public class MainMenu extends JFrame {
 	}
 	
 	private void createLease() {
-		CreateLease lease = new CreateLease();
+		CreateLease lease = new CreateLease(leaseCtrl);
 		
 		lease.setVisible(true);
 	}
 	
 	private void returnLease() {
-		ReturnLease lease = new ReturnLease();
+		ReturnLease lease = new ReturnLease(leaseCtrl);
 		
 		lease.setVisible(true);
 	}

@@ -16,7 +16,9 @@ import javax.swing.border.EmptyBorder;
 
 import controller.LeaseCtrl;
 import exceptions.CustomerNotFoundException;
+import exceptions.LeaseNotFoundException;
 import exceptions.MachineNotFoundException;
+import exceptions.NotCorrectCustomerException;
 
 
 public class CreateLease extends JDialog {
@@ -33,7 +35,7 @@ public class CreateLease extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			CreateLease dialog = new CreateLease();
+			CreateLease dialog = new CreateLease(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -44,8 +46,8 @@ public class CreateLease extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public CreateLease() {
-		leaseCtrl = new LeaseCtrl();
+	public CreateLease(LeaseCtrl leaseCtrl) {
+		this.leaseCtrl = leaseCtrl;
 		
 		setModal(true);
 		setTitle("Create Lease");
@@ -144,12 +146,12 @@ public class CreateLease extends JDialog {
 		try {
 			int machine = Integer.parseInt(textFieldMachine.getText());
 			leaseCtrl.confirmLease(leaseCtrl.searchCustomer(phone), leaseCtrl.searchMachine(machine));
-			LeaseCreated created = new LeaseCreated(leaseCtrl.searchLease(machine));
+			LeaseCreated created = new LeaseCreated(leaseCtrl.searchLease(leaseCtrl.searchCustomer(phone), machine));
 			dispose();
 			created.setVisible(true);
 		} catch(NumberFormatException e) {
 			lblError.setText("The machine id must be a number.");
-		} catch(MachineNotFoundException | CustomerNotFoundException e) {
+		} catch(MachineNotFoundException | CustomerNotFoundException | NotCorrectCustomerException | LeaseNotFoundException e) {
 			lblError.setText(e.getMessage());
 		} 
 	}

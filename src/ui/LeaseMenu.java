@@ -2,7 +2,10 @@ package ui;
 
 import controller.LeaseCtrl;
 import exceptions.CustomerNotFoundException;
+import exceptions.LeaseNotFoundException;
 import exceptions.MachineNotFoundException;
+import exceptions.NotCorrectCustomerException;
+import model.Customer;
 import model.Lease;
 
 public class LeaseMenu extends Menu{
@@ -35,7 +38,7 @@ public class LeaseMenu extends Menu{
 				}
 				break;
 			case 2:
-				returnLease(input.inputInt("Input Machine ID"));
+				returnLease(input.inputString("Input Customer Phone Number"), input.inputInt("Input Machine ID"));
 				break;
 		}
 	}
@@ -77,26 +80,30 @@ public class LeaseMenu extends Menu{
 	 * @param machineID The machine id
 	 * @return True if the returning was successful
 	 */
-	public boolean returnLease(int machineID) {
+	public boolean returnLease(String phone, int machineID) {
 		boolean retVal = false;
-		Lease l = leaseCtrl.searchLease(machineID);
-		if(l != null) {
-			System.out.println("Lease found");
-			l.printLeaseInfo();
-			//display info about lease
-			String answ = input.inputString("Confirm return of the machine y/n");
-			if(answ.equals("y")) {
-				l.getMachine().setLeased(false);
-				leaseCtrl.removeLease(l);
-				retVal = true;
-				System.out.println("Machine returned succesfully");
+		try {
+			Lease l = leaseCtrl.searchLease(leaseCtrl.searchCustomer(phone), machineID);
+			if(l != null) {
+				System.out.println("Lease found");
+				l.printLeaseInfo();
+				//display info about lease
+				String answ = input.inputString("Confirm return of the machine y/n");
+				if(answ.equals("y")) {
+					l.getMachine().setLeased(false);
+					leaseCtrl.removeLease(l);
+					retVal = true;
+					System.out.println("Machine returned succesfully");
+				}
+				else {
+					System.out.println("Machine not returned");
+				}
 			}
 			else {
-				System.out.println("Machine not returned");
+				System.out.println("System was not able to find the lease, try again!");
 			}
-		}
-		else {
-			System.out.println("System was not able to find the lease, try again!");
+		} catch(NotCorrectCustomerException | CustomerNotFoundException | LeaseNotFoundException e) {
+			System.out.println(e.getMessage());
 		}
 		return retVal;
 	}

@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import controller.LeaseCtrl;
 import exceptions.CustomerNotFoundException;
+import exceptions.LeaseNotFoundException;
 import exceptions.MachineNotFoundException;
+import exceptions.NotCorrectCustomerException;
 import model.Customer;
 import model.CustomerCont;
 import model.Lease;
@@ -48,26 +50,26 @@ class LeaseCtrlTest {
 	}
 
 	@Test
-	void testSearchLease() {
+	void testSearchLease() throws NotCorrectCustomerException, LeaseNotFoundException {
 		Lease l = new Lease(c, m);
 		LeaseCont.getInstance().addLease(l);
-		assertEquals(l, ctrl.searchLease(1));
+		assertEquals(l, ctrl.searchLease(c, 1));
 	}
 	
 
 
 	@Test
-	void testConfirmLease() {
+	void testConfirmLease() throws NotCorrectCustomerException, LeaseNotFoundException {
 		assertEquals(true, ctrl.confirmLease(c, m));
-		assertEquals(m ,ctrl.searchLease(1).getMachine());
+		assertEquals(m ,ctrl.searchLease(c, 1).getMachine());
 		LeaseCont.getInstance().emptyContainer();
-		ctrl.removeLease(ctrl.searchLease(1));
+		ctrl.removeLease(ctrl.searchLease(c, 1));
 	}
 	
 	@Test
-	void testRemoveLease() {
+	void testRemoveLease() throws NotCorrectCustomerException, LeaseNotFoundException {
 		ctrl.confirmLease(c, m);
-		ctrl.removeLease(ctrl.searchLease(1));
+		ctrl.removeLease(ctrl.searchLease(c, 1));
 		assertEquals(0, LeaseCont.getInstance().getContainerSize());
 	}
 
