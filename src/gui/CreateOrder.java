@@ -470,6 +470,7 @@ public class CreateOrder extends JDialog {
 		try {
 			orderCtrl.createOrder("0");
 			showSelectProductsPanel();
+			hideSelectCustomerMethodPanel();
 		}
 		catch (CustomerNotFoundException e) {
 				lblErrorButton.setText(e.getMessage());

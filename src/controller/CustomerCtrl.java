@@ -18,4 +18,21 @@ public class CustomerCtrl {
 	public Customer searchCustomer(String phone) throws CustomerNotFoundException {
 		return CustomerCont.getInstance().searchCustomer(phone);
 	}
+
+	/**
+	 * Create a new customer
+	 * @return True if the creation was successful
+	 */
+	public boolean createNewCustomer(String name, String phoneNumber,
+			String address, String city, String zipCode) {
+		boolean retVal = false;
+
+		Customer newCustomer = new Customer(name, phoneNumber, address, city, zipCode);
+
+		if (CustomerCont.getInstance().addCustomer(newCustomer)) {
+			retVal = true;
+		}
+
+		return retVal;
+	}
 }

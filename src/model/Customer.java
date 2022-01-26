@@ -24,7 +24,7 @@ public class Customer {
 		this.city = city;
 		this.zipCode = zipCode;
 	}
-	
+
 	/**
 	 * Get name of the customer
 	 * 
