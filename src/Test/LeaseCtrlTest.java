@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import controller.LeaseCtrl;
 import exceptions.CustomerNotFoundException;
 import exceptions.LeaseNotFoundException;
+import exceptions.MachineAlreadyLeasedException;
 import exceptions.MachineNotFoundException;
 import exceptions.NotCorrectCustomerException;
 import model.Customer;
@@ -59,7 +60,7 @@ class LeaseCtrlTest {
 
 
 	@Test
-	void testConfirmLease() throws NotCorrectCustomerException, LeaseNotFoundException {
+	void testConfirmLease() throws NotCorrectCustomerException, LeaseNotFoundException, MachineAlreadyLeasedException {
 		assertEquals(true, ctrl.confirmLease(c, m));
 		assertEquals(m ,ctrl.searchLease(c, 1).getMachine());
 		LeaseCont.getInstance().emptyContainer();
@@ -67,7 +68,7 @@ class LeaseCtrlTest {
 	}
 	
 	@Test
-	void testRemoveLease() throws NotCorrectCustomerException, LeaseNotFoundException {
+	void testRemoveLease() throws NotCorrectCustomerException, LeaseNotFoundException, MachineAlreadyLeasedException {
 		ctrl.confirmLease(c, m);
 		ctrl.removeLease(ctrl.searchLease(c, 1));
 		assertEquals(0, LeaseCont.getInstance().getContainerSize());

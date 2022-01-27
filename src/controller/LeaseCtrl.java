@@ -2,6 +2,7 @@ package controller;
 
 import exceptions.CustomerNotFoundException;
 import exceptions.LeaseNotFoundException;
+import exceptions.MachineAlreadyLeasedException;
 import exceptions.MachineNotFoundException;
 import exceptions.NotCorrectCustomerException;
 import model.Customer;
@@ -62,11 +63,19 @@ public class LeaseCtrl {
 	 * @param c A customer who is leasing
 	 * @param m A machine that is being leased
 	 * @return True if the lease was successful
+	 * @throws MachineAlreadyLeasedException 
 	 */
-	public boolean confirmLease(Customer c, Machine m) {
-		Lease l = new Lease(c, m);
-		m.setLeased(true);
-		return LeaseCont.getInstance().addLease(l);
+	public boolean confirmLease(Customer c, Machine m) throws MachineAlreadyLeasedException {
+		boolean retVal;
+		if(!m.isLeased()) {
+			Lease l = new Lease(c, m);
+			m.setLeased(true);
+			retVal = LeaseCont.getInstance().addLease(l);
+		}
+		else {
+			throw new MachineAlreadyLeasedException();
+		}
+		return retVal;
 	}
 	
 	/**

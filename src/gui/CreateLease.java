@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 import controller.LeaseCtrl;
 import exceptions.CustomerNotFoundException;
 import exceptions.LeaseNotFoundException;
+import exceptions.MachineAlreadyLeasedException;
 import exceptions.MachineNotFoundException;
 import exceptions.NotCorrectCustomerException;
 
@@ -152,7 +153,7 @@ public class CreateLease extends JDialog {
 			created.setVisible(true);
 		} catch(NumberFormatException e) {
 			lblError.setText("The machine id must be a number.");
-		} catch(MachineNotFoundException | CustomerNotFoundException | NotCorrectCustomerException | LeaseNotFoundException e) {
+		} catch(MachineNotFoundException | CustomerNotFoundException | NotCorrectCustomerException | LeaseNotFoundException | MachineAlreadyLeasedException e) {
 			lblError.setText(e.getMessage());
 		} 
 		

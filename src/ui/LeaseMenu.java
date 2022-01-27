@@ -3,6 +3,7 @@ package ui;
 import controller.LeaseCtrl;
 import exceptions.CustomerNotFoundException;
 import exceptions.LeaseNotFoundException;
+import exceptions.MachineAlreadyLeasedException;
 import exceptions.MachineNotFoundException;
 import exceptions.NotCorrectCustomerException;
 import model.Customer;
@@ -69,7 +70,7 @@ public class LeaseMenu extends Menu{
 				System.out.println(e.getMessage());
 			}
 			
-		} catch (CustomerNotFoundException e) {
+		} catch (CustomerNotFoundException | MachineAlreadyLeasedException e) {
 			System.out.println(e.getMessage());
 		}
 		return retVal;
