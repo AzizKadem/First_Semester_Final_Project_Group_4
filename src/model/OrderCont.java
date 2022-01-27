@@ -52,4 +52,19 @@ public class OrderCont {
 	public void emptyContainer() {
 		orders.clear();
 	}
+
+	/**
+	 * Returns the number of orders made by a customer with the specific phone number
+	 * @param phone the phone number of the customer to search for
+	 * @return the number of orders
+	 */
+	public int getNumberOfOrdersByCustomer(String phone) {
+		int i = 0;
+		for(Order order:orders) {
+			if(order.getACustomer().getPhoneNumber().equals(phone)) {
+				i++;
+			}
+		}
+		return i;
+	}
 }

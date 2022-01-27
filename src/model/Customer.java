@@ -114,4 +114,12 @@ public class Customer {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
+	
+	/**
+	 * Returns the number of orders made by this customer
+	 * @return the number of orders
+	 */
+	public int getNumberOfOrders() {
+		return OrderCont.getInstance().getNumberOfOrdersByCustomer(phoneNumber);
+	}
 }

@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import controller.LeaseCtrl;
+import controller.StaffCtrl;
 import model.LeaseCont;
 
 
@@ -28,8 +29,10 @@ public class MainMenu extends JFrame {
 	private JPanel contentPane;
 	private JPanel ordersPanel;
 	private JPanel leasesPanel;
+	private JPanel statisticsPanel;
 	private JLabel lblNewLabel;
 	private LeaseCtrl leaseCtrl = new LeaseCtrl();
+	private StaffCtrl staffCtrl = new StaffCtrl();
 	
 	/**
 	 * Launch the application.
@@ -150,6 +153,27 @@ public class MainMenu extends JFrame {
 		
 		splitPane.setRightComponent(interactivePanel);
 		
+		statisticsPanel = new JPanel();
+		interactivePanel.add(statisticsPanel);
+		
+		Box verticalBox_1_1 = Box.createVerticalBox();
+		statisticsPanel.add(verticalBox_1_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Statistics");
+		lblNewLabel_1_1.setAlignmentX(0.1f);
+		verticalBox_1_1.add(lblNewLabel_1_1);
+		
+		Component verticalStrut_1_1 = Box.createVerticalStrut(5);
+		verticalBox_1_1.add(verticalStrut_1_1);
+		
+		JButton btnNewButton_2_1 = new JButton("Generate statistics");
+		btnNewButton_2_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				generateStatistics();
+			}
+		});
+		verticalBox_1_1.add(btnNewButton_2_1);
+		
 		Box verticalBox_3 = Box.createVerticalBox();
 		interactivePanel.add(verticalBox_3);
 		
@@ -190,6 +214,18 @@ public class MainMenu extends JFrame {
 		btnLeases.setAlignmentX(0.5f);
 		verticalBox.add(btnLeases);
 		
+		Component verticalStrut_4 = Box.createVerticalStrut(10);
+		verticalBox.add(verticalStrut_4);
+		
+		JButton btnStatistics = new JButton("Statistics");
+		btnStatistics.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showStatistics();
+			}
+		});
+		btnStatistics.setAlignmentX(0.5f);
+		verticalBox.add(btnStatistics);
+		
 	}
 	
 	/**
@@ -211,11 +247,21 @@ public class MainMenu extends JFrame {
 	}
 	
 	/**
+	 * Show orders menu
+	 */
+	private void showStatistics() {
+		hidePanels();
+		lblNewLabel.setVisible(false);
+		statisticsPanel.setVisible(true);
+	}
+	
+	/**
 	 * Hide all menu panels
 	 */
 	private void hidePanels() {
 		ordersPanel.setVisible(false);
 		leasesPanel.setVisible(false);
+		statisticsPanel.setVisible(false);
 	}
 	
 	/**
@@ -236,6 +282,9 @@ public class MainMenu extends JFrame {
 		}
 	}
 	
+	/**
+	 * Handles lease creation
+	 */
 	private void createLease() {
 		CreateLease lease = new CreateLease(leaseCtrl);
 		
@@ -248,9 +297,12 @@ public class MainMenu extends JFrame {
 			lblNewLabel.setText("\n      Your lease was not created      ");
 			lblNewLabel.setVisible(true);
 		}
-		System.out.println(LeaseCont.getInstance().getContainerSize());
+		//System.out.println(LeaseCont.getInstance().getContainerSize());
 	}
 	
+	/**
+	 * Handles lease return
+	 */
 	private void returnLease() {
 		ReturnLease lease = new ReturnLease(leaseCtrl);
 		
@@ -264,6 +316,14 @@ public class MainMenu extends JFrame {
 			lblNewLabel.setText("\n      Your lease was not returned      ");
 			lblNewLabel.setVisible(true);
 		}
-		System.out.println(LeaseCont.getInstance().getContainerSize());
+		//System.out.println(LeaseCont.getInstance().getContainerSize());
+	}
+	
+	/**
+	 * Handles statistics generation
+	 */
+	private void generateStatistics() {
+		GenerateStatistics stat = new GenerateStatistics(staffCtrl);
+		stat.setVisible(true);
 	}
 }

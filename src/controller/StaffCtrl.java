@@ -1,15 +1,19 @@
 package controller;
 
+import java.util.ArrayList;
+
+import model.Customer;
 import model.Staff;
 import model.StaffCont;
-import java.util.ArrayList;
 
 public class StaffCtrl {
 	private static Staff loged;	
+	private CustomerCtrl customerCtrl;
 	
 	public StaffCtrl() {
 		//for now
 		loged = new Staff(0, "worker", "1234", "admin", "password", true);
+		customerCtrl = new CustomerCtrl();
 	}
 	
 	/**
@@ -44,5 +48,9 @@ public class StaffCtrl {
 	 */
 	public ArrayList<Staff> getStaffList() {
 		return StaffCont.getInstance().getStaffList();
+	}
+	
+	public ArrayList<Customer> generateCustomerStatistics() {
+		return customerCtrl.getCustomers();
 	}
 }

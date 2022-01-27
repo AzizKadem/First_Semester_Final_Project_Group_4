@@ -82,4 +82,11 @@ public final class CustomerCont {
 		}
 		return retVal;
 	}
+	
+	/**
+	 * @return a list of customers
+	 */
+	public ArrayList<Customer> getCustomerList() {
+		return new ArrayList<>(cust);
+	}
 }

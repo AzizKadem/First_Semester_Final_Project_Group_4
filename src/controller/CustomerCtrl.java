@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import exceptions.CustomerNotFoundException;
 import model.Customer;
 import model.CustomerCont;
@@ -34,5 +36,12 @@ public class CustomerCtrl {
 		}
 
 		return retVal;
+	}
+	
+	/**
+	 * @return a list of customers
+	 */
+	public ArrayList<Customer> getCustomers() {
+		return CustomerCont.getInstance().getCustomerList();
 	}
 }
