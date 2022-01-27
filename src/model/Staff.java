@@ -9,23 +9,66 @@ public class Staff {
 	private String phoneNumber;
 	private String CPR;
 	private String address;
+
+	private String password;
+	private String userName;
 	
+	private boolean isManager;
 
 	/**
-	 * @param workerID
-	 * @param name
-	 * @param cPR
+	 * Staff constructor
 	 */
-	public Staff(int workerID, String name, String cPR) {
-		super();
+	public Staff(int workerID, String name, String cPR, String userName,
+			String password, boolean isManager) {
 		this.workerID = workerID;
 		this.name = name;
+		
+		this.password = password;
+		this.userName = userName;
+
+		this.isManager = isManager;
 		CPR = cPR;
 		total = 0;
 	}
+
+	/**
+	 * Set new log in password
+	 * @param userName the name of the user
+	 * @param oldPassword the password to be changed
+	 * @param newPassword the new password
+	 */
+	public boolean setNewPassword(String userName, String oldPassword, String newPassword) {
+		boolean retVal = false;
+
+		if (checkLogIn(userName, oldPassword)) {
+			password = newPassword;
+			retVal = true;
+		}
+		
+		return retVal;
+	}
+
+	/**
+	 * Check if the log in is correct
+	 * @param userName The user name
+	 * @param password The password
+	 * @return True if the user name and the password are correct
+	 */
+	public boolean checkLogIn(String userName, String password) {
+		boolean retVal = false;
+
+		if (this.password.equals(password)) {
+			if (this.userName.equals(userName)) {
+				retVal = true;
+			}
+		}
+
+		return retVal;
+	}
 	
 	/**
-	 * @param amount
+	 * Add to total by amount
+	 * @param amount The amount to be added to the total
 	 */
 	public void updateTotal(double amount) {
 		total = total + amount;
@@ -93,6 +136,10 @@ public class Staff {
 	public String getAddress() {
 		return address;
 	}
+	
+	public boolean isManager() {
+		return isManager;
+	}
 
 	/**
 	 * @param address
@@ -113,5 +160,9 @@ public class Staff {
 	 */
 	public void setTotal(double total) {
 		this.total = total;
+	}
+	
+	public void setIsManager(boolean isManager) {
+		this.isManager = isManager;
 	}
 }

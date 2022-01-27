@@ -5,7 +5,7 @@ public class Employee extends Staff{
 	
 	public Employee(int workerID, String name, String cPR) {
 		// TODO Auto-generated constructor stub
-		super(workerID, name, cPR);
+		super(workerID, name, cPR, "" ,"", false);
 	}
 
 	/**

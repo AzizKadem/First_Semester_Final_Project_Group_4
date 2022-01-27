@@ -5,7 +5,7 @@ public class Manager extends Staff{
 	
 	public Manager(int workerID, String name, String cPR) {
 		// TODO Auto-generated constructor stub
-		super(workerID, name, cPR);
+		super(workerID, name, cPR, "", "", false);
 	}
 
 	/**
