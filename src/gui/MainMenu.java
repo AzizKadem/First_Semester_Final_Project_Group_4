@@ -84,9 +84,9 @@ public class MainMenu extends JFrame {
 		Box verticalBox_1 = Box.createVerticalBox();
 		ordersPanel.add(verticalBox_1);
 		
-		JLabel lblNewLabel_1 = new JLabel("Orders");
-		lblNewLabel_1.setAlignmentX(0.1f);
-		verticalBox_1.add(lblNewLabel_1);
+		JLabel lblOrders = new JLabel("Orders     ");
+		lblOrders.setAlignmentX(0.1f);
+		verticalBox_1.add(lblOrders);
 		
 		JButton btnNewButton_2 = new JButton("Create order");
 		btnNewButton_2.addActionListener(new ActionListener() {
