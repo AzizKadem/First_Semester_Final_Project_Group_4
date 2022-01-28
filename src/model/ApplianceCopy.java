@@ -71,4 +71,8 @@ public class ApplianceCopy {
 	public void setStock(int stock) {
 	    this.stock = stock;
 	}
+	
+	public int getNumberOfOrders() {
+		return OrderCont.getInstance().getNumberOfProductsSold(ProductCont.getInstance().searchProduct(barcode));
+	}
 }

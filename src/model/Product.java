@@ -57,4 +57,9 @@ public abstract class Product {
 	
 	public abstract void addToStock(int stock, ApplianceCopy copy);
 	
+	/**
+	 * @return the number of products sold all in all
+	 */
+	public abstract int getNumberOfOrders();
+	
 }

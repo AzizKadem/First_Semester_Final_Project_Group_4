@@ -324,7 +324,7 @@ public class MainMenu extends JFrame {
 	 * Handles statistics generation
 	 */
 	private void generateStatistics() {
-		GenerateStatistics stat = new GenerateStatistics(staffCtrl);
+		GenerateStatistics stat = new GenerateStatistics();
 		stat.setVisible(true);
 	}
 }

@@ -3,16 +3,18 @@ package controller;
 import java.util.ArrayList;
 
 import model.Customer;
+import model.Product;
 import model.Staff;
 import model.StaffCont;
 
 public class StaffCtrl {
 	private static Staff loged;	
 	private CustomerCtrl customerCtrl;
+	private ProductCtrl productCtrl;
 	
 	public StaffCtrl() {
 		//for now
-		
+		productCtrl = new ProductCtrl();
 		customerCtrl = new CustomerCtrl();
 	}
 	
@@ -50,7 +52,19 @@ public class StaffCtrl {
 		return StaffCont.getInstance().getStaffList();
 	}
 	
+	/**
+	 * Return a list of all the customers for the statistics
+	 * @return a list of customers
+	 */
 	public ArrayList<Customer> generateCustomerStatistics() {
 		return customerCtrl.getCustomers();
+	}
+	
+	/**
+	 * Return a list of all the products for the statistics
+	 * @return a list of products
+	 */
+	public ArrayList<Product> generateProductStatistics() {
+		return productCtrl.getProducts();
 	}
 }

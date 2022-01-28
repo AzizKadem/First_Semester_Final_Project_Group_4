@@ -64,4 +64,11 @@ public class ProductCont {
 	public void emptyContainer() {
 		products.clear();
 	}
+	
+	/**
+	 * @return a list of products
+	 */
+	public ArrayList<Product> getProducts() {
+		return new ArrayList<>(products);
+	}
 }

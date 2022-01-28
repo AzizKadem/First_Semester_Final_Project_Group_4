@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import javax.print.attribute.standard.Copies;
+
 public class Appliance extends SingleProduct {
 	private int generation;
 	private int waranty;
@@ -95,5 +97,14 @@ public class Appliance extends SingleProduct {
 	@Override
 	public void addToStock(int stock, ApplianceCopy copy) {
 		copy.setStock(copy.getStock() + stock);
+	}
+
+	@Override
+	public int getNumberOfOrders() {
+		int number = 0;
+		for(ApplianceCopy copy:applianceCopies) {
+			number += copy.getNumberOfOrders();
+		}
+		return number;
 	}
 }

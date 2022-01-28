@@ -175,5 +175,10 @@ public class Packages extends Product {
 			element.getaProduct().addToStock(element.getQuantity()*stock, element.getaCopy());
 		}
 	}
+
+	@Override
+	public int getNumberOfOrders() {
+		return OrderCont.getInstance().getNumberOfProductsSold(ProductCont.getInstance().searchProduct(barcode));
+	}
 	
 }

@@ -67,4 +67,17 @@ public class OrderCont {
 		}
 		return i;
 	}
+	
+	/**
+	 * Gets quantity of products in orders
+	 * @param aProduct the product to search for
+	 * @return the quantity of sales
+	 */
+	public int getNumberOfProductsSold(Product aProduct) {
+		int i = 0;
+		for(Order element:orders) {
+			i += element.getQuantityOfOrderLine(aProduct);
+		}
+		return i;
+	}
 }

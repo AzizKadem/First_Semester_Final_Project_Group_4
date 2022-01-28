@@ -1,5 +1,7 @@
 package model;
 
+import javax.print.attribute.standard.Copies;
+
 public class Item extends SingleProduct {
 	private String barcode;
 	private String category;
@@ -40,6 +42,11 @@ public class Item extends SingleProduct {
 	@Override
 	public void addToStock(int stock, ApplianceCopy copy) {
 		this.stock += stock;		
+	} 
+
+	@Override
+	public int getNumberOfOrders() {
+		return OrderCont.getInstance().getNumberOfProductsSold(ProductCont.getInstance().searchProduct(barcode));
 	}
 
 }

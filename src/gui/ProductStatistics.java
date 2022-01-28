@@ -16,9 +16,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.StaffCtrl;
-import model.Customer;
+import model.Product;
 
-public class CustomerStatistics extends JDialog {
+public class ProductStatistics extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private StaffCtrl staffCtrl = new StaffCtrl();
@@ -29,7 +29,7 @@ public class CustomerStatistics extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			CustomerStatistics dialog = new CustomerStatistics();
+			ProductStatistics dialog = new ProductStatistics();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -40,7 +40,7 @@ public class CustomerStatistics extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public CustomerStatistics() {
+	public ProductStatistics() {
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -53,7 +53,7 @@ public class CustomerStatistics extends JDialog {
 			flowLayout.setAlignment(FlowLayout.LEFT);
 			contentPanel.add(panel, BorderLayout.NORTH);
 			{
-				JLabel lblNewLabel = new JLabel("Customer Statistics");
+				JLabel lblNewLabel = new JLabel("Product Statistics");
 				panel.add(lblNewLabel);
 			}
 		}
@@ -100,14 +100,14 @@ public class CustomerStatistics extends JDialog {
 	private void initializeTable() {
 			DefaultTableModel myTableModel = new DefaultTableModel();
 			
-			List<Customer> list =staffCtrl.generateCustomerStatistics();
+			List<Product> list =staffCtrl.generateProductStatistics();
 			
 			myTableModel.addColumn("Name");
-			myTableModel.addColumn("Phone number");
-			myTableModel.addColumn("Number of orders");
+			myTableModel.addColumn("Stock");
+			myTableModel.addColumn("Sold");
 			
-			for (Customer element : list) {
-				myTableModel.addRow(new Object[] {element.getName(), element.getPhoneNumber(),
+			for (Product element : list) {
+				myTableModel.addRow(new Object[] {element.getName(), element.getStock(),
 						element.getNumberOfOrders()});
 			}
 			

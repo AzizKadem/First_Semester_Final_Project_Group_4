@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.Appliance;
 import model.Item;
 import model.Packages;
@@ -50,5 +52,12 @@ public class ProductCtrl {
 		}
 
 		return retVal;
+	}
+	
+	/**
+	 * @return a list of products
+	 */
+	public ArrayList<Product> getProducts() {
+		return ProductCont.getInstance().getProducts();
 	}
 }
