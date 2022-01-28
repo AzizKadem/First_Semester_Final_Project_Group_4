@@ -422,8 +422,6 @@ public class CreateOrder extends JDialog {
     	if (currentPanel != null) {
     		hidePanel(currentPanel);
     	}
-		
-		
     	
     	panel.setVisible(true);
     	contentPanel.add(panel);

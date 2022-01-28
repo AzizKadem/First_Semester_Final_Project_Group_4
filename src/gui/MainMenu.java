@@ -234,7 +234,6 @@ public class MainMenu extends JFrame {
 	 */
 	private void showOrders() {
 		hidePanels();
-		lblNewLabel.setVisible(false);
 		ordersPanel.setVisible(true);
 	}
 	
@@ -243,7 +242,6 @@ public class MainMenu extends JFrame {
 	 */
 	private void showLeases() {
 		hidePanels();
-		lblNewLabel.setVisible(false);
 		leasesPanel.setVisible(true);
 	}
 	
@@ -252,7 +250,6 @@ public class MainMenu extends JFrame {
 	 */
 	private void showStatistics() {
 		hidePanels();
-		lblNewLabel.setVisible(false);
 		statisticsPanel.setVisible(true);
 	}
 	
@@ -260,6 +257,8 @@ public class MainMenu extends JFrame {
 	 * Hide all menu panels
 	 */
 	private void hidePanels() {
+		lblNewLabel.setVisible(false);
+		
 		ordersPanel.setVisible(false);
 		leasesPanel.setVisible(false);
 		statisticsPanel.setVisible(false);
