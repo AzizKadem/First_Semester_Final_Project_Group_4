@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import exceptions.CustomerAlreadyExistsException;
 import exceptions.CustomerNotFoundException;
 import model.Customer;
 import model.CustomerCont;
@@ -24,17 +25,25 @@ public class CustomerCtrl {
 	/**
 	 * Create a new customer
 	 * @return True if the creation was successful
+	 * @throws CustomerAlreadyExistsException 
 	 */
 	public boolean createNewCustomer(String name, String phoneNumber,
-			String address, String city, String zipCode) {
+			String address, String city, String zipCode) throws CustomerAlreadyExistsException {
 		boolean retVal = false;
+		
+		try {
+			CustomerCont.getInstance().searchCustomer(phoneNumber);
+			
+			throw new CustomerAlreadyExistsException();
+			
+		} catch (CustomerNotFoundException e) {
+			Customer newCustomer = new Customer(name, phoneNumber, address, city, zipCode);
+			
 
-		Customer newCustomer = new Customer(name, phoneNumber, address, city, zipCode);
-
-		if (CustomerCont.getInstance().addCustomer(newCustomer)) {
-			retVal = true;
+			if (CustomerCont.getInstance().addCustomer(newCustomer)) {
+					retVal = true;
+			}
 		}
-
 		return retVal;
 	}
 	
