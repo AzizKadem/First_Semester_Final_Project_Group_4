@@ -14,15 +14,19 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import controller.StaffCtrl;
 import model.Customer;
+import model.Staff;
+
+import javax.swing.JTable;
 
 public class CustomerStatistics extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JList<Customer> list = new JList<>();
 	private StaffCtrl staffCtrl;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -70,7 +74,10 @@ public class CustomerStatistics extends JDialog {
 			JScrollPane scrollPane = new JScrollPane();
 			contentPanel.add(scrollPane, BorderLayout.CENTER);
 			{
-				scrollPane.setViewportView(list);
+				table = new JTable();
+				table.setBackground(ColorScheme.BACKGROUND);
+				table.setDefaultEditor(Object.class, null);
+				scrollPane.setViewportView(table);
 			}
 		}
 		{
@@ -88,22 +95,27 @@ public class CustomerStatistics extends JDialog {
 				buttonPane.add(backButton);
 			}
 		}
-		initializeList();
+		initializeTable();
 	}
 
 	private void close() {
 		dispose();
-	}
+	}	
 	
-	private void initializeList() {
-		StatisticsCellRenderer cellRenderer = new StatisticsCellRenderer();
-		list.setCellRenderer(cellRenderer);
-		
-		DefaultListModel<Customer> listRepresentation = new DefaultListModel<>();
-		List<Customer> customers = staffCtrl.generateCustomerStatistics();
-		for(Customer element:customers) {
-			listRepresentation.addElement(element);
-		}
-		list.setModel(listRepresentation);
+	private void initializeTable() {
+			DefaultTableModel myTableModel = new DefaultTableModel();
+			
+			List<Customer> list =staffCtrl.generateCustomerStatistics();
+			
+			myTableModel.addColumn("Name");
+			myTableModel.addColumn("Phone number");
+			myTableModel.addColumn("Number of orders");
+			
+			for (Customer element : list) {
+				myTableModel.addRow(new Object[] {element.getName(), element.getPhoneNumber(),
+						element.getNumberOfOrders()});
+			}
+			
+			table.setModel(myTableModel);
 	}
 }
