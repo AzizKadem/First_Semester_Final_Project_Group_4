@@ -89,7 +89,7 @@ public class StaffStatistics extends JDialog {
 		
 		myTableModel.addColumn("Name");
 		myTableModel.addColumn("ID");
-		myTableModel.addColumn("Money made");
+		myTableModel.addColumn("Revenue");
 		
 		for (Staff element : list) {
 			myTableModel.addRow(new Object[] {element.getName(), element.getWorkerID(),
