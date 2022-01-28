@@ -154,6 +154,7 @@ public class MainMenu extends JFrame {
 		splitPane.setRightComponent(interactivePanel);
 		
 		statisticsPanel = new JPanel();
+		statisticsPanel.setBackground(ColorScheme.BACKGROUND);
 		interactivePanel.add(statisticsPanel);
 		
 		Box verticalBox_1_1 = Box.createVerticalBox();

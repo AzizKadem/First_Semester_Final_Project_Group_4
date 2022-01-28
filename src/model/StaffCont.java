@@ -19,6 +19,21 @@ public final class StaffCont {
 		}
 		return instance;
 	}
+	
+	/**
+	 * Add a new staff to the container
+	 * @param newStaff The staff to be added
+	 * @return True if the staff was added successfully
+	 */
+	public boolean addStaff(Staff newStaff) {
+		boolean retVal = false;
+		
+		if (staff.add(newStaff)) {
+			retVal = true;
+		}
+		
+		return retVal;
+	}
 
 	/**
 	 * Get staff.
@@ -26,13 +41,13 @@ public final class StaffCont {
 	 * @return staff as ArrayList<Staff>.
 	 */
 	public ArrayList<Staff> getStaffList() {
-	    return staff;
+	    return new ArrayList<>(staff);
 	}
 
 	/**
 	 * Find staff with userName and password
 	 * @param userName The name of the user
-	 * @param password The coresponding password 
+	 * @param password The corresponding password 
 	 * @return Staff found staff
 	 */
 	public Staff getStaffLogin(String userName, String password) {

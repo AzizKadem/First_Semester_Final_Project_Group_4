@@ -1,5 +1,6 @@
 package gui;
 
+import controller.StaffCtrl;
 import model.Appliance;
 import model.ApplianceCopy;
 import model.Customer;
@@ -14,9 +15,19 @@ import model.PackageLine;
 import model.Packages;
 import model.Price;
 import model.ProductCont;
+import model.Staff;
+import model.StaffCont;
 
 public class GenerateData {
 	public static void generateData() {
+		
+		Staff staff = new Staff(0, "worker", "1234", "admin", "password", true);
+		
+		StaffCont.getInstance().addStaff(staff);
+		
+		StaffCtrl staffCtrl = new StaffCtrl();
+		
+		staffCtrl.logIn("admin", "password");
 		
 		CustomerCont.getInstance().addCustommer(new Customer("Bob", 
 					"123", "Home", "ThisCity", "0"));

@@ -12,7 +12,7 @@ public class StaffCtrl {
 	
 	public StaffCtrl() {
 		//for now
-		loged = new Staff(0, "worker", "1234", "admin", "password", true);
+		
 		customerCtrl = new CustomerCtrl();
 	}
 	

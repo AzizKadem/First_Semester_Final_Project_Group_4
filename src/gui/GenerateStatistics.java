@@ -37,6 +37,7 @@ public class GenerateStatistics extends JDialog {
 	 * Create the dialog.
 	 */
 	public GenerateStatistics(StaffCtrl staffCtrl) {
+		setTitle("Generate Statistics");
 		setModal(true);
 		this.staffCtrl = staffCtrl;
 		setBounds(100, 100, 450, 300);
@@ -63,7 +64,12 @@ public class GenerateStatistics extends JDialog {
 			contentPanel.add(btnNewButton, gbc_btnNewButton);
 		}
 		{
-			JButton btnNewButton_1 = new JButton("New button");
+			JButton btnNewButton_1 = new JButton("Generate staff statistics");
+			btnNewButton_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					staffStatistics();
+				}
+			});
 			GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 			gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
 			gbc_btnNewButton_1.gridx = 1;
@@ -97,6 +103,11 @@ public class GenerateStatistics extends JDialog {
 	private void customerStatistics() {
 		CustomerStatistics customerStat = new CustomerStatistics(staffCtrl);
 		customerStat.setVisible(true);
+	}
+	
+	private void staffStatistics() {
+		StaffStatistics dialog = new StaffStatistics();
+		dialog.setVisible(true);
 	}
 	
 	private void close() {
