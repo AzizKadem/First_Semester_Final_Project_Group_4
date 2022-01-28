@@ -215,18 +215,19 @@ public class MainMenu extends JFrame {
 		btnLeases.setAlignmentX(0.5f);
 		verticalBox.add(btnLeases);
 		
-		Component verticalStrut_4 = Box.createVerticalStrut(10);
-		verticalBox.add(verticalStrut_4);
-		
-		JButton btnStatistics = new JButton("Statistics");
-		btnStatistics.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				showStatistics();
-			}
-		});
-		btnStatistics.setAlignmentX(0.5f);
-		verticalBox.add(btnStatistics);
-		
+		if (staffCtrl.isManager()) {
+			Component verticalStrut_4 = Box.createVerticalStrut(10);
+			verticalBox.add(verticalStrut_4);
+			
+			JButton btnStatistics = new JButton("Statistics");
+			btnStatistics.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					showStatistics();
+				}
+			});
+			btnStatistics.setAlignmentX(0.5f);
+			verticalBox.add(btnStatistics);
+		}
 	}
 	
 	/**

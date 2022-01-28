@@ -67,4 +67,12 @@ public class StaffCtrl {
 	public ArrayList<Product> generateProductStatistics() {
 		return productCtrl.getProducts();
 	}
+	
+	/**
+	 * Return whether the logged staff is a manager
+	 * @return True if the staff is a manager
+	 */
+	public boolean isManager() {
+		return loged.isManager();
+	}
 }
