@@ -41,22 +41,13 @@ public class CustomerStatistics extends JDialog {
 	 * Create the dialog.
 	 */
 	public CustomerStatistics() {
+		setTitle("Customer Statistics");
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
-		{
-			JPanel panel = new JPanel();
-			FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-			flowLayout.setAlignment(FlowLayout.LEFT);
-			contentPanel.add(panel, BorderLayout.NORTH);
-			{
-				JLabel lblNewLabel = new JLabel("Customer Statistics");
-				panel.add(lblNewLabel);
-			}
-		}
 		{
 			JPanel panel = new JPanel();
 			contentPanel.add(panel, BorderLayout.WEST);

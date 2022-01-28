@@ -130,18 +130,24 @@ public class GenerateStatistics extends JDialog {
 	}
 
 	private void customerStatistics() {
-		CustomerStatistics customerStat = new CustomerStatistics();
-		customerStat.setVisible(true);
+		CustomerStatistics dialog = new CustomerStatistics();
+		dispose();
+		dialog.setVisible(true);
+		setVisible(true);
 	}
 	
 	private void staffStatistics() {
 		StaffStatistics dialog = new StaffStatistics();
+		dispose();
 		dialog.setVisible(true);
+		setVisible(true);
 	}
 	
 	private void productStatistics() {
 		ProductStatistics dialog = new ProductStatistics();
+		dispose();
 		dialog.setVisible(true);
+		setVisible(true);
 	}
 	
 	private void close() {
