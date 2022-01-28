@@ -392,12 +392,13 @@ public class CreateOrder extends JDialog {
 	private void finishOrder() {
 		if (!orderCtrl.isEmpty()) {
 			OrderReceipt dialog = new OrderReceipt(orderCtrl);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 			
-			created = dialog.isFinished();
-			
-			dispose();
+			if (dialog.isFinished()) {
+				created = dialog.isFinished();
+				
+				dispose();
+			}
 		} 
 		else {
 			lblErrorButton.setText(new EmptyOrderException().getMessage());

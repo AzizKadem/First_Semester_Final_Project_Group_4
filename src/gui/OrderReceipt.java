@@ -181,7 +181,6 @@ public class OrderReceipt extends JDialog {
 	private void finishHere() {
 		try {
 			Payment dialog = new Payment(orderCtrl);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 			if (dialog.isPaid()) {
 				finishOrder();
