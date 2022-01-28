@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
@@ -491,7 +492,7 @@ public class CreateOrder extends JDialog {
 				ready = false;
 			}
 			else {
-				thisField.setBorder(new LineBorder(Color.BLACK, 1));
+				thisField.setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
 			}
 		}
 		
@@ -578,9 +579,9 @@ public class CreateOrder extends JDialog {
 	}
 	
 	private void removeErrorMessage() {
-		spinnerQuantity.setBorder(new LineBorder(Color.BLACK, 1));
-		textBarcode.setBorder(new LineBorder(Color.BLACK, 1));
-		phoneField.setBorder(new LineBorder(Color.BLACK, 1));
+		spinnerQuantity.setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
+		textBarcode.setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
+		phoneField.setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
 		lblErrorButton.setText("");
 	}
 	
