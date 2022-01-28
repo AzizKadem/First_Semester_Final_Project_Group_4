@@ -20,7 +20,6 @@ import exceptions.EmptyOrderException;
 import model.Appliance;
 import model.AppliancesOrderLine;
 import model.OrderLine;
-import javax.swing.JList;
 
 public class OrderReceipt extends JDialog {
 

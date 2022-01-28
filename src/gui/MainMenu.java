@@ -17,7 +17,6 @@ import javax.swing.JSplitPane;
 
 import controller.LeaseCtrl;
 import controller.StaffCtrl;
-import model.LeaseCont;
 
 
 public class MainMenu extends JFrame {

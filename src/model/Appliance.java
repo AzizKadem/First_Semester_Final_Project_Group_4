@@ -2,8 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import javax.print.attribute.standard.Copies;
-
 public class Appliance extends SingleProduct {
 	private int generation;
 	private int waranty;

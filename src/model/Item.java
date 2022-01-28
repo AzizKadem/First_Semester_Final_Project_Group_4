@@ -1,7 +1,5 @@
 package model;
 
-import javax.print.attribute.standard.Copies;
-
 public class Item extends SingleProduct {
 	private String barcode;
 	private String category;

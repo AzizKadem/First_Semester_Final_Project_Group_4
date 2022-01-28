@@ -6,7 +6,6 @@ import exceptions.LeaseNotFoundException;
 import exceptions.MachineAlreadyLeasedException;
 import exceptions.MachineNotFoundException;
 import exceptions.NotCorrectCustomerException;
-import model.Customer;
 import model.Lease;
 
 public class LeaseMenu extends Menu{
