@@ -102,7 +102,7 @@ public class CreateOrder extends JDialog {
 	}
 	
 	/**
-	 * Initialise gui
+	 * Initialize gui
 	 */
 	private void initGui() {
 		setModal(true);
@@ -471,7 +471,11 @@ public class CreateOrder extends JDialog {
 			}
 		}
 	}
-	
+	/**
+	 * Handles the creation on new customer for the order
+	 * @throws CustomerNotFoundException
+	 * @throws CustomerAlreadyExistsException
+	 */
 	private void createNewCustomer() {
 		ArrayList<JTextField> fields = new ArrayList<>();
 		
@@ -525,21 +529,34 @@ public class CreateOrder extends JDialog {
 			
 		}
 	}
-
+	
+	/**
+	 * Opens the panel for a new customer
+	 */
 	private void newCustomer() {
 		showPanel(newCustomerPanel);
 	}
-
+	
+	/**
+	 * Opens the panel for searching for customer
+	 */
 	private void selectExistingCustomer() {
 		showPanel(phoneNumberPanel);
 		FlowLayout flowLayout = (FlowLayout) phoneNumberPanel.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 	}
 	
+	/**
+	 * Opens panel for products searching
+	 */
 	private void showProductScreen() {
 		showPanel(selectProductsPanel);
 	}
 	
+	/**
+	 * Searches for customer with inputed phone number
+	 * @throws CustomerNotFoundException
+	 */
 	private void checkPhoneNumber() {
 		String phone =  phoneField.getText();
 		try {
@@ -554,6 +571,13 @@ public class CreateOrder extends JDialog {
 		}
 	}
 	
+	/**
+	 * Adds products to the order lines 
+	 * Adds order lines to the order
+	 * @throws QuantityUnderrunException
+	 * @throws ProductNotFoundException
+	 * @throws NotEnoughInStockException
+	 */
 	private void addProduct() {
 		try {
 			orderCtrl.createOrderline(textBarcode.getText(), (int)spinnerQuantity.getValue());
@@ -583,7 +607,9 @@ public class CreateOrder extends JDialog {
 		phoneField.setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
 		lblErrorButton.setText("");
 	}
-	
+	/**
+	 * Updates the list of products added to the order
+	 */
 	private void updateList() {
 		DefaultTableModel myTableModel = new DefaultTableModel();
 		
@@ -601,6 +627,9 @@ public class CreateOrder extends JDialog {
 		table.setModel(myTableModel);
 	}
 	
+	/**
+	 * Asks for payment 
+	 */
 	private void finishOrder() {
 		if (!orderCtrl.isEmpty()) {
 			OrderReceipt dialog = new OrderReceipt(orderCtrl);
@@ -617,6 +646,9 @@ public class CreateOrder extends JDialog {
 		}
 	}
 	
+	/**
+	 * Closes current panel and opens previous one 
+	 */
 	private void back() {
 		if (currentPanel.equals(selectProductsPanel)) {
 			orderCtrl.cancelOrder();
@@ -630,7 +662,10 @@ public class CreateOrder extends JDialog {
 		handleButtons();
 		removeErrorMessage();
 	}
-    
+    /**
+     * Shows given panel and closes current one
+     * @param panel
+     */
     private void showPanel(JPanel panel) {
     	if (currentPanel != null) {
     		hidePanel(currentPanel);
@@ -648,12 +683,19 @@ public class CreateOrder extends JDialog {
 		}
     }
     
+    /**
+     * Hides given panel
+     * @param panel
+     */
     private void hidePanel(JPanel panel) {
     	panel.setVisible(false);
     	contentPanel.remove(panel);
     	currentPanel = null;
     }
     
+    /**
+     * Handles buttons in the UI
+     */
     private void handleButtons() {
     	btnFinishOrder.setVisible(false);
     	btnConfirm.setVisible(false);
@@ -680,11 +722,16 @@ public class CreateOrder extends JDialog {
     		btnBack.setVisible(true);
     	}
     }
-    
+    /**
+     * Disposes the window
+     */
 	private void cancel() {
 		dispose();
 	}
 	
+	/**
+	 * Handles the order for Guest
+	 */
 	private void randomCustomer() {
 		try {
 			orderCtrl.createOrder("Guest");
@@ -696,12 +743,18 @@ public class CreateOrder extends JDialog {
 		}
 	}
 	
+	/**
+	 * Updates path
+	 */
 	private void addToBackPath() {
 		if (!backPath.contains(currentPanel)) {
 			backPath.add(currentPanel);
 		}
 	}
 	
+	/**
+	 * @return boolean of created
+	 */
 	public boolean isCreated() {
 		return created;
 	}

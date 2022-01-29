@@ -59,7 +59,9 @@ public class MainMenu extends JFrame {
 		initGui();
 		showOrders();
 	}
-	
+	/**
+	 * Initialize the MainMenu gui
+	 */
 	private void initGui() {
 		setTitle("Main Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
