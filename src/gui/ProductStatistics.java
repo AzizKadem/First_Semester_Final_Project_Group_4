@@ -83,10 +83,16 @@ public class ProductStatistics extends JDialog {
 		initializeTable();
 	}
 
+	/**
+	 * Disposes the window
+	 */
 	private void close() {
 		dispose();
 	}	
 	
+	/**
+	 * Initializes the table
+	 */
 	private void initializeTable() {
 			DefaultTableModel myTableModel = new DefaultTableModel();
 			

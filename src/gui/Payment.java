@@ -72,15 +72,24 @@ public class Payment extends JDialog {
 		}
 	}
 	
+	/**
+	 * sets boolean of paid to true if the payment was successful
+	 */
 	private void yes() {
 		paid = true;
 		dispose();
 	}
 	
+	/**
+	 * Disposes the window if the payment was unsuccessful
+	 */
 	private void no() {
 		dispose();
 	}
 	
+	/**
+	 * @return boolean of paid
+	 */
 	public boolean isPaid() {
 		return paid;
 	}

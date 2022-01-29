@@ -129,6 +129,9 @@ public class GenerateStatistics extends JDialog {
 		}
 	}
 
+	/**
+	 * Generates customer statistics
+	 */
 	private void customerStatistics() {
 		CustomerStatistics dialog = new CustomerStatistics();
 		dispose();
@@ -136,6 +139,9 @@ public class GenerateStatistics extends JDialog {
 		setVisible(true);
 	}
 	
+	/**
+	 * Generates staff statistics
+	 */
 	private void staffStatistics() {
 		StaffStatistics dialog = new StaffStatistics();
 		dispose();
@@ -143,6 +149,9 @@ public class GenerateStatistics extends JDialog {
 		setVisible(true);
 	}
 	
+	/**
+	 * Generates product statistics
+	 */
 	private void productStatistics() {
 		ProductStatistics dialog = new ProductStatistics();
 		dispose();
@@ -150,6 +159,9 @@ public class GenerateStatistics extends JDialog {
 		setVisible(true);
 	}
 	
+	/**
+	 * Disposes the window
+	 */
 	private void close() {
 		dispose();
 	}

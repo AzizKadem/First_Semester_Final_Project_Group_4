@@ -47,6 +47,9 @@ public class OrderReceipt extends JDialog {
 		initGui();
 	}
 	
+	/**
+	 * Initializes the gui
+	 */
 	private void initGui() {
 		setModal(true);
 		setTitle("Order for " + orderCtrl.getCurrentOrder().getACustomer().getName());
@@ -136,6 +139,9 @@ public class OrderReceipt extends JDialog {
 		}
 	}
 	
+	/**
+	 * Handles the list of products in the order
+	 */
 	private void getItems() {
 		for(int i  = 0; i < orderCtrl.getCurrentOrder().getOrderLines().size(); i++) {
 			
@@ -167,6 +173,10 @@ public class OrderReceipt extends JDialog {
 		
 	}
 	
+	/**
+	 * Finishes the order
+	 * @throws EmptyOrderException
+	 */
 	private void finishOrder(){
 		try {
 			orderCtrl.finishOrder();
@@ -177,6 +187,9 @@ public class OrderReceipt extends JDialog {
 		dispose();
 	}
 	
+	/**
+	 * Asks for payment
+	 */
 	private void finishHere() {
 		try {
 			Payment dialog = new Payment(orderCtrl);
@@ -189,14 +202,24 @@ public class OrderReceipt extends JDialog {
 		}
 	}
 	
+	/**
+	 * Handles sending the invoice to registered customer
+	 */
 	private void finishInvoice() {
+		//TODO where the customer is registered, send invoice 
 		finishOrder();
 	}
 	
+	/**
+	 * @return boolean of finished
+	 */
 	public boolean isFinished() {
 		return finished;
 	}
 	
+	/**
+	 * Disposes the window
+	 */
 	private void cancel() {
 		dispose();
 	}

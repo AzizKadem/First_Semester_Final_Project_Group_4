@@ -83,10 +83,16 @@ public class CustomerStatistics extends JDialog {
 		initializeTable();
 	}
 
+	/**
+	 * Disposes the window
+	 */
 	private void close() {
 		dispose();
 	}	
 	
+	/**
+	 * Initializes the table with statistics
+	 */
 	private void initializeTable() {
 			DefaultTableModel myTableModel = new DefaultTableModel();
 			

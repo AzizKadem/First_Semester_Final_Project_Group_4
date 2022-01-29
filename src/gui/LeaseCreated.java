@@ -195,6 +195,9 @@ public class LeaseCreated extends JDialog {
 		}
 	}
 
+	/**
+	 * Disposes the window
+	 */
 	private void back() {
 		dispose();
 	}

@@ -214,11 +214,17 @@ public class DeletedLease extends JDialog {
 		}
 	}
 	
+	/**
+	 * Disposes the window
+	 */
 	public void cancel()
 	{
 		dispose();
 	}
 	
+	/**
+	 * Handles return of the lease
+	 */
 	public void returnLease()
 	{
 		leaseCtrl.removeLease(l);
@@ -226,6 +232,9 @@ public class DeletedLease extends JDialog {
 		dispose();
 	}
 	
+	/**
+	 * @return boolean of created
+	 */
 	public boolean isCreated() {
 		return created;
 	}

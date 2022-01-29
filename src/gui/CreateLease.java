@@ -137,11 +137,22 @@ public class CreateLease extends JDialog {
 		});
 		buttonPanel.add(btnCancel);
 	}
-
+	/**
+	 * Disposes the window
+	 */
 	private void cancel() {
 		dispose();
 	}
 	
+	/**
+	 * Created lease
+	 * @throws NumberFormatException
+	 * @throws MachineNotFoundException
+	 * @throws MachineNotFoundException
+	 * @throws NotCorrectCustomerException
+	 * @throws LeaseNotFoundException
+	 * @throws MachineAlreadyLeasedException
+	 */
 	private void createLease(){
 		String phone = textFieldCustomer.getText();
 		
@@ -160,6 +171,9 @@ public class CreateLease extends JDialog {
 		create = true;
 	}
 	
+	/**
+	 * @return boolean of created
+	 */
 	public boolean isCreated()
 	{
 		return create;

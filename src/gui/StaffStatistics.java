@@ -78,10 +78,16 @@ public class StaffStatistics extends JDialog {
 		updateTable();
 	}
 	
+	/**
+	 * Disposes the window
+	 */
 	private void back() {
 		dispose();
 	}
 
+	/**
+	 * Initializes the table
+	 */
 	private void updateTable() {
 		DefaultTableModel myTableModel = new DefaultTableModel();
 		

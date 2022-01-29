@@ -147,11 +147,17 @@ public class ReturnLease extends JDialog {
 		}
 	}
 	
+	/**
+	 * Disposes the window
+	 */
 	public void cancel()
 	{
 		dispose();
 	}
 	
+	/**
+	 * Handles returning of the lease
+	 */
 	public void returnLease() {
 		String phone = textFieldCustomer.getText();
 		
@@ -171,6 +177,9 @@ public class ReturnLease extends JDialog {
 		} 
 	}
 	
+	/**
+	 * @return boolean of created
+	 */
 	public boolean isCreated()
 	{
 		return created;

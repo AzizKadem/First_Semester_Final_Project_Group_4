@@ -19,6 +19,10 @@ import model.Staff;
 import model.StaffCont;
 
 public class GenerateData {
+	
+	/**
+	 * Generates data for the program
+	 */
 	public static void generateData() {
 		
 		Staff staff = new Staff(0, "worker", "1234", "admin", "password", true);
