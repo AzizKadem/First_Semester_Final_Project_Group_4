@@ -44,8 +44,9 @@ public class OrderCont {
 	 * @return orders
 	 */
 	public ArrayList<Order> getOrders() {
-		return orders;
+		return new ArrayList<>(orders);
 	}
+	
 	/**
 	 * Empty the container
 	 */
